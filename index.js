@@ -33,15 +33,10 @@ process.on('SIGINT', function() {
     console.log('Application successfully shutdown');
     process.exit(0);
 });
-     
-app.set("view engine", "ejs");
-app.get('/', (req, res) => {
-    const data = {name: 'Mario'};
-    res.render('index', data);
-});
 
 app.get('/user', (req, res) => {
     teammembers = []
+    //console.log("In the User Section");
     pool
         .query('SELECT * FROM teammembers;')
         .then(query_res => {
