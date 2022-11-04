@@ -22,12 +22,12 @@ process.on('SIGINT', function() {
     process.exit(0);
 });
 
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 
-app.get('/', (req, res) => {
-    const data = {name: 'Mario'};
-    res.render('index', data);
-});
+// app.get('/', (req, res) => {
+//     const data = {name: 'Mario'};
+//     res.render('index', data);
+// });
 process.on('SIGINT', function() {
     pool.end();
     console.log('Application successfully shutdown');
