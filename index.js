@@ -34,9 +34,9 @@ process.on('SIGINT', function() {
     process.exit(0);
 });
 
-app.get('/user', (req, res) => {
+app.get('/', (req, res) => {
     teammembers = []
-    //console.log("In the User Section");
+    console.log("In the User Section");
     pool
         .query('SELECT * FROM teammembers;')
         .then(query_res => {
