@@ -25,10 +25,16 @@ export default function Inventory() {
     }
     } 
 
+    const data = [
+        { name: "Anom", age: 19, gender: "Male" },
+        { name: "Megha", age: 19, gender: "Female" },
+        { name: "Subham", age: 25, gender: "Male"},
+      ]
+
     return (
     <>
-    <h1>Inventory</h1>
-    <div>
+    
+    <div class="column left">
         
         <div class="dropdown">
         <button class="dropbtn">Select Item</button>
@@ -44,6 +50,26 @@ export default function Inventory() {
         <form>Order Amount: <input type="text"></input></form>
 
         <button class="order_inv">Order Inventory</button>
+
+    </div>
+    
+    <div class="column right">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+            </tr>
+            {data.map((val, key) => {
+            return (
+                <tr key={key}>
+                <td>{val.name}</td>
+                <td>{val.age}</td>
+                <td>{val.gender}</td>
+                </tr>
+            )
+            })}
+        </table>
     </div>
     </>
 );
