@@ -1,3 +1,5 @@
+import React, { Component }  from 'react';
+
 import NavBar from "./NavBar";
 import Pricing from "./pages/Pricing"
 import About from "./pages/About"
