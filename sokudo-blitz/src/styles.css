@@ -50,7 +50,12 @@ body {
 
 .column {
   float: left;
-  
+  width: 100%;
+}
+
+.row {
+  display:flex;
+  text-align: center;
 }
 
 .left {
