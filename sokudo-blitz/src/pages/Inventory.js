@@ -1,19 +1,13 @@
 import React, { Component }  from 'react';
 
-import { myFunction } from "../functions";
-
 export default function Inventory() {
-        /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    // document.getElementById("myDropdown").setAttribute.onclick('onclick', alert("test"));
-    //alert("test");
-   
-    // function myFunction() {
-    //     alert("Test");
-    //     document.getElementById("myDropdown").classList.toggle("show");
-    // }
+    const handleClick = (e)=>{
+        e.preventDefault();
+        document.getElementById("myDropdown").classList.toggle("show");
 
-    // Close the dropdown menu if the user clicks outside of it
+    }
+
+    // // Close the dropdown menu if the user clicks outside of it
     window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -37,10 +31,9 @@ export default function Inventory() {
     <>
     
     <div class="column left">
-        
-        <div class="dropdown">
-        <button class="dropbtn">Select Item</button>
-            <div id ="myDropdown" onclick={myFunction} class="dropdown-content">
+        <div class="dropdown row" onClick={handleClick}>
+            <button class="dropbtn">Select Item</button>
+            <div id ="myDropdown" class="dropdown-content">
                 <a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 1</a>
                 <a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 2</a>
                 <a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 3</a>

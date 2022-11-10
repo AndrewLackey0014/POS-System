@@ -1,19 +1,38 @@
-<<<<<<< HEAD
+import React, { Component }  from 'react';
+
+
 const data = [
     { name: "Anom", age: 19, gender: "Male" },
     { name: "Megha", age: 19, gender: "Female" },
     { name: "Subham", age: 25, gender: "Male"},
   ]
-=======
-import React, { Component }  from 'react';
->>>>>>> e10eb8b80bf1ad5a34644313d26f31adb517768b
 
 export default function Items() {
+    const handleClick = (e)=>{
+        e.preventDefault();
+        document.getElementById("myDropdown").classList.toggle("show");
+
+    }
+
+    // // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+        }
+    }
+    } 
+
     return(
         <>
     
     <div class="column left">
-        <div class="dropdown">
+        <div class="dropdown row" onClick={handleClick}>
         <button class="dropbtn">Select Item</button>
             <div id ="myDropdown"  class="dropdown-content">
                 <a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 1</a>

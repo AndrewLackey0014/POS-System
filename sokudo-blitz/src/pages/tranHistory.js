@@ -1,26 +1,19 @@
-<<<<<<< HEAD
+import React, { Component }  from 'react';
+
 const data = [
     { name: "Anom", age: 19, gender: "Male" },
     { name: "Megha", age: 19, gender: "Female" },
     { name: "Subham", age: 25, gender: "Male"},
   ]
-=======
-import React, { Component }  from 'react';
->>>>>>> e10eb8b80bf1ad5a34644313d26f31adb517768b
 
 export default function tranHistory() {
     return(
         <>
     
     <div class="column left">
-    
-        
-
-    <form>Begin Date<input type="text"></input></form>
-    <form>End Date<input type="text"></input></form>
-
-    <button>Load Selected Data</button>
-
+        <form>Begin Date: <input type="text"></input></form>
+        <form>End Date: <input type="text"></input></form>
+        <button>Load Selected Data</button>
     </div>
     
     <div class="column right">
