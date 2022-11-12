@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React, { Component, useState, useEffect} from 'react';
 
 //import NavBar from "./NavBar";
 import Pricing from "./pages/Pricing"
@@ -16,6 +16,76 @@ import NavBarManager2 from './pages/NavBarManager2';
 import NavBarAbout from './pages/NavBarAbout';
 import NavBarServer2 from './pages/NavBarServer2';
 function App() {
+  const [employees, setEmployees] = useState(false);
+  useEffect(() => {
+    getEmployees();
+  }, []);
+  function getEmployees() {
+    fetch('http://localhost:3001')
+      .then(response => {
+        return response.text();
+      })
+      .then(data => {
+        setEmployees(data);
+      });
+  }
+  function createEmployee() {
+    let employeeid = prompt('Enter employee id');
+    let salary = prompt('Enter salary');
+    let name = prompt('enter name');
+    let managerid = prompt('enter managerid');
+    let role = prompt('enter role');
+    fetch('http://localhost:3001/employees', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({employeeid, salary, name, managerid, role}),
+    })
+      .then(response => {
+        return response.text();
+      })
+      .then(data => {
+        alert(data);
+        getEmployees();
+      });
+  }
+  function updateSalary() {
+    let employeeid = prompt('Enter employee id');
+    let salary = prompt('Enter salary');
+    fetch('http://localhost:3001/employee_update', {
+      method: 'POST',
+      headers: {  
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({employeeid, salary}),
+    })
+      .then(response => {
+        return response.text();
+      })
+      .then(data => {
+        alert(data);
+        getEmployees();
+      });
+  }
+  function deleteEmployee() {
+    let id = prompt('Enter employeeid');
+    // console.log(id);
+    fetch(`http://localhost:3001/delete_employee`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({id}),
+    })
+      .then(response => {
+        return response.text();
+      })
+      .then(data => {
+        alert(data);
+        getEmployees();
+      });
+  }
   let component
   switch (window.location.pathname) {
     case "/pricing":
@@ -96,10 +166,31 @@ function App() {
     <>
 
       {component}
+      <div>
+        {employees ? employees : 'There is no employee data available'}
+        <br />
+        <button onClick={createEmployee}>Add employee</button>
+        <br />
+        <button onClick={deleteEmployee}>Delete employee</button>
+        <br />
+        <button onClick={updateSalary}>update employee</button>
+    </div>
     </>
   )
 
+
+
+  
+  // return (
+  //   <div>
+  //     {employees ? employees : 'There is no employee data available'}
+  //     <br />
+  //     <button onClick={createEmployee}>Add employee</button>
+  //     <br />
+  //     <button onClick={deleteEmployee}>Delete employee</button>
+  //     <br />
+  //     <button onClick={updateSalary}>update employee</button>
+  //   </div>
+  // );
 }
-
-
 export default App;
