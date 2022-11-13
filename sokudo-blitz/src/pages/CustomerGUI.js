@@ -1,3 +1,4 @@
+
 import NavBarCustomer2 from "./NavBarCustomer2";
 import "./CustomerGUI.css";
 

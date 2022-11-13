@@ -20,7 +20,7 @@ const getEmployees = () => {
           reject(error)
         }
         // resolve(results.rows);
-        resolve(results);
+        resolve(results.rows);
 
       })
     }) 
