@@ -174,7 +174,7 @@ function App() {
         <button onClick={deleteEmployee}>Delete employee</button>
         <br />
         <button onClick={updateSalary}>update employee</button>
-    </div>
+      </div>
     </>
   )
 
