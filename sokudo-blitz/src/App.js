@@ -105,6 +105,15 @@ function App() {
       component =  <>
       <NavBarManager2/>
       <Employees/>
+      <div>
+        {employees ? employees : 'There is no employee data available'}
+        <br />
+        <button onClick={createEmployee}>Add employee</button>
+        <br />
+        <button onClick={deleteEmployee}>Delete employee</button>
+        <br />
+        <button onClick={updateSalary}>update employee</button>
+      </div>
       </>
       break
     case "/ManagerGUI/Inventory":
@@ -166,15 +175,7 @@ function App() {
     <>
 
       {component}
-      <div>
-        {employees ? employees : 'There is no employee data available'}
-        <br />
-        <button onClick={createEmployee}>Add employee</button>
-        <br />
-        <button onClick={deleteEmployee}>Delete employee</button>
-        <br />
-        <button onClick={updateSalary}>update employee</button>
-      </div>
+      
     </>
   )
 

@@ -8,7 +8,10 @@ const pool = require('./db');
 app.use(cors())
 app.use(express.json()); // express.json
 
-const port = 3001
+// const port = 3001
+const port = process.env.PORT || 3001;
+
+
 
 const db = require('./db')
 
