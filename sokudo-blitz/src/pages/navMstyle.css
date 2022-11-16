@@ -10,15 +10,14 @@ body {
     background-color: #333;
     color: white;
     display: flex;
-    
     align-items: stretch;
     gap: 2rem;
     padding: 0 1rem;
 
 }
 
-.site-title {
-    font-size: 2rem;    /* Made redundant by .nav a font-size, unless going to be used different*/
+.naventries {
+    font-size: 50px;    /* Made redundant by .nav a font-size, unless going to be used different*/
 }
 
 .nav ul {
@@ -127,3 +126,8 @@ td {
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block; color: red;} 
+
+  .logo{
+    width:125px;
+    height:125px;
+  }

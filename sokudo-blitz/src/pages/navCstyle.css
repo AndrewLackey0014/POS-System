@@ -18,7 +18,7 @@ body {
 }
 
 .site-title {
-    font-size: 2rem;    /* Made redundant by .nav a font-size, unless going to be used different*/
+    font-size: 500;    /* Made redundant by .nav a font-size, unless going to be used different*/
 }
 
 .nav ul {
