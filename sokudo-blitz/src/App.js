@@ -13,7 +13,7 @@ import ManagerGUI from "./pages/ManagerGUI"
 import CustomerGUI from './pages/CustomerGUI';
 import ServerGUI from './pages/ServerGUI';
 import NavBarManager from './pages/NavBarManager';
-import NavBarManager2 from './pages/NavBarManager2';
+import NavBarManager2 from './pages/Login';
 import NavBarAbout from './pages/NavBarAbout';
 import NavBarServer2 from './pages/NavBarServer2';
 function App() {
@@ -104,25 +104,25 @@ function App() {
       break
     case "/ManagerGUI/Employees":
       component =  <>
-      <NavBarManager2/>
+      <NavBarManager/>
       <Employees/>
       </>
       break
     case "/ManagerGUI/Inventory":
       component =  <>
-      <NavBarManager2/>
+      <NavBarManager/>
       <Inventory/>
       </> 
       break
     case "/ManagerGUI/Items":
       component =  <>
-      <NavBarManager2/>
+      <NavBarManager/>
       <Items/>
       </> 
       break
     case "/ManagerGUI/Reports":
       component =  <>
-      <NavBarManager2/>
+      <NavBarManager/>
       <Reports/>
       </> 
       break
@@ -167,7 +167,7 @@ function App() {
     <>
 
       {component}
-      <div>
+      {/* <div>
         {employees ? employees : 'There is no employee data available'}
         <br />
         <button onClick={createEmployee}>Add employee</button>
@@ -175,7 +175,7 @@ function App() {
         <button onClick={deleteEmployee}>Delete employee</button>
         <br />
         <button onClick={updateSalary}>update employee</button>
-      </div>
+      </div> */}
     </>
   )
 

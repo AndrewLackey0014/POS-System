@@ -1,0 +1,17 @@
+body .login{
+    background-color: cadetblue;
+}
+
+.nav1 {
+    font-size: 100px;
+    height: 100%;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+    position: fixed;
+    background-color: cadetblue;
+}
+
+form {
+    font-size: 30px;
+}

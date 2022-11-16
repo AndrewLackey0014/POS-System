@@ -8,6 +8,7 @@ import Reports from "./Reports";
 import Inventory from "./Inventory";
 
 import NavBarManager from "./NavBarManager";
+import Login from "./Login";
 //import Transaction from "./tranHistory";
 //import Employees from "./Employees";
 //import Items from "./Items";
@@ -17,9 +18,6 @@ import NavBarManager from "./NavBarManager";
  function ManagerGUI() {
     let component
     switch (window.location.pathname) {
-        case "/pricing":
-          component = <Pricing/>
-          break
         case "/about":
           component = <About/>
           break
@@ -38,13 +36,10 @@ import NavBarManager from "./NavBarManager";
         case "/Inventory":
           component = <Inventory/>
           break;
-          case "/tranHistory":
-            component = <Transaction/>
-            break;
-
 
         default: 
-          component = <Transaction/>
+          component = <Login/>
+          return component;
           break
       }
       return (
