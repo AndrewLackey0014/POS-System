@@ -15,14 +15,41 @@ import ServerGUI from './pages/ServerGUI';
 import NavBarManager2 from './pages/NavBarManager2';
 import NavBarAbout from './pages/NavBarAbout';
 import NavBarServer2 from './pages/NavBarServer2';
+
+
+
+var url = "";
+export async function getEnvironmentVarsFromExpress() {
+  return await fetch('http://localhost:3001/getEnvironmentVars').then((res) => {
+    url = res.json();
+    // console.log(url);
+
+  })
+}
+
+function getCurrentURL () {
+  return window.location.href
+}
+
+// Example
+
+
 function App() {
-  
+  const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
   const [employees, setEmployees] = useState(false);
   useEffect(() => {
     getEmployees();
   }, []);
   function getEmployees() {
-    fetch('https://sokudoblitzbackend.onrender.com/')
+    fetch(backend_url)
       .then(response => {
         return response.text();
       })
@@ -36,7 +63,7 @@ function App() {
     let name = prompt('enter name');
     let managerid = prompt('enter managerid');
     let role = prompt('enter role');
-    fetch('http://localhost:3001/employees', {
+    fetch(backend_url+'employees', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +81,7 @@ function App() {
   function updateSalary() {
     let employeeid = prompt('Enter employee id');
     let salary = prompt('Enter salary');
-    fetch('http://localhost:3001/employee_update', {
+    fetch(backend_url+'employee_update', {
       method: 'POST',
       headers: {  
         'Content-Type': 'application/json',
@@ -72,7 +99,7 @@ function App() {
   function deleteEmployee() {
     let id = prompt('Enter employeeid');
     // console.log(id);
-    fetch(`http://localhost:3001/delete_employee`, {
+    fetch(backend_url+'delete_employee', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -174,7 +201,7 @@ function App() {
   }
   return (
     <>
-
+      {/* {getEnvironmentVarsFromExpress()} */}
       {component}
       
     </>

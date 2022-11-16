@@ -10,7 +10,12 @@ app.use(express.json()); // express.json
 
 // const port = 3001
 const port = process.env.PORT || 3001;
-
+url= "";
+if (port==3001){
+  url= "http://localhost:3001/";
+}else{
+  url= "https://sokudoblitzbackend.onrender.com/";
+}
 
 
 
@@ -67,6 +72,11 @@ app.post('/employee_update', (req, res) => {
   })
 })
 
+app.get('/getEnvironmentVars', (_, res) => {
+  res.json({ ENVIRONMENT: url })
+})
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
+

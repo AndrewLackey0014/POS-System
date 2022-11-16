@@ -27,11 +27,11 @@ export default function Employees() {
           });
     }
 
-    console.log(typeof employee_data);
-    console.log(typeof temp_data);
+    // console.log(typeof employee_data);
+    // console.log(typeof temp_data);
     const obj = JSON.parse(employee_data);
-    console.log(typeof obj);
-    console.log(obj);
+    // console.log(typeof obj);
+    // console.log(obj);
     // data =
     // employee_data = 
 
@@ -50,7 +50,7 @@ export default function Employees() {
                         <th>Role</th>
 
                     </tr>
-                    {/* {temp_data.map((val, key) => {
+                    {temp_data.map((val, key) => {
                     return (
                         <tr key={key}>
                         <td>{val.name}</td>
@@ -58,8 +58,8 @@ export default function Employees() {
                         <td>{val.gender}</td>
                         </tr>
                     )
-                    })} */}
-                    {obj.map((val, key) => {
+                    })}
+                    {/* {obj.map((val, key) => {
                     return (
                         <tr key={key}>
                         <td>{val.employeeid}</td>
@@ -71,7 +71,7 @@ export default function Employees() {
 
                         </tr>
                     )
-                    })}
+                    })} */}
                 </table>
             </div>
         </>
