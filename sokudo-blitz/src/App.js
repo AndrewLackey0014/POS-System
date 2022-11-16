@@ -16,6 +16,7 @@ import NavBarManager2 from './pages/NavBarManager2';
 import NavBarAbout from './pages/NavBarAbout';
 import NavBarServer2 from './pages/NavBarServer2';
 function App() {
+  
   const [employees, setEmployees] = useState(false);
   useEffect(() => {
     getEmployees();
