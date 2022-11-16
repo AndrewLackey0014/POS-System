@@ -22,7 +22,7 @@ function App() {
     getEmployees();
   }, []);
   function getEmployees() {
-    fetch('http://localhost:3001')
+    fetch('https://sokudoblitzbackend.onrender.com/')
       .then(response => {
         return response.text();
       })
