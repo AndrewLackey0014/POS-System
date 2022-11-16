@@ -12,6 +12,7 @@ import Inventory from "./pages/Inventory";
 import ManagerGUI from "./pages/ManagerGUI"
 import CustomerGUI from './pages/CustomerGUI';
 import ServerGUI from './pages/ServerGUI';
+import NavBarManager from './pages/NavBarManager';
 import NavBarManager2 from './pages/NavBarManager2';
 import NavBarAbout from './pages/NavBarAbout';
 import NavBarServer2 from './pages/NavBarServer2';
@@ -97,7 +98,7 @@ function App() {
       break
     case "/ManagerGUI/tranHistory":
       component =  <>
-      <NavBarManager2/>
+      <NavBarManager/>
       <Transaction/>
       </>
       break

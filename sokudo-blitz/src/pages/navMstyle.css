@@ -7,9 +7,10 @@ body {
 }
 
 .nav {
-    background-color: #333;
+    background-color: cadetblue;
     color: white;
     display: flex;
+    font-size: 100px;
     align-items: stretch;
     gap: 2rem;
     padding: 0 1rem;

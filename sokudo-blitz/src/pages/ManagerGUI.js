@@ -35,10 +35,10 @@ import NavBarManager from "./NavBarManager";
         case "/reports":
           component = <Reports/>
           break;
-        case "/ManagerGUI/Inventory":
+        case "/Inventory":
           component = <Inventory/>
           break;
-          case "/ManagerGUI/tranHistory":
+          case "/tranHistory":
             component = <Transaction/>
             break;
 
