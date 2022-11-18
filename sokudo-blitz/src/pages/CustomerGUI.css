@@ -1,3 +1,9 @@
+.logo{
+    height: 10%;
+    width: 10%;
+    padding-top: 50px;
+}
+
 
 
 .mainItems{
@@ -5,6 +11,8 @@
     width: 200px;
     height: 200px;
     overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .sideItems{
@@ -12,13 +20,45 @@
     width: 200px;
     height: 200px;
     overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .columnItems{
     float: left;
-    
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .rowItems{
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.orderButton{
+
+    /* display: inline-block; */
+    display: block; 
+    margin: auto;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 3px;
+    padding: 0 16px;
+    border-radius: 4px;
+    color: #fff;
+    background: brown;
+    line-height: 1.15;
+    font-size: 20px;
+    height: 36px;
+    word-spacing: 0px;
+    letter-spacing: .0892857143em;
+    text-decoration: none;
+    text-transform: uppercase;
+    min-width: 64px;
+    border: none;
+    text-align: center;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }

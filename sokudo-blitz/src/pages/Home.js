@@ -8,13 +8,13 @@ export default function Home() {
             <p className = "center">Welcome to Cabo Grill!</p>
             <br></br>
 
-            <li className = "center"><a href="CustomerGUI">Customer GUI</a></li>
+            <li className = "list"><a href="CustomerGUI">Customer GUI</a></li>
             <br></br>
-            <li className = "center"><a href="ManagerGUI">Manager GUI</a></li>
+            <li className = "list"><a href="ManagerGUI">Manager GUI</a></li>
             <br></br>
-            <li className = "center"><a href="ServerGUI">Server GUI</a></li>
+            <li className = "list"><a href="ServerGUI">Server GUI</a></li>
             <br></br>
-            <li className = "center"><a href="About">About us</a></li>
+            <li className = "list"><a href="About">About us</a></li>
         </body>
     );
 }

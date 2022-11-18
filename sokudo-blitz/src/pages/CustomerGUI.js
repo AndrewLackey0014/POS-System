@@ -1,6 +1,7 @@
 
 import NavBarCustomer2 from "./NavBarCustomer2";
 import "./CustomerGUI.css";
+// import { Button } from 'react-native'
 
 import Items from "./Items";
 
@@ -77,11 +78,13 @@ import Items from "./Items";
                 <p>Chips and Guacamole</p>
             </button>
             </div>
-            <div>
-                <button onClick = {handleOrder}>
-                    <p>Add to Order</p>
-                </button>
+            <div className = "orderButton" onClick = {handleOrder}>
+                <p>ADD TO ORDER</p>
+                {/* <button onClick = {handleOrder}>
+                    
+                </button> */}
             </div>
+            <img alt = "Cabo Grill logo" title = "logo" className = "logo" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
         </body>
         //need to add total and order summary window
       )
