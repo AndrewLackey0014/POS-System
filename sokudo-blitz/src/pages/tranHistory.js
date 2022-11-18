@@ -1,5 +1,7 @@
 //import React, { Component }  from 'react';
 
+// import React, { Component, useState, useEffect} from 'react';
+
 const data = [
     { name: "Anom", age: 19, gender: "Male" },
     { name: "Megha", age: 19, gender: "Female" },
@@ -7,7 +9,28 @@ const data = [
   ]
 
 export default function tranHistory() {
-    return(
+//     const [employee_data, setEmployees] = useState(false);
+//     useEffect(() => {
+//         getEmployees();
+//     }, []);
+//     function getEmployees() {
+//         fetch('http://localhost:3001')
+//             .then(response => {
+//             return response.text();
+//             })
+//             .then(data => {
+//             // employee_data = data;
+//             setEmployees(data);
+//             });
+// }
+
+// console.log(typeof employee_data);
+// console.log(typeof temp_data);
+// const obj = JSON.parse(employee_data);
+// console.log(typeof obj);
+// console.log(obj);
+
+return(
         <>
     
     <div class="column left">
@@ -36,4 +59,4 @@ export default function tranHistory() {
     </div>
     </>
         );
-}
+ }

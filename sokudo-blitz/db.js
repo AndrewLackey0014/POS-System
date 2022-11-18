@@ -33,7 +33,7 @@ const createEmployee = (body) => {
         if (error) {
           reject(error)
         }
-        resolve(`A new employee has been added added: ${results.rows[0]}`)
+        resolve(`A new employee has been added added: ${results}`)
       })
     })
 }
@@ -46,7 +46,7 @@ const updateSalary = (body) => {
       if (error) {
         reject(error)
       }
-      resolve(`Employee salary has been updated: ${results.rows[0]}`)
+      resolve(`Employee salary has been updated: ${results}`)
     })
   })
 }

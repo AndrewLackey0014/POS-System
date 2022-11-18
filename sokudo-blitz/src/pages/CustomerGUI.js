@@ -1,6 +1,7 @@
 
 import NavBarCustomer from "./NavBarCustomer";
 import "./CustomerGUI.css";
+// import { Button } from 'react-native'
 
 import Items from "./Items";
 
@@ -33,12 +34,11 @@ import Items from "./Items";
         
     }
       return (
- /*need to add on click event to show a menu customization options such as meat option and topping
+        /*need to add on click event to show a menu customization options such as meat option and topping
         Should make it to where the other items disappear so you can customize then add then unhide and hide the customizations*/
         // add an add to order button along with a for loop to display the order summary on click
         <>
-        <NavBarCustomer/>
-        {<body className="body">
+        <body className="body">
             <div className = "rowItems">
             <button onClick = {handleClick}>
                 <img alt = "tacos" title = "tacos" className = "mainItems" src="https://www.isabeleats.com/wp-content/uploads/2022/09/chicken-tacos-small-5.jpg" />
@@ -79,15 +79,21 @@ import Items from "./Items";
                 <p>Chips and Guacamole</p>
             </button>
             </div>
-            <div>
-                <button onClick = {handleOrder}>
-                    <p>Add to Order</p>
-                </button>
+            <div className = "orderButton" onClick = {handleOrder}>
+                <p>ADD TO ORDER</p>
+                {/* <button onClick = {handleOrder}>
+                    
+                </button> */}
             </div>
-        </body>}
+            <img alt = "Cabo Grill logo" title = "logo" className = "logo" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
+        </body>
+        //need to add total and order summary window
+
         </>
-      )
-    
+
+        )
+            
+
 
 }   
 export default CustomerGUI;

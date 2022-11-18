@@ -8,7 +8,16 @@ const pool = require('./db');
 app.use(cors())
 app.use(express.json()); // express.json
 
-const port = 3001
+// const port = 3001
+const port = process.env.PORT || 3001;
+url= "";
+if (port==3001){
+  url= "http://localhost:3001/";
+}else{
+  url= "https://sokudoblitzbackend.onrender.com/";
+}
+
+
 
 const db = require('./db')
 
@@ -63,6 +72,11 @@ app.post('/employee_update', (req, res) => {
   })
 })
 
+app.get('/getEnvironmentVars', (_, res) => {
+  res.json({ ENVIRONMENT: url })
+})
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
+
