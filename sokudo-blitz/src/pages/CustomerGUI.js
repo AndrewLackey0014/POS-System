@@ -34,7 +34,7 @@ import Items from "./Items";
         
     }
       return (
- /*need to add on click event to show a menu customization options such as meat option and topping
+        /*need to add on click event to show a menu customization options such as meat option and topping
         Should make it to where the other items disappear so you can customize then add then unhide and hide the customizations*/
         // add an add to order button along with a for loop to display the order summary on click
         <body className="body">
