@@ -63,6 +63,12 @@ body {
 }
 
 .list:hover{
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-left: 19px;
+    padding-right: 19px;
+    display: block;
+    position:static;
     border-radius: 15px;
     border: 1px solid black;
 }
