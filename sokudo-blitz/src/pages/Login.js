@@ -50,7 +50,7 @@ import Transaction from "./tranHistory";
     
     return (
           <div class="nav1">
-            <img alt = "Cabo Grill logo" title = "logo" className = "logo" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
+            <img alt = "Cabo Grill logo" title = "logo" className = "logologin" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
             <h1 class="center">WELCOME TO CABO GRILL</h1>
             Input MANAGER ID:
             <br/>
