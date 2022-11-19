@@ -1,17 +1,78 @@
-body .login{
-    background-color: cadetblue;
-}
+
 
 .nav1 {
-    font-size: 100px;
+    font-size: 30px;
     height: 100%;
     width: 100%;
     align-content: center;
     text-align: center;
-    position: fixed;
-    background-color: cadetblue;
+    background-color: teal;
 }
 
 form {
     font-size: 30px;
+}
+
+.logo {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 300px;
+    height: 300px;
+}
+
+.center{
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 80px;
+}
+
+.list{
+    margin: 0 auto;
+    background-color: white;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    display: block;
+    clear: both;
+    counter-increment: list;
+    border-radius: 12px;
+    position: relative;
+    display: grid;
+    grid-gap: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #8B4513;
+    cursor: pointer;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.list:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+  }
+  
+  @media (min-width: 768px) {
+    .list {
+      padding: 0.25em 0.75em;
+    }
+}
+
+.list:hover{
+    border-radius: 15px;
+    border: 1px solid black;
 }

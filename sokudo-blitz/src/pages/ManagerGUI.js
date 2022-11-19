@@ -1,5 +1,3 @@
-
-import Pricing from "./Pricing"
 import About from "./About"
 import Transaction from "./tranHistory";
 import Employees from "./Employees";
@@ -39,8 +37,8 @@ import Login from "./Login";
 
         default: 
           component = <Login/>
-          return component;
-          break
+          return <Login/>;
+          
       }
       return (
         <>
