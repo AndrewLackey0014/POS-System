@@ -13,9 +13,9 @@ import ManagerGUI from "./pages/ManagerGUI"
 import CustomerGUI from './pages/CustomerGUI';
 import ServerGUI from './pages/ServerGUI';
 import NavBarManager from './pages/NavBarManager';
-import NavBarManager2 from './pages/Login';
+
 import NavBarAbout from './pages/NavBarAbout';
-import NavBarServer2 from './pages/NavBarServer2';
+import NavBarServer from './pages/NavBarServer';
 
 
 
@@ -174,14 +174,14 @@ function App() {
       break
     case "/ServerGUI/Items":
       component = <>
-      <NavBarServer2/>
+      <NavBarServer/>
       <Items/>
       </>
       break
 
       case "/ServerGUI/Reports":
         component = <>
-        <NavBarServer2/>
+        <NavBarServer/>
         <Reports/>
         </>
         break
