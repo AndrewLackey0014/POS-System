@@ -10,7 +10,7 @@ body {
   background-color: #333;
   color: white;
   display: flex;
-  align-items: center;
+  align-items:center;
   margin-top: 0px;
   gap: 3rem;
   padding: 0 1rem;
@@ -130,8 +130,7 @@ td {
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block; color: red;} 
 
-  .logo{
-    margin-left: 0;
+  .logonav{
     width:125px;
     height:125px;
   }
