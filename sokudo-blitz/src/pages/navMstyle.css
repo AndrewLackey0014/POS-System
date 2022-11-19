@@ -6,19 +6,21 @@ body {
     margin: 0;
 }
 
-.nav {
-    background-color: teal;
-    color: white;
-    display: flex;
-    font-size: 100px;
-    align-items: stretch;
-    gap: 2rem;
-    padding: 0 1rem;
+.navbar {
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  gap: 3rem;
+  padding: 0 1rem;
 
 }
 
-.naventries {
-    font-size: 50px;    /* Made redundant by .nav a font-size, unless going to be used different*/
+.nav_title {
+    text-decoration: none;
+    font-size: 40px;
+    color: white;    /* Made redundant by .nav a font-size, unless going to be used different*/
 }
 
 .nav ul {
@@ -129,6 +131,7 @@ td {
   .show {display:block; color: red;} 
 
   .logo{
+    margin-left: 0;
     width:125px;
     height:125px;
   }
