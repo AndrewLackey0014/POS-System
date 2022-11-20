@@ -18,6 +18,8 @@ import NavBarAbout from './pages/NavBarAbout';
 import NavBarServer from './pages/NavBarServer';
 
 
+import NavBarCustomer from './pages/NavBarCustomer';
+import Toppings_Page from './pages/Toppings_Page';
 
 var url = "";
 export async function getEnvironmentVarsFromExpress() {
@@ -45,12 +47,20 @@ function App() {
   else {
     backend_url = 'https://sokudoblitzbackend.onrender.com/';
   }
+
   const [employees, setEmployees] = useState(false);
   useEffect(() => {
     getEmployees();
   }, []);
+  
   function getEmployees() {
-    fetch(backend_url)
+    fetch(backend_url+'get_employees',{
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      
+    })
       .then(response => {
         return response.text();
       })
@@ -164,7 +174,15 @@ function App() {
       </> 
       break
     case "/CustomerGUI":
-      component= <CustomerGUI/>
+      component= <>
+      <NavBarCustomer/>
+     <CustomerGUI/> 
+      </>
+      break
+    case "/CustomerGUI/Toppings_Page":
+      component= <>
+      <Toppings_Page/>
+      </>
       break
     case "/CustomerGUI/Item":
       component= <CustomerGUI/>

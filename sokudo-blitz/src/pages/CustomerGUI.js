@@ -11,27 +11,72 @@ import Items from "./Items";
 //import Reports from "./Reports";
 //import Inventory from "./Inventory";
 //import "./navMstyle.css"
+import Toppings_Page from "./Toppings_Page"
+
+
+
+var order_summary = ["asd","aggg","Boosakc"];
  function CustomerGUI() {
     let component
     
     switch (window.location.pathname) {
 
-
+        case"/Toppings_Page":
+            component= <Toppings_Page/>
+            break;
         default: 
         
           component = <Items/>
           break
       }
 
+
+      var content=  document.getElementById("content");
+    
+      order_summary[0] = "Test";
+      var stringorder= order_summary.toString();
+
       const handleClick = (e)=>{
         alert("Test")
     }
+    const handleTaco = (e)=>{
+        <li><a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a></li>
+        alert("Taco")
+        order_summary.push("Taco");
 
-    const order_summary = [];
-    order_summary[0] = "Test";
+    }
+
+
+    const FinishOrder = (e)=>{
+     //   <li><a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a></li>
+      //  alert("Taco")
+        alert("Finished Order")
+    }
+
+
 
     const handleOrder = (e)=>{
-        
+
+        stringorder= order_summary.toString();
+        let Contents = stringorder;
+        document.getElementById("Contents").innerHTML = Contents;
+
+
+
+    //    displayOrder();
+        alert("Added to order")
+
+
+    }
+    const DeleteOrder = (e)=>{
+        order_summary=[];
+        stringorder= order_summary.toString();
+        let Contents = stringorder;
+        document.getElementById("Contents").innerHTML = Contents;
+    //    displayOrder();
+        alert("Deleted Contents")   
+
+
     }
       return (
         /*need to add on click event to show a menu customization options such as meat option and topping
@@ -40,9 +85,10 @@ import Items from "./Items";
         <>
         <body className="body">
             <div className = "rowItems">
-            <button onClick = {handleClick}>
+            <button onClick = {handleTaco}>
                 <img alt = "tacos" title = "tacos" className = "mainItems" src="https://www.isabeleats.com/wp-content/uploads/2022/09/chicken-tacos-small-5.jpg" />
                 <p>Tacos</p>
+               
             </button>
             <button onClick = {handleClick}>
                 <img alt = "bowl" title = "bowl" className = "mainItems" src="https://www.threelittlechickpeas.com/wp-content/uploads/2020/01/vegan-taco-bowl-with-lime-crema.jpg" />
@@ -79,15 +125,44 @@ import Items from "./Items";
                 <p>Chips and Guacamole</p>
             </button>
             </div>
+
+
             <div className = "orderButton" onClick = {handleOrder}>
                 <p>ADD TO ORDER</p>
                 {/* <button onClick = {handleOrder}>
                     
+                </button> */
+                //displayOrder()
+                }
+            </div>
+            
+            <div className = "orderButton" onClick = {FinishOrder}>
+                <p>Finish Order</p>
+                {/* <button onClick = {handleOrder}>
+                    
                 </button> */}
             </div>
-            <img alt = "Cabo Grill logo" title = "logo" className = "logocust" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
+            <div className = "orderButton" onClick = {DeleteOrder}>
+                <p>Delete Contents</p>
+                {/* <button onClick = {handleOrder}>
+                    
+                </button> */}
+            </div>
+
+            {/* Contents changes to whatever is in the order_summary string when add to order is pressed */}
+            <p id="Contents">Contents</p>
+   
+           <img alt = "Cabo Grill logo" title = "logo" className = "logo" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
         </body>
+                order_summary
+
         //need to add total and order summary window
+
+
+
+
+
+
 
         </>
 

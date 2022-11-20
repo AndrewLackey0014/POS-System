@@ -39,6 +39,16 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/get_employees', (req, res) => {
+  db.getEmployees()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
 app.post('/employees', (req, res) => {
   db.createEmployee(req.body)
   .then(response => {

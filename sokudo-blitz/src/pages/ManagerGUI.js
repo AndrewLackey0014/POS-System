@@ -18,7 +18,7 @@ import Login from "./Login";
     switch (window.location.pathname) {
         case "/about":
           component = <About/>
-          break
+          break;
         case "/tranHistory":
           component = <Transaction/>
           break;
