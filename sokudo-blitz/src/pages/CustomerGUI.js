@@ -37,13 +37,29 @@ var order_summary = ["asd","aggg","Boosakc"];
       var stringorder= order_summary.toString();
 
       const handleClick = (e)=>{
-        alert("Test")
+  //      alert("Test")
     }
     const handleTaco = (e)=>{
         <li><a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a></li>
-        alert("Taco")
+     //   alert("Taco")
         order_summary.push("Taco");
 
+    }
+    const handleDrink= (e)=>{
+        alert("Drink")
+        order_summary.push("Drink");
+    }
+    const handleChips_and_Salsa= (e)=>{
+        //alert("Taco")
+        order_summary.push("Chips&Salsa");
+    }
+    const handleChips_and_Queso= (e)=>{
+       // alert("Taco")
+        order_summary.push("Chips&Queso");
+    }
+    const handleChips_and_Guac= (e)=>{
+       // alert("Taco")
+        order_summary.push("Chips&Guac");
     }
 
 
@@ -106,21 +122,21 @@ var order_summary = ["asd","aggg","Boosakc"];
             </button>
             </div>
             <div className = "columnItems">
-            <button onClick = {handleClick}>
+            <button onClick = {handleDrink}>
                 <img alt = "drink" title = "drink" className = "mainItems" src="https://media.istockphoto.com/id/467108213/photo/red-cardboard-cup-with-a-straw.jpg?s=612x612&w=0&k=20&c=tkx8YkdZTYJWaslh571sKof3v78yrl_HapEvTawfGDE=" />
                 <p>Drink</p>
             </button>
-            <button onClick = {handleClick}>
+            <button onClick = {handleChips_and_Salsa}>
                 <img alt = "chips and salsa" title = "chips and salsa" className = "mainItems" src="https://media.chefdehome.com/740/0/0/salsa/homemade-salsa.jpg" />
                 <p>Chips and Salsa</p>
             </button>
             </div>
             <div>
-            <button onClick = {handleClick}>
+            <button onClick = {handleChips_and_Queso}>
                 <img alt = "chips and queso" title = "chips and queso" className = "mainItems" src="https://www.tacobueno.com/assets/food/nachos/Nachos_chips_queso_990x725.jpg" />
                 <p>Chips and Queso</p>
             </button>
-            <button onClick = {handleClick}>
+            <button onClick = {handleChips_and_Guac}>
                 <img alt = "chips and quac" title = "chips and quacamole" className = "mainItems" src="https://brokebankvegan.com/wp-content/uploads/2021/06/Guacamole-Feature.jpg" />
                 <p>Chips and Guacamole</p>
             </button>

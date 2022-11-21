@@ -8,6 +8,7 @@ var obj;
 function getCurrentURL () {
     return window.location.href
   }
+  
 export default function Employees() {
 
     const url = getCurrentURL()
@@ -25,7 +26,7 @@ export default function Employees() {
         getEmployees();
     }, []);
     function getEmployees() {
-        fetch(backend_url)
+        fetch(backend_url+'get_employees')
           .then(response => {
             return response.text();
           })

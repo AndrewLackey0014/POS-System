@@ -22,8 +22,19 @@ import NavBarCustomer from './pages/NavBarCustomer';
 import Toppings_Page from './pages/Toppings_Page';
 
 var url = "";
+const urlweb = getCurrentURL()
+  var backend_urlweb = "";
+  // console.log(url);
+  if (urlweb.substring(0,21) == 'http://localhost:3000') {
+    backend_urlweb = 'http://localhost:3001/';
+  }
+  else {
+    backend_urlweb = 'https://sokudoblitzbackend.onrender.com/';
+  }
+
+
 export async function getEnvironmentVarsFromExpress() {
-  return await fetch('http://localhost:3001/getEnvironmentVars').then((res) => {
+  return await fetch(backend_urlweb+'webgetEnvironmentVars').then((res) => {
     url = res.json();
     // console.log(url);
 
@@ -141,7 +152,7 @@ function App() {
       </>
       break
     case "/ManagerGUI/Employees":
-      component =  <>
+      component =  <> 
       <NavBarManager/>
       <Employees/>
       <div>
