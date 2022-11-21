@@ -1,9 +1,5 @@
 import "./loginCstyle.css"
 import React, { useState, useRef } from "react"
-import NavBarManager from "./NavBarManager";
-import { ReactDOM } from "react";
-import Transaction from "./tranHistory";
-
 
   const data = [
     ["david", "123"],
@@ -41,9 +37,10 @@ import Transaction from "./tranHistory";
 
     if (typeof(result) !== 'undefined'){
       alert("You're in Database");
-      window.location.pathname = "/ManagerGUI/tranHistory";
+      window.location.pathname = "/CustomerGUI/Items";
     }else{
       alert("NOT in Database");
+      window.location.pathname = "/CustomerGUI/Items";
     }
     }
   
@@ -52,7 +49,7 @@ import Transaction from "./tranHistory";
           <div class="nav1">
             <img alt = "Cabo Grill logo" title = "logo" className = "logo" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
             <h1 class="center">WELCOME TO CABO GRILL</h1>
-            Input MANAGER ID:
+            Input Customer ID:
             <br/>
             <input ref={inputRef1} type="text" id="name" name="name" onChange={handleNameChange} value={name} /> 
             <input ref={inputRef2} type="text" id="password" name="password" onChange={handlePwdChange} value={password} />

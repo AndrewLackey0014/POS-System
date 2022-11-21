@@ -13,7 +13,7 @@ import ManagerGUI from "./pages/ManagerGUI"
 import CustomerGUI from './pages/CustomerGUI';
 import ServerGUI from './pages/ServerGUI';
 import NavBarManager from './pages/NavBarManager';
-import NavBarManager2 from './pages/Login';
+import NavBarManager2 from './pages/LoginManager';
 import NavBarAbout from './pages/NavBarAbout';
 import NavBarServer2 from './pages/NavBarServer2';
 

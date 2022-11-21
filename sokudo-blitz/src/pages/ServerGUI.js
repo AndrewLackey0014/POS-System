@@ -7,6 +7,7 @@ import NavBarServer from "./NavBarServer";
 //import Employees from "./Employees";
 //import Items from "./Items";
 import Reports from "./Reports";
+import Login from "./LoginServer";
 //import Inventory from "./Inventory";
 //import "./navMstyle.css"
  function ServerGUI() {
@@ -20,8 +21,8 @@ import Reports from "./Reports";
         break
 
         default: 
-          component = <Items/>
-          break
+          component = <Login/>
+          return <Login/>
       }
       return (
         <>

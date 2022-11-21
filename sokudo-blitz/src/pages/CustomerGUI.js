@@ -5,6 +5,8 @@ import "./CustomerGUI.css";
 
 import Items from "./Items";
 
+import Login from "./LoginCustomer";
+
 //import Transaction from "./tranHistory";
 //import Employees from "./Employees";
 //import Items from "./Items";
@@ -15,11 +17,13 @@ import Items from "./Items";
     let component
     
     switch (window.location.pathname) {
-
+        case "/Items":
+            component = <Items/>;
+            break;
 
         default: 
-        
-          component = <Items/>
+          component = <Login/>
+          return <Login/>;
           break
       }
 
