@@ -145,7 +145,7 @@ function App() {
       <NavBarManager/>
       <Employees/>
       <div>
-        {employees ? employees : 'There is no employee data available'}
+        {/* {employees ? employees : 'There is no employee data available'} */}
         <br />
         <button onClick={createEmployee}>Add employee</button>
         <br />
