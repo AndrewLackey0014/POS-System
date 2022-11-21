@@ -5,14 +5,27 @@ import React, { Component, useState, useEffect} from 'react';
 
 const temp_data = [];
 var obj;
-
+function getCurrentURL () {
+    return window.location.href
+  }
 export default function Employees() {
+
+    const url = getCurrentURL()
+    var backend_url = "";
+    // console.log(url);
+    if (url.substring(0,21) == 'http://localhost:3000') {
+      backend_url = 'http://localhost:3001/';
+    }
+    else {
+      backend_url = 'https://sokudoblitzbackend.onrender.com/';
+    }
+
     const [employee_data, setEmployees] = useState(false);
     useEffect(() => {
         getEmployees();
     }, []);
     function getEmployees() {
-        fetch('http://localhost:3001')
+        fetch(backend_url)
           .then(response => {
             return response.text();
           })
