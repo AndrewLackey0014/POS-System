@@ -39,6 +39,39 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/tranHist', (req, res) => {
+  db.getTranHist()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+
+app.get('/inventory', (req, res) => {
+  db.getInventory()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+
+app.get('/items', (req, res) => {
+  db.getItems()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+
 app.get('/get_employees', (req, res) => {
   db.getEmployees()
   .then(response => {

@@ -4,7 +4,6 @@ import React, { Component, useState, useEffect} from 'react';
 
 
 const temp_data = [];
-// const employee_data = [];
 var obj;
 
 export default function Employees() {
@@ -18,7 +17,6 @@ export default function Employees() {
             return response.text();
           })
           .then(data => {
-            // employee_data = data;
             setEmployees(data);
           });
     }

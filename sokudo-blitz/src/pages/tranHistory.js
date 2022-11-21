@@ -1,39 +1,102 @@
-//import React, { Component }  from 'react';
 
-// import React, { Component, useState, useEffect} from 'react';
+import React, { Component, useState, useEffect} from 'react';
 
-const data = [
-    { name: "Anom", age: 19, gender: "Male" },
-    { name: "Megha", age: 19, gender: "Female" },
-    { name: "Subham", age: 25, gender: "Male"},
-  ]
 
-export default function tranHistory() {
-//     const [employee_data, setEmployees] = useState(false);
-//     useEffect(() => {
-//         getEmployees();
-//     }, []);
-//     function getEmployees() {
-//         fetch('http://localhost:3001')
-//             .then(response => {
-//             return response.text();
-//             })
-//             .then(data => {
-//             // employee_data = data;
-//             setEmployees(data);
-//             });
-// }
+const temp_data = []
+var obj;
 
-// console.log(typeof employee_data);
-// console.log(typeof temp_data);
-// const obj = JSON.parse(employee_data);
-// console.log(typeof obj);
-// console.log(obj);
+export default function TranHistory() {
+    const [transactionHist, setTranHist] = useState(false);
+    useEffect(() => {
+        getTranHist();
+    }, []);
+    function getTranHist() {
+        fetch('http://localhost:3001/tranHist')
+          .then(response => {
+            return response.text();
+          })
+          .then(data => {
+            setTranHist(data);
+          });
+    }
+    obj = JSON.parse(transactionHist);
+    
+    let component;
+    switch (obj) {
+        case false:
+          component = <>
+          <div class="column left">
+                <form>Begin Date: <input type="text"></input></form>
+                <form>End Date: <input type="text"></input></form>
+                <button>Load Selected Data</button>
+            </div>
+            <div class="column">
+                <table>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Order ID</th>
+                        <th>Order Time</th>
+                        <th>Order Cost</th>
+                        <th>Order Contents</th>
+
+                    </tr>
+                        {temp_data.map((val, key) => {
+                        return (
+                            <tr key={key}>
+                            <td>{val.name}</td>
+                            <td>{val.age}</td>
+                            <td>{val.gender}</td>
+                            </tr>
+                        )
+                        })}
+                </table>
+            </div>
+          
+          </>
+          break
+        
+        default: 
+          component = <>
+          <div>
+
+            <div class="column left">
+                <form>Begin Date: <input type="text"></input></form>
+                <form>End Date: <input type="text"></input></form>
+                <button>Load Selected Data</button>
+            </div>
+            <div class="column">
+                <table>
+                    <tr>
+                    <th>Order Number</th>
+                        <th>Order ID</th>
+                        <th>Order Time</th>
+                        <th>Order Cost</th>
+                        <th>Order Contents</th>
+
+                    </tr>
+                     
+                    {obj.map((val, key) => {
+                    return (
+                        <tr key={key}>
+                        <td>{val.order_number}</td>
+                        <td>{val.order_id}</td>
+                        <td>{val.order_time}</td>
+                        <td>{val.order_cost}</td>
+                        <td>{val.order_contents}</td>
+                        </tr>
+                    )
+                    })}
+                </table>
+            </div>  
+          </div>
+          </>
+          break
+      }
 
 return(
         <>
     
-    <div class="column left">
+    {/* <div class="column left">
         <form>Begin Date: <input type="text"></input></form>
         <form>End Date: <input type="text"></input></form>
         <button>Load Selected Data</button>
@@ -42,11 +105,13 @@ return(
     <div class="column right">
         <table>
             <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Gender</th>
+                <th>Order Number</th>
+                <th>Order ID</th>
+                <th>Order Time</th>
+                <th>Order Cost</th>
+                <th>Order Contents</th>
             </tr>
-            {data.map((val, key) => {
+            {temp_data.map((val, key) => {
             return (
                 <tr key={key}>
                 <td>{val.name}</td>
@@ -56,7 +121,8 @@ return(
             )
             })}
         </table>
-    </div>
+    </div> */}
+    {component}
     </>
         );
  }
