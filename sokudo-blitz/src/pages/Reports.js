@@ -1,13 +1,27 @@
-import React, { Component }  from 'react';
+import React, { Component, useState, useEffect} from 'react';
 
 
-const data = [
-    { name: "Anom", age: 19, gender: "Male" },
-    { name: "Megha", age: 19, gender: "Female" },
-    { name: "Subham", age: 25, gender: "Male"},
-  ]
+const temp_data = [];
+var obj;
+
 
 export default function Reports(props) {
+
+    const [reports_data, setReports] = useState(false);
+    useEffect(() => {
+        getReports();
+    }, []);
+    function getReports() {
+        fetch('http://localhost:3001/inventory')
+          .then(response => {
+            return response.text();
+          })
+          .then(data => {
+            setReports(data);
+          });
+    }
+    obj = JSON.parse(reports_data);
+
     return(
         <>
         <div class="column left">
@@ -41,7 +55,7 @@ export default function Reports(props) {
                 <th>Age</th>
                 <th>Gender</th>
             </tr>
-            {data.map((val, key) => {
+            {temp_data.map((val, key) => {
             return (
                 <tr key={key}>
                 <td>{val.name}</td>

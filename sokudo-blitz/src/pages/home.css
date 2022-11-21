@@ -10,11 +10,14 @@ body {
     display: block;
     width: 300px;
     height: 300px;
+    margin-top: 5px;
 }
 
 .center{
     text-align: center;
     font-family: 'Courier New', monospace;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .list{

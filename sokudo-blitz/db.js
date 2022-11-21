@@ -26,6 +26,46 @@ const getEmployees = () => {
     }) 
 }
 
+const getTranHist = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM transaction3', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
+
+const getInventory = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM inventory', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
+
+
+
+const getItems = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM items', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
 const createEmployee = (body) => {
     return new Promise(function(resolve, reject) {
       const { employeeid, salary, name, managerid, role } = body
@@ -78,4 +118,7 @@ const deleteEmployee = (body) => {
     createEmployee,
     deleteEmployee,
     updateSalary,
+    getTranHist,
+    getInventory,
+    getItems
 }

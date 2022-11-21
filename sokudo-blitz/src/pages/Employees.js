@@ -3,43 +3,43 @@
 import React, { Component, useState, useEffect} from 'react';
 
 
-const temp_data = [
-    { name: "Anom", age: 19, gender: "Male" },
-    { name: "Megha", age: 19, gender: "Female" },
-    { name: "Subham", age: 25, gender: "Male"},
-  ]
-// const employee_data = [];
-
-
+const temp_data = [];
+var obj;
+function getCurrentURL () {
+    return window.location.href
+  }
+  
 export default function Employees() {
+
+    const url = getCurrentURL()
+    var backend_url = "";
+    // console.log(url);
+    if (url.substring(0,21) == 'http://localhost:3000') {
+      backend_url = 'http://localhost:3001/';
+    }
+    else {
+      backend_url = 'https://sokudoblitzbackend.onrender.com/';
+    }
+
     const [employee_data, setEmployees] = useState(false);
     useEffect(() => {
         getEmployees();
     }, []);
     function getEmployees() {
-        fetch('http://localhost:3001')
+        fetch(backend_url+'get_employees')
           .then(response => {
             return response.text();
           })
           .then(data => {
-            // employee_data = data;
             setEmployees(data);
           });
     }
+    obj = JSON.parse(employee_data);
 
-    // console.log(typeof employee_data);
-    // console.log(typeof temp_data);
-    const obj = JSON.parse(employee_data);
-    // console.log(typeof obj);
-    // console.log(obj);
-    // data =
-    // employee_data = 
-
-
-    return(
-        <>
-            {/* <button onClick={getEmployees}>See Employees</button> */}
-            <br />
+    let component;
+    switch (obj) {
+        case false:
+          component = <>
             <div class="column">
                 <table>
                     <tr>
@@ -50,16 +50,35 @@ export default function Employees() {
                         <th>Role</th>
 
                     </tr>
-                    {temp_data.map((val, key) => {
-                    return (
-                        <tr key={key}>
-                        <td>{val.name}</td>
-                        <td>{val.age}</td>
-                        <td>{val.gender}</td>
-                        </tr>
-                    )
-                    })}
-                    {/* {obj.map((val, key) => {
+                        {temp_data.map((val, key) => {
+                        return (
+                            <tr key={key}>
+                            <td>{val.name}</td>
+                            <td>{val.age}</td>
+                            <td>{val.gender}</td>
+                            </tr>
+                        )
+                        })}
+                </table>
+            </div>
+          
+          </>
+          break
+        
+        default: 
+          component = <>
+            <div class="column">
+                <table>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Salary</th>
+                        <th>Name</th>
+                        <th>Manager ID</th>
+                        <th>Role</th>
+
+                    </tr>
+                     
+                    {obj.map((val, key) => {
                     return (
                         <tr key={key}>
                         <td>{val.employeeid}</td>
@@ -67,13 +86,18 @@ export default function Employees() {
                         <td>{val.name}</td>
                         <td>{val.managerid}</td>
                         <td>{val.role}</td>
-
-
                         </tr>
                     )
-                    })} */}
+                    })}
                 </table>
-            </div>
+            </div>  
+          </>
+          break
+      }
+
+    return(
+        <>
+            {component}
         </>
         );
 }
