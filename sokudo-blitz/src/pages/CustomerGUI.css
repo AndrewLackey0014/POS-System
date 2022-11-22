@@ -28,22 +28,15 @@
     flex-wrap: wrap;
 }
 
-.columnItems{
+.columnCust {
     float: left;
-    display: flex;
-    align-items: center;
-    flex: wrap;
-    /* padding: 0 4px; */
-}
-
-.rowItems{
-    float: left;
-    display: flex;
-    flex-wrap: wrap;
-    /* padding: 0 4px; */
-    /* position: relative;
-    display: flex;
-    flex-wrap: wrap; */
+    width: 14.2%;
+  }
+  
+.rowCust {
+    display:flex;
+    text-align: center;
+    justify-content: center;
 }
 
 .orderButton{
