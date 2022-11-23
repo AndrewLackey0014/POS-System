@@ -48,6 +48,10 @@ body {
     background-color: #777;
 }
 
+input {
+  width:100%;
+}
+
 .column {
   float: left;
   width: 100%;
@@ -55,7 +59,6 @@ body {
 
 .row {
   display:flex;
-  text-align: center;
   justify-content: center;
 }
 
@@ -64,7 +67,7 @@ body {
   border: 20px solid transparent;
   display:inline-grid;
   text-align: justify;
-  row-gap: 150%;
+  row-gap: 50%;
   align-content:stretch;
 
 }

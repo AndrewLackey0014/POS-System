@@ -53,7 +53,7 @@ import React, { useState, useRef } from "react"
             <input ref={inputRef1} type="text" id="name" name="name" onChange={handleNameChange} value={name} /> 
             <input ref={inputRef2} type="text" id="password" name="password" onChange={handlePwdChange} value={password} />
             <button class="list" onClick={handleClick}>Login</button>
-            <br/><br/>
+            <br/>
             <button class="list" onClick={() => window.location.pathname = "/"}>Return</button>
         </div>
     );

@@ -27,8 +27,8 @@ var order_summary = ["asd","aggg","Boosakc"];
             component= <Toppings_Page/>
             break;
         default: 
-          component = <Login/>
-          return <Login/>;
+          component = <Items/>
+          //return <Login/>;
           break
       }
 
