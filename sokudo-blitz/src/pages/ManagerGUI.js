@@ -6,7 +6,7 @@ import Reports from "./Reports";
 import Inventory from "./Inventory";
 
 import NavBarManager from "./NavBarManager";
-import Login from "./Login";
+import Login from "./LoginManager";
 //import Transaction from "./tranHistory";
 //import Employees from "./Employees";
 //import Items from "./Items";

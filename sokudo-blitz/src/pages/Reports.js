@@ -28,8 +28,9 @@ export default function Reports(props) {
             <form class="row">
                 Begin Time: <input type="text"></input>
                 End Time: <input type="text"></input>
-                <button>Sales Report</button>
-            </form>
+                <button>Sales Report</button>   
+            </form>    
+            
 
             <form class="row">
                 Previous Date: <input type="text"></input>

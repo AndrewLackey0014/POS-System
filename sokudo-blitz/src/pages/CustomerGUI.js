@@ -5,6 +5,8 @@ import "./CustomerGUI.css";
 
 import Items from "./Items";
 
+import Login from "./LoginCustomer";
+
 //import Transaction from "./tranHistory";
 //import Employees from "./Employees";
 //import Items from "./Items";
@@ -25,8 +27,8 @@ var order_summary = ["asd","aggg","Boosakc"];
             component= <Toppings_Page/>
             break;
         default: 
-        
           component = <Items/>
+          //return <Login/>;
           break
       }
 
