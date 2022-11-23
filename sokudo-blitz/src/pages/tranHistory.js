@@ -30,7 +30,7 @@ export default function TranHistory() {
                 <form>End Date: <input type="text"></input></form>
                 <button>Load Selected Data</button>
             </div>
-            <div class="column">
+            <div class="column right">
                 <table>
                     <tr>
                         <th>Order Number</th>
