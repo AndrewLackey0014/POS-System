@@ -17,7 +17,7 @@ import Toppings_Page from "./Toppings_Page"
 
 
 
-var order_summary = ["asd","aggg","Boosakc"];
+var order_summary = [];
  function CustomerGUI() {
     let component
     
@@ -38,9 +38,6 @@ var order_summary = ["asd","aggg","Boosakc"];
       order_summary[0] = "Test";
       var stringorder= order_summary.toString();
 
-    const handleClick = (e)=>{
-  //      alert("Test")
-    }
     const handleTaco = (e)=>{
         <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
      //   alert("Taco")
@@ -48,7 +45,7 @@ var order_summary = ["asd","aggg","Boosakc"];
 
     }
     const handleDrink= (e)=>{
-        alert("Drink")
+        alert(order_summary)
         order_summary.push("Drink");
     }
     const handleChips_and_Salsa= (e)=>{
@@ -63,6 +60,22 @@ var order_summary = ["asd","aggg","Boosakc"];
        // alert("Taco")
         order_summary.push("Chips&Guac");
     }
+
+    const handleBurrito= (e)=>{
+      // alert("Taco")
+       order_summary.push("Burrito");
+    }
+
+    const handleBowl= (e)=>{
+      // alert("Taco")
+       order_summary.push("Bowl");
+    }
+
+    const handleSalad= (e)=>{
+      // alert("Taco")
+       order_summary.push("Salad");
+   }
+
 
 
     const FinishOrder = (e)=>{
@@ -109,17 +122,17 @@ var order_summary = ["asd","aggg","Boosakc"];
                   <p>Tacos</p>
                 
               </button>
-              <button onClick = {handleClick}>
+              <button onClick = {handleBowl}>
                   <img alt = "bowl" title = "bowl" className = "mainItems" src="https://www.threelittlechickpeas.com/wp-content/uploads/2020/01/vegan-taco-bowl-with-lime-crema.jpg" />
                   <p>Bowl</p>
               </button>
             </div>
             <div className = "columnCust">
-              <button onClick = {handleClick}>
+              <button onClick = {handleBurrito}>
                   <img alt = "burrito" title = "burrito" className = "mainItems" src="https://media.istockphoto.com/id/1313361282/photo/mexican-rice-and-chorizo-sausage-wrap.jpg?s=612x612&w=0&k=20&c=7BgOT-kuluQIlZ50l-p-DNvajA66EeB_HIUvW6O_GPM=" />
                   <p>Burrito</p>
               </button>
-              <button onClick = {handleClick}>
+              <button onClick = {handleSalad}>
                   <img alt = "salad" title = "salad" className = "mainItems" src="https://assets.bonappetit.com/photos/624215f8a76f02a99b29518f/3:4/w_1812,h_2416,c_limit/0328-ceasar-salad-lede.jpg" />
                   <p>Salad</p>
               </button>
@@ -145,6 +158,8 @@ var order_summary = ["asd","aggg","Boosakc"];
               </button>
             </div>
           </div>
+          <table class="content">
+          </table>
 
             <div className = "orderButton" onClick = {handleOrder}>
                 <p>ADD TO ORDER</p>
@@ -169,7 +184,6 @@ var order_summary = ["asd","aggg","Boosakc"];
             </div>
 
             {/* Contents changes to whatever is in the order_summary string when add to order is pressed */}
-            <p id="Contents">Contents</p>
    
         </body>
 
