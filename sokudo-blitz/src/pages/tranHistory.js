@@ -26,9 +26,11 @@ export default function TranHistory() {
         case false:
           component = <>
           <div class="column left">
-                <form>Begin Date: <input type="text"></input></form>
-                <form>End Date: <input type="text"></input></form>
-                <button>Load Selected Data</button>
+                <form class = "row">
+                    Begin Date: <input type="text"></input>
+                    End Date: <input type="text"></input>
+                    <button>Load Selected Data</button>
+                </form>
             </div>
             <div class="column right">
                 <table>
@@ -60,9 +62,11 @@ export default function TranHistory() {
           <div>
 
             <div class="column left">
-                <form>Begin Date: <input type="text"></input></form>
-                <form>End Date: <input type="text"></input></form>
-                <button>Load Selected Data</button>
+                <form class = "row">
+                    Begin Date: <input type="text"></input>
+                    End Date: <input type="text"></input>
+                    <button>Load Selected Data</button>
+                </form>
             </div>
             <div class="column">
                 <table>
@@ -94,35 +98,9 @@ export default function TranHistory() {
       }
 
 return(
-        <>
-    
-    {/* <div class="column left">
-        <form>Begin Date: <input type="text"></input></form>
-        <form>End Date: <input type="text"></input></form>
-        <button>Load Selected Data</button>
-    </div>
-    
-    <div class="column right">
-        <table>
-            <tr>
-                <th>Order Number</th>
-                <th>Order ID</th>
-                <th>Order Time</th>
-                <th>Order Cost</th>
-                <th>Order Contents</th>
-            </tr>
-            {temp_data.map((val, key) => {
-            return (
-                <tr key={key}>
-                <td>{val.name}</td>
-                <td>{val.age}</td>
-                <td>{val.gender}</td>
-                </tr>
-            )
-            })}
-        </table>
-    </div> */}
-    {component}
+
+    <>
+        {component}
     </>
         );
  }
