@@ -26,9 +26,11 @@ export default function TranHistory() {
         case false:
           component = <>
           <div class="column left">
-                <form>Begin Date: <input type="text"></input></form>
-                <form>End Date: <input type="text"></input></form>
-                <button>Load Selected Data</button>
+                <form class = "row">
+                    Begin Date: <input type="text"></input>
+                    End Date: <input type="text"></input>
+                    <button>Load Selected Data</button>
+                </form>
             </div>
             <div class="column right">
                 <table>
@@ -60,9 +62,11 @@ export default function TranHistory() {
           <div>
 
             <div class="column left">
-                <form>Begin Date: <input type="text"></input></form>
-                <form>End Date: <input type="text"></input></form>
-                <button>Load Selected Data</button>
+                <form class = "row">
+                    Begin Date: <input type="text"></input>
+                    End Date: <input type="text"></input>
+                    <button>Load Selected Data</button>
+                </form>
             </div>
             <div class="column">
                 <table>
