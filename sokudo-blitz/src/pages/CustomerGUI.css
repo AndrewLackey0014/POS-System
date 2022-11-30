@@ -10,6 +10,17 @@
     grid-auto-rows: 200px;
 } */
 
+.content{
+    text-align: left;
+    border: 2px solid;
+    width: 40%;
+    height: 66%;
+    position: absolute;
+    right: 0px;
+    top: 155px;
+    overflow-y: auto;
+}
+
 .mainItems{
     object-fit: contain;
     width: 200px;
@@ -35,8 +46,8 @@
   
 .rowCust {
     display:flex;
-    text-align: center;
-    justify-content: center;
+    text-align: left;
+    justify-content: left;
 }
 
 .orderButton{

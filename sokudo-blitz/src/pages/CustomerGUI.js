@@ -45,6 +45,25 @@ var order_summary = ["asd","aggg","Boosakc"];
         order_summary.push("Taco");
 
     }
+    const handleBurrito = (e)=>{
+      <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
+    //   alert("Taco")
+      order_summary.push("Burrito");
+
+    }
+    const handleSalad = (e)=>{
+      <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
+    //   alert("Taco")
+      order_summary.push("Salad");
+
+    }
+    const handleBowl = (e)=>{
+      <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
+    //   alert("Taco")
+      order_summary.push("Bowl");
+
+  }
+
     const handleDrink= (e)=>{
         alert("Drink")
         order_summary.push("Drink");
@@ -107,17 +126,17 @@ var order_summary = ["asd","aggg","Boosakc"];
                   <p>Tacos</p>
                 
               </button>
-              <button onClick = {handleClick}>
+              <button onClick = {handleBowl}>
                   <img alt = "bowl" title = "bowl" className = "mainItems" src="https://www.threelittlechickpeas.com/wp-content/uploads/2020/01/vegan-taco-bowl-with-lime-crema.jpg" />
                   <p>Bowl</p>
               </button>
             </div>
             <div className = "columnCust">
-              <button onClick = {handleClick}>
+              <button onClick = {handleBurrito}>
                   <img alt = "burrito" title = "burrito" className = "mainItems" src="https://media.istockphoto.com/id/1313361282/photo/mexican-rice-and-chorizo-sausage-wrap.jpg?s=612x612&w=0&k=20&c=7BgOT-kuluQIlZ50l-p-DNvajA66EeB_HIUvW6O_GPM=" />
                   <p>Burrito</p>
               </button>
-              <button onClick = {handleClick}>
+              <button onClick = {handleSalad}>
                   <img alt = "salad" title = "salad" className = "mainItems" src="https://assets.bonappetit.com/photos/624215f8a76f02a99b29518f/3:4/w_1812,h_2416,c_limit/0328-ceasar-salad-lede.jpg" />
                   <p>Salad</p>
               </button>
