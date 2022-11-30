@@ -28,9 +28,7 @@ import React, { useState, useRef } from "react"
 
     var msg = inputRef1.current.value;
     var pwd = inputRef2.current.value;
-
-
-
+    
     const result = data.find(element => {
       return ((element[0] === msg) && (element[1] === pwd));
     })
@@ -42,7 +40,6 @@ import React, { useState, useRef } from "react"
       alert("NOT in Database");
     }
     }
-  
     
     return (
           <div class="nav1">
