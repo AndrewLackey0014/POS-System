@@ -38,9 +38,7 @@ var order_summary = ["asd","aggg","Boosakc"];
       order_summary[0] = "Test";
       var stringorder= order_summary.toString();
 
-    const handleClick = (e)=>{
-  //      alert("Test")
-    }
+
     const handleTaco = (e)=>{
         <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
      //   alert("Taco")
@@ -145,6 +143,10 @@ var order_summary = ["asd","aggg","Boosakc"];
               </button>
             </div>
           </div>
+          <table class="content">
+
+          <p id="Contents">Contents</p>
+          </table>
 
             <div className = "orderButton" onClick = {handleOrder}>
                 <p>ADD TO ORDER</p>
@@ -169,10 +171,9 @@ var order_summary = ["asd","aggg","Boosakc"];
             </div>
 
             {/* Contents changes to whatever is in the order_summary string when add to order is pressed */}
-            <p id="Contents">Contents</p>
-   
         </body>
 
+                order_summary
 
 
 
