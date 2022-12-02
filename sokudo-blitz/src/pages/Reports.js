@@ -24,6 +24,9 @@ export default function Reports(props) {
     
     const [excessDate, setExcessDate] = useState('');   //  Excess Report
 
+    const [startDateCombo, setStartDateCombo] = useState('');    //  Combo Report
+    const [endDateCombo, setEndDateCombo] = useState('')    //  Combo Report
+
     
 
     const handleStartChange = event => {    //  On click, Gets Sales Report Start Time
@@ -41,10 +44,23 @@ export default function Reports(props) {
         console.log(excess)
     }
 
+    const handleStartChangeCombo = event => {    //  On click, Gets Combo Report Start Time
+        setStartDateCombo(event.target.value);    start = inputRef4.current.value;
+        console.log(start)
+    }
+    
+    const handleEndChangeCombo = event => {  //  On click, gets Combo Report End time
+        setEndDateCombo(event.target.value);        end = inputRef5.current.value;
+        console.log(end)
+    }
+
     const inputRef1 = useRef(null); //  Sales Report
     const inputRef2 = useRef(null); //  Sales Report
 
     const inputRef3 = useRef(null); //  Excess Report
+
+    const inputRef4 = useRef(null); //  Combo Report
+    const inputRef5 = useRef(null); //  Combo Report
 
 
     const handleType = (type) => {  //  Determines which Report is being requested & calls for that data
@@ -166,6 +182,82 @@ export default function Reports(props) {
             //     // alert("Correct Date Format: YYYYMMDD")
             //     return false;
             // }})
+        }else if (type === "restock"){  //  If Requesting Restock Report
+            console.log("ENTERING RESTOCK...")
+            fetch('http://localhost:3001/inventory')
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReports(data);
+                    });
+            obj = JSON.parse(reports_data);
+
+            data = obj.map((val,key) => {
+                // console.log("Current: " + val.curr_inv + "\tMin: " + val.min_inv)
+                if ((val.curr_inv) < (val.min_inv)){
+                    return (
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Current Inv</th>
+                                    <th>Max Inv</th>
+                                    <th>Min Inv</th>
+                                </tr>
+                            
+                            <tr key={key}>
+                                <td>{val.item}</td>
+                                <td>{val.curr_inv}</td>
+                                <td>{val.max_inv}</td>
+                                <td>{val.min_inv}</td>
+                            </tr></table>
+                        </div>
+                )}else{
+                    console.log("NO VALID DATA ")
+                    return false;
+                }
+            })
+        }else if (type === "combo"){    //  If Requesting Combo Report
+            console.log("ENTERING COMBO...")
+            fetch('http://localhost:3001/tranHist')
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReports(data);
+                    });
+            obj = JSON.parse(reports_data);
+
+            data = obj.map((val, key) => {
+                var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
+                if((itemTime > startDateCombo) && (itemTime < endDateCombo)){
+                    console.log(end)
+                    // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+    
+                return (
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>Order ID</th>
+                                <th>Order Time</th>
+                                <th>Order Cost</th>
+                                <th>Order Contents</th>
+                            </tr>
+                        
+                        <tr key={key}>
+                            <td>{val.order_number}</td>
+                            <td>{val.order_id}</td>
+                            <td>{val.order_time}</td>
+                            <td>{val.order_cost}</td>
+                            <td>{val.order_contents}</td>
+                        </tr></table>
+                    </div>
+                )}else{
+                    console.log("NO VALID DATA ")
+                    return false;
+                }})
         }
         
     }
@@ -200,21 +292,27 @@ export default function Reports(props) {
     component = <> 
         <div class="column left">
             <div class="row">
+            {/* Sales Report */}
                 <input ref={inputRef1} id="startDate" type="text" value={startDate} onChange={handleStartChange} placeholder="YYYYMMDD"></input>
                 <input ref={inputRef2} id="endDate" type="text" value={endDate} onChange={handleEndChange} placeholder="YYYYMMDD"></input>
                 <button id={numBtns[0]} onClick={changeRep(1, "sales")} value={false}>Sales Report</button><br/>
             </div>
 
             <div class="row">
+            {/* Excess Report */}
                 <input ref={inputRef3} id="excessDate" type="text" value={excessDate} onChange={handleExcessDate} placeholder="YYYYMMDD"></input>
                 <button id={numBtns[1]} onClick={changeRep(2, "excess")} value={false}>Excess Report</button><br/>
             </div>
 
-            <div class="row">
+            <div class="row"> 
+            {/* Restock Report */}
                 <button id={numBtns[2]} onClick={changeRep(3, "restock")} value={false}>Restock Report</button><br/>
             </div>
 
             <div class="row">
+            {/* Combo Report */}
+                <input ref={inputRef4} id="startDateCombo" type="text" value={startDateCombo} onChange={handleStartChangeCombo} placeholder="YYYYMMDD"></input>
+                <input ref={inputRef5} id="endDateCombo" type="text" value={endDateCombo} onChange={handleEndChangeCombo} placeholder="YYYYMMDD"></input>
                 <button id={numBtns[3]} onClick={changeRep(4, "combo")} value={false}>Combo Report</button>
             </div>
         </div>
