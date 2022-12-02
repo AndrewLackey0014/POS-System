@@ -17,7 +17,7 @@ import Toppings_Page from "./Toppings_Page"
 
 
 
-var order_summary = ["asd","aggg","Boosakc"];
+var order_summary = [];
  function CustomerGUI() {
     let component
     
@@ -35,37 +35,29 @@ var order_summary = ["asd","aggg","Boosakc"];
 
       var content=  document.getElementById("content");
     
-      order_summary[0] = "Test";
       var stringorder= order_summary.toString();
 
 
     const handleTaco = (e)=>{
-        <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
-     //   alert("Taco")
         order_summary.push("Taco");
 
     }
     const handleBurrito = (e)=>{
-      <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
     //   alert("Taco")
       order_summary.push("Burrito");
 
     }
     const handleSalad = (e)=>{
-      <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
+      <a href="Toppings_Page" className="naventries">Toppings</a>
     //   alert("Taco")
       order_summary.push("Salad");
 
     }
     const handleBowl = (e)=>{
       <a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a>
-    //   alert("Taco")
       order_summary.push("Bowl");
-
-  }
-
+    }
     const handleDrink= (e)=>{
-        alert("Drink")
         order_summary.push("Drink");
     }
     const handleChips_and_Salsa= (e)=>{
@@ -83,7 +75,7 @@ var order_summary = ["asd","aggg","Boosakc"];
 
 
     const FinishOrder = (e)=>{
-     //   <li><a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a></li>
+       <li><a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a></li>
       //  alert("Taco")
         alert("Finished Order")
     }
@@ -97,19 +89,12 @@ var order_summary = ["asd","aggg","Boosakc"];
         document.getElementById("Contents").innerHTML = Contents;
 
 
-
-    //    displayOrder();
-        alert("Added to order")
-
-
     }
     const DeleteOrder = (e)=>{
         order_summary=[];
         stringorder= order_summary.toString();
         let Contents = stringorder;
-        document.getElementById("Contents").innerHTML = Contents;
-    //    displayOrder();
-        alert("Deleted Contents")   
+        document.getElementById("Contents").innerHTML = Contents; 
 
 
     }
@@ -121,25 +106,84 @@ var order_summary = ["asd","aggg","Boosakc"];
         <body className="body">
           <div className = "rowCust">
             <div className = "columnCust">
+              <div class="dropdown">
               <button onClick = {handleTaco}>
                   <img alt = "tacos" title = "tacos" className = "mainItems" src="https://www.isabeleats.com/wp-content/uploads/2022/09/chicken-tacos-small-5.jpg" />
                   <p>Tacos</p>
-                
               </button>
+                <div class="dropdown-content">
+                <input type="checkbox" /> Beef
+                <input type="checkbox" />Steak
+                <input type="checkbox" />Veggie Medley
+                <input type="checkbox" />Chicken
+                <input type="checkbox" />Cheese
+                <input type="checkbox" />Beans
+                <input type="checkbox" />Rice
+                <input type="checkbox" />Salsa
+                <input type="checkbox" />Sour Cream
+                <input type="checkbox" />Guacamole
+                <input type="checkbox" />Queso
+                </div>
+              </div>
+              <div class="dropdown">
               <button onClick = {handleBowl}>
                   <img alt = "bowl" title = "bowl" className = "mainItems" src="https://www.threelittlechickpeas.com/wp-content/uploads/2020/01/vegan-taco-bowl-with-lime-crema.jpg" />
                   <p>Bowl</p>
               </button>
+                <div class="dropdown-content">
+                <input type="checkbox" />Beef
+                <input type="checkbox" />Steak
+                <input type="checkbox" />Veggie Medley
+                <input type="checkbox" />Chicken
+                <input type="checkbox" />Cheese
+                <input type="checkbox" />Beans
+                <input type="checkbox" />Rice
+                <input type="checkbox" />Salsa
+                <input type="checkbox" />Sour Cream
+                <input type="checkbox" />Guacamole
+                <input type="checkbox" />Queso
+                </div>
+              </div>
             </div>
             <div className = "columnCust">
+            <div class="dropdown">
               <button onClick = {handleBurrito}>
                   <img alt = "burrito" title = "burrito" className = "mainItems" src="https://media.istockphoto.com/id/1313361282/photo/mexican-rice-and-chorizo-sausage-wrap.jpg?s=612x612&w=0&k=20&c=7BgOT-kuluQIlZ50l-p-DNvajA66EeB_HIUvW6O_GPM=" />
                   <p>Burrito</p>
               </button>
-              <button onClick = {handleSalad}>
+                <div class="dropdown-content">
+                <input type="checkbox" />Beef
+                <input type="checkbox" />Steak
+                <input type="checkbox" />Veggie Medley
+                <input type="checkbox" />Chicken
+                <input type="checkbox" />Cheese
+                <input type="checkbox" />Beans
+                <input type="checkbox" />Rice
+                <input type="checkbox" />Salsa
+                <input type="checkbox" />Sour Cream
+                <input type="checkbox" />Guacamole
+                <input type="checkbox" />Queso
+                </div>
+                </div>
+                <div class="dropdown">
+                <button onClick = {handleSalad}>
                   <img alt = "salad" title = "salad" className = "mainItems" src="https://assets.bonappetit.com/photos/624215f8a76f02a99b29518f/3:4/w_1812,h_2416,c_limit/0328-ceasar-salad-lede.jpg" />
                   <p>Salad</p>
               </button>
+                <div class="dropdown-content">
+                <input type="checkbox" />Beef
+                <input type="checkbox" />Steak
+                <input type="checkbox" />Veggie Medley
+                <input type="checkbox" />Chicken
+                <input type="checkbox" />Cheese
+                <input type="checkbox" />Beans
+                <input type="checkbox" />Rice
+                <input type="checkbox" />Salsa
+                <input type="checkbox" />Sour Cream
+                <input type="checkbox" />Guacamole
+                <input type="checkbox" />Queso
+                </div>
+                </div>
             </div>
             <div className = "columnCust">
               <button onClick = {handleDrink}>
@@ -191,8 +235,6 @@ var order_summary = ["asd","aggg","Boosakc"];
 
             {/* Contents changes to whatever is in the order_summary string when add to order is pressed */}
         </body>
-
-                order_summary
 
 
 
