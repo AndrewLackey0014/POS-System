@@ -100,9 +100,86 @@ var order_summary = [];
 
 
     const FinishOrder = (e)=>{
-       <li><a href="/CustomerGUI/Toppings_Page" className="naventries">Toppings</a></li>
-      //  alert("Taco")
-        alert("Finished Order")
+      for(var i = 0; i < order_summary.length; i++){
+        if(order_summary[i] == ", Chips&Guac"){
+
+        }
+        if(order_summary[i] == "Chips&Guac"){
+          
+        }
+        if(order_summary[i] == ", Chips&Queso"){
+          
+        }
+        if(order_summary[i] == "Chips&Queso"){
+          
+        }
+        if(order_summary[i] == ", Chips&Salsa"){
+          
+        }
+        if(order_summary[i] == "Chips&Salsa"){
+          
+        }
+        if(order_summary[i] == ", Burrito"){
+          
+        }
+        if(order_summary[i] == "Burrito"){
+          
+        }
+        if(order_summary[i] == ", Bowl"){
+          
+        }
+        if(order_summary[i] == "Bowl"){
+          
+        }
+        if(order_summary[i] == ", Salad"){
+          
+        }
+        if(order_summary[i] == "Salad"){
+          
+        }
+        if(order_summary[i] == ", Taco"){
+          
+        }
+        if(order_summary[i] == "Taco"){
+          
+        }
+        if(order_summary[i] == "Beef"){
+          
+        }
+        if(order_summary[i] == "Steak"){
+          
+        }
+        if(order_summary[i] == "Medley"){
+          
+        }
+        if(order_summary[i] == "Chicken"){
+          
+        }
+        if(order_summary[i] == "Cheese"){
+          
+        }
+        if(order_summary[i] == "Beans"){
+          
+        }
+        if(order_summary[i] == "Rice"){
+          
+        }
+        if(order_summary[i] == "Salsa"){
+          
+        }
+        if(order_summary[i] == "SourCream"){
+          
+        }
+        if(order_summary[i] == "Guac"){
+          
+        }
+        if(order_summary[i] == "Queso"){
+          
+        }
+        
+
+
+      }
     }
 
 
