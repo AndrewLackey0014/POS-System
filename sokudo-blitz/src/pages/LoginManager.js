@@ -1,15 +1,18 @@
 import "./loginCstyle.css"
 import React, { useState, useRef } from "react"
 
-  const data = [
-    ["david", "123"],
-     ["jon", "321"]
+  let data = [
+    ["david", "123"]
   ]
+
+  var obj;
 
   const Login = () => { 
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
-    var id, pswrd;
+    var id, pswrd;  
+    const [reports_data, setReports] = useState({})
+
 
     const handleNameChange = event => {
       setName(event.target.value);
@@ -28,17 +31,27 @@ import React, { useState, useRef } from "react"
 
     var msg = inputRef1.current.value;
     var pwd = inputRef2.current.value;
-    
-    const result = data.find(element => {
-      return ((element[0] === msg) && (element[1] === pwd));
-    })
 
-    if (typeof(result) !== 'undefined'){
-      alert("You're in Database");
-      window.location.pathname = "/ManagerGUI/tranHistory";
-    }else{
-      alert("NOT in Database");
-    }
+    fetch('http://localhost:3001/get_employees')
+      .then(response => {
+          return response.text(); 
+          })
+      .then(data => {
+          setReports(data);
+          });
+    obj = JSON.parse(reports_data);
+
+    data = obj.map((val, key) => {
+      // console.log("Val Name: " + val.name + "\tMSG: " + msg + "\tEVAl: " + ((test + "                                            " === val.name)))
+      if ((val.name === (msg+"                                            ")) && (((String(val.employeeid)) + (String(val.managerid))) === pwd) ){
+        console.log("Successfully Logged In: " + msg + "\tPWD: " + pwd)
+        window.location.pathname="/ManagerGUI/tranHistory";
+        return true;
+      }else{
+        console.log("Failed to Login")
+        return false;
+      }
+    })
     }
     
     return (

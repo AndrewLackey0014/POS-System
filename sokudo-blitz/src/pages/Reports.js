@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect, useRef, isValidElement} from 're
 
 
 const temp_data = [];
-var obj;
+var obj; var obj_hist; var obj_inv;
 var rep_type;
 var component;
 var dataTable;
@@ -10,37 +10,46 @@ var numBtns = [1,2,3,4];
 var num = 0;
 var sales; var excess; var restock; var combo;
 var start; var end;
+var inventory_data;
 
 
 var data = ["hello", "howdy"]
 export default function Reports(props) {
 
-    const [reports_data, setReports] = useState(false);
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [rep_type, setRepType] = useState({});
+    const [reports_data, setReports] = useState(false); //  Report Selection
+    const [rep_type, setRepType] = useState({});    //  Report Selection 
+
+    const [startDate, setStartDate] = useState(''); //  Sales Report
+    const [endDate, setEndDate] = useState(''); //  Sales Report
+    
+    const [excessDate, setExcessDate] = useState('');   //  Excess Report
 
     
 
-    const handleStartChange = event => {
+    const handleStartChange = event => {    //  On click, Gets Sales Report Start Time
         setStartDate(event.target.value);    start = inputRef1.current.value;
         console.log(start)
-
     }
     
-    const handleEndChange = event => {
+    const handleEndChange = event => {  //  On click, gets Sales Report End time
         setEndDate(event.target.value);        end = inputRef2.current.value;
         console.log(end)
-
     }
 
-    const inputRef1 = useRef(null);
-    const inputRef2 = useRef(null);
+    const handleExcessDate = event => { //  On click, gets Excess Report Date (for transaction history table)
+        setExcessDate(event.target.value);      excessDate = inputRef3.current.value;
+        console.log(excess)
+    }
+
+    const inputRef1 = useRef(null); //  Sales Report
+    const inputRef2 = useRef(null); //  Sales Report
+
+    const inputRef3 = useRef(null); //  Excess Report
 
 
-    const handleType = (type) => {
-        if (type === "sales"){
-            data = ["Sales", "Stuff"]
+    const handleType = (type) => {  //  Determines which Report is being requested & calls for that data
+        if (type === "sales"){  //  If Requesting Sales Report...
+            console.log("Fetching Sales Report Data...")
             fetch('http://localhost:3001/tranHist')
                 .then(response => {
                     return response.text(); 
@@ -49,49 +58,125 @@ export default function Reports(props) {
                     setReports(data);
                     });
             obj = JSON.parse(reports_data);
-            // console.log("OBJ time: " + obj)
-//               if ((Integer.parseInt(start) <= Integer.parseInt(row[3].replaceAll("[^0-9]","").substring(0,8)) && (Integer.parseInt(row[3].replaceAll("[^0-9]","").substring(0,8))) <= Integer.parseInt(end))){    //  If Order time is between start and end times
 
             data = obj.map((val, key) => {
-            var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+            var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
             if((itemTime > startDate) && (itemTime < endDate)){
                 console.log(end)
-                // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )
-                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+                // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+
             return (
-                <table>
-                    <tr>
-                        <th>Order Number</th>
-                        <th>Order ID</th>
-                        <th>Order Time</th>
-                        <th>Order Cost</th>
-                        <th>Order Contents</th>
-                    </tr>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Order ID</th>
+                            <th>Order Time</th>
+                            <th>Order Cost</th>
+                            <th>Order Contents</th>
+                        </tr>
+                    </table>
                     <tr key={key}>
-                    <td>{val.order_number}</td>
-                    <td>{val.order_id}</td>
-                    <td>{val.order_time}</td>
-                    <td>{val.order_cost}</td>
-                    <td>{val.order_contents}</td>
+                        <td>{val.order_number}</td>
+                        <td>{val.order_id}</td>
+                        <td>{val.order_time}</td>
+                        <td>{val.order_cost}</td>
+                        <td>{val.order_contents}</td>
                     </tr>
-                </table>
+                </div>
             )}else{
                 console.log("NO VALID DATA ")
                 return false;
             }})
-        }else if (type === "excess"){
-            data = ["Excess", "Things"]
+        }else if (type === "excess"){   //  If Requesting Excess Report
+            console.log("Fetching Excess Report Data...")
+
+            var temp_hist_data = ["Secondary"]  //  Used to get All Transaction History
+            var hist_data = []    //  Used to get filtered Transaction History
+
+            fetch('http://localhost:3001/inventory')    //  Fetch Inventory Data for Current Inventory
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReports(data);
+                    });
+            obj_inv = JSON.parse(reports_data);
+
+            fetch("http://localhost:3001/tranHist") //  Fetch Transaction Data for Items Sold
+                    .then(response => {
+                        return response.text();
+                    })
+                    .then(data => {
+                        setReports(data);
+                    })
+            obj_hist = JSON.parse(reports_data);
+
+            //  Filter Data based on input date
+            temp_hist_data = obj_hist.map((val, key) => {
+                var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
+                if (itemTime >= excessDate){
+                    hist_data.push(val.order_contents)
+                }
+                
+            })
+
+            for(var i = 0; i < hist_data.length(); i++){
+                //  Dictionary to go through each order's contents and tally the values of each item type
+                //  Collect # of each item sold, Do the math with data from the item's current value (from obj_inv-> val.curr_inv) to determine if its excess
+            }
+            console.log(hist_data)
+
+            // data = obj_inv.map((val,key) => {
+            //     console.log(val.curr_inv)
+            // });
+            // console.log("Inventory: " + inventory_data);
+            
+            return (
+                <div>EXCESS DATA BB</div>
+            )
+
+            // itemData = obj.map((val, key) => {
+            // var curInv = parseInt(val.curr_inv);
+            // if(curInv > 0){
+            //     console.log(end)
+            //     // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )
+            //     // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+            // return (
+            //     <div>
+            //         <table>
+            //             <tr>
+            //                 <th>Order Number</th>
+            //                 <th>Order ID</th>
+            //                 <th>Order Time</th>
+            //                 <th>Order Cost</th>
+            //                 <th>Order Contents</th>
+            //             </tr>
+            //         </table>
+            //         <tr key={key}>
+            //             <td>{val.order_number}</td>
+            //             <td>{val.order_id}</td>
+            //             <td>{val.order_time}</td>
+            //             <td>{val.order_cost}</td>
+            //             <td>{val.order_contents}</td>
+            //         </tr>
+            //     </div>
+            // )}else{
+            //     console.log("NO VALID DATA ")
+            //     // alert("Correct Date Format: YYYYMMDD")
+            //     return false;
+            // }})
         }
         
     }
 
-    const changeRep = (index, type) => {
+    const changeRep = (index, type) => {    //  Handles Displaying selected information, changing based on which report
         
     // this will be run for the amount of button you have
         if (!rep_type[index]) {
           setRepType((rep_type) => ({
             ...rep_type,
-            [index]: "REP",
+            [index]: " ",
           }));
         }
     
@@ -103,23 +188,25 @@ export default function Reports(props) {
               Object.keys(rep_type)
                 .reduce((a, b) => ({
                   ...a,
-                  [b]: "REP"
+                  [b]: " "
                 }), {})
             ),
-            [index]: rep_type[index] === "REP" ? data : "REP",
+            [index]: rep_type[index] === " " ? data : " ",
           }));
         };
       };
 
-    component = <>
+    //  Left side of Display; Contains all Input Fields and Buttons
+    component = <> 
         <div class="column left">
             <div class="row">
-                <input ref={inputRef1} id="startDate" type="text" value={startDate} onChange={handleStartChange}></input>
-                <input ref={inputRef2} id="endDate" type="text" value={endDate} onChange={handleEndChange}></input>
+                <input ref={inputRef1} id="startDate" type="text" value={startDate} onChange={handleStartChange} placeholder="YYYYMMDD"></input>
+                <input ref={inputRef2} id="endDate" type="text" value={endDate} onChange={handleEndChange} placeholder="YYYYMMDD"></input>
                 <button id={numBtns[0]} onClick={changeRep(1, "sales")} value={false}>Sales Report</button><br/>
             </div>
 
             <div class="row">
+                <input ref={inputRef3} id="excessDate" type="text" value={excessDate} onChange={handleExcessDate} placeholder="YYYYMMDD"></input>
                 <button id={numBtns[1]} onClick={changeRep(2, "excess")} value={false}>Excess Report</button><br/>
             </div>
 
@@ -133,15 +220,16 @@ export default function Reports(props) {
         </div>
     </>
 
-        dataTable = 
-        <>
+    //  Right side of Display; Contains Tables of Data
+    dataTable = <>
         <div class="column right">
             <div>{rep_type[1]}</div>
             <div>{rep_type[2]}</div>
             <div>{rep_type[3]}</div>
             <div>{rep_type[4]}</div>
+            
         </div>
-        </>
+    </>
     
     return(
         <>
