@@ -2,7 +2,8 @@
 import NavBarCustomer from "./NavBarCustomer";
 import "./CustomerGUI.css";
 // import { Button } from 'react-native'
-
+import React, { Component, useState, useEffect} from 'react';
+import {ToggleButtonGroup} from 'react';
 import Items from "./Items";
 
 import Login from "./LoginCustomer";
@@ -18,9 +19,30 @@ import Toppings_Page from "./Toppings_Page"
 
 
 var order_summary = [];
+var temp_array = [];
+var obj;
+var Display_Order = [];
+
  function CustomerGUI() {
     let component
-    
+    const [items_data, setItems] = useState(false);
+    useEffect(() => {
+        getItems();
+    }, []);
+    function getItems() {
+        fetch('http://localhost:3001/items')
+          .then(response => {
+            return response.text();
+          })
+          .then(data => {
+            setItems(data);
+          });
+    }
+
+    console.log(obj);
+
+    obj = JSON.parse(items_data);
+
     switch (window.location.pathname) {
 
         case"/Toppings_Page":
@@ -34,10 +56,12 @@ var order_summary = [];
 
 
       var content=  document.getElementById("content");
-    
+      var Price = document.getElementById("price");
+
       var stringorder= order_summary.toString();
-
-
+      var stringprice= 0;
+      var stringdislayorder = Display_Order.toString();
+      var stringpricee= "";
     const handleTaco = (e)=>{
         if (order_summary.length == 0){
           order_summary.push("Taco");
@@ -72,30 +96,50 @@ var order_summary = [];
     const handleDrink= (e)=>{
       if (order_summary.length == 0){
         order_summary.push("Drink");
+
+
       }else{
         order_summary.push(", Drink");
+
       }
+        Display_Order.push("Fountain Drink");
+
+
     }
     const handleChips_and_Salsa= (e)=>{
       if (order_summary.length == 0){
         order_summary.push("Chips&Salsa");
       }else{
         order_summary.push(", Chips&Salsa");
+
+
+
       }
+
+        Display_Order.push("Chips & Salsa");
+
     }
     const handleChips_and_Queso= (e)=>{
       if (order_summary.length == 0){
         order_summary.push("Chips&Queso");
+
       }else{
         order_summary.push(", Chips&Queso");
+     
+
       }
+        Display_Order.push("Chips & Queso");
+
     }
     const handleChips_and_Guac= (e)=>{
       if (order_summary.length == 0){
         order_summary.push("Chips&Guac");
+
       }else{
         order_summary.push(", Chips&Guac");
       }
+      
+        Display_Order.push("Chips & Guac");
     }
 
 
@@ -117,7 +161,8 @@ var order_summary = [];
           
         }
         if(order_summary[i] == "Chips&Salsa"){
-          
+          // functionality for chips and salsa for inventory?
+          // EDIT INV
         }
         if(order_summary[i] == ", Burrito"){
           
@@ -187,17 +232,50 @@ var order_summary = [];
     const handleOrder = (e)=>{
 
         stringorder= order_summary.join(" ");
+        //stringprice= Display_Order.toString();
+        stringdislayorder= Display_Order.join(", ");
         let Contents = stringorder;
+        let DisplayOrder = stringdislayorder;
         document.getElementById("Contents").innerHTML = Contents;
+        document.getElementById("DisplayOrder").innerHTML = DisplayOrder;
+
+
+        stringprice=0;
+      for(var i = 0; i < Display_Order.length; i++){
+  //calculate for string price?
+        stringprice += 5.01; //actually an integer
+        
+        //TODO query from database with Display_Order[i], these are from the items table in database/
+        // also, Display_Order[i] has the exact name given from database, making querying easier
+        // it would look something like GET PRICE FROM ITEMS WHERE name= display_order[i].
+
+
+      }
+
+      stringpricee= "Order Total: $" + parseFloat(stringprice).toFixed(2);
+
+      let Price = stringpricee;
+
+      document.getElementById("Price").innerHTML = Price;
 
 
     }
     const DeleteOrder = (e)=>{
         order_summary=[];
-        stringorder= order_summary.toString();
-        let Contents = stringorder;
-        document.getElementById("Contents").innerHTML = Contents; 
+        Display_Order=[];
 
+        stringorder= order_summary.toString();
+        stringprice = "";  //resetting stringprice
+        stringdislayorder= Display_Order.toString();
+        
+        let Contents = stringorder;
+        let Price= stringprice;
+        let DisplayOrder= stringdislayorder;
+        document.getElementById("Contents").innerHTML = ""; 
+        document.getElementById("Price").innerHTML = Price; 
+        document.getElementById("DisplayOrder").innerHTML = DisplayOrder; 
+
+      //  alert("Deleted Contents")   
 
     }
 
@@ -347,6 +425,14 @@ var order_summary = [];
           <table class="content">
 
           <p id="Contents">Contents</p>
+
+          
+
+          <p id="DisplayOrder">DisplayOrder</p>
+
+           <p 
+          
+          id="Price">Price </p>
           </table>
 
             <div className = "orderButton" onClick = {handleOrder}>
@@ -366,6 +452,7 @@ var order_summary = [];
             </div>
             <div className = "orderButton" onClick = {DeleteOrder}>
                 <p>Delete Contents</p>
+
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */}
