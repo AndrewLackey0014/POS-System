@@ -67,9 +67,8 @@ var Display_Order = [];
       var stringpricee= "";
     const handleTaco = (e)=>{
         if (order_summary.length == 0){
-          order_summary.push("Taco");
+
         }else{
-          order_summary.push(", Taco");
         }
         if (document.getElementById("Tacoo").style.backgroundColor!= "grey"){
           document.getElementById("Tacoo").style.backgroundColor="grey";
@@ -84,9 +83,7 @@ var Display_Order = [];
     const handleBurrito = (e)=>{
     //   alert("Taco")
       if (order_summary.length == 0){
-        order_summary.push("Burrito")
       }else{
-        order_summary.push(", Burrito");
       } 
 
       if (document.getElementById("Burrito").style.backgroundColor!= "grey"){
@@ -103,9 +100,7 @@ var Display_Order = [];
     }
     const handleSalad = (e)=>{
       if (order_summary.length == 0){
-        order_summary.push("Salad");
       }else{
-        order_summary.push(", Salad");
       }
 
   if (document.getElementById("Salad").style.backgroundColor!= "grey"){
@@ -118,9 +113,7 @@ var Display_Order = [];
     }
     const handleBowl = (e)=>{
       if (order_summary.length == 0){
-        order_summary.push("Bowl");
       }else{
-        order_summary.push(", Bowl");
       }
       if (document.getElementById("Bowl").style.backgroundColor!= "grey"){
         document.getElementById("Bowl").style.backgroundColor="grey";
@@ -132,14 +125,11 @@ var Display_Order = [];
     }
     const handleDrink= (e)=>{
       if (order_summary.length == 0){
-        order_summary.push("Drink");
 
 
       }else{
-        order_summary.push(", Drink");
 
       }
-        Display_Order.push("Fountain Drink");
         if (document.getElementById("Drink").style.backgroundColor!= "grey"){
           document.getElementById("Drink").style.backgroundColor="grey";
   
@@ -151,9 +141,7 @@ var Display_Order = [];
     }
     const handleChips_and_Salsa= (e)=>{
       if (order_summary.length == 0){
-        order_summary.push("Chips&Salsa");
       }else{
-        order_summary.push(", Chips&Salsa");
 
 
 
@@ -165,15 +153,12 @@ var Display_Order = [];
         document.getElementById("Chips and Salsa").style.backgroundColor="white";
 
       }
-        Display_Order.push("Chips & Salsa");
 
     }
     const handleChips_and_Queso= (e)=>{
       if (order_summary.length == 0){
-        order_summary.push("Chips&Queso");
 
       }else{
-        order_summary.push(", Chips&Queso");
      
 
       }
@@ -185,15 +170,12 @@ var Display_Order = [];
         document.getElementById("Chips and Queso").style.backgroundColor="white";
 
       }
-        Display_Order.push("Chips & Queso");
 
     }
     const handleChips_and_Guac= (e)=>{
       if (order_summary.length == 0){
-        order_summary.push("Chips&Guac");
 
       }else{
-        order_summary.push(", Chips&Guac");
       }
 
       if (document.getElementById("Chips and Guac").style.backgroundColor!= "grey"){
@@ -204,7 +186,7 @@ var Display_Order = [];
 
       }
       
-        Display_Order.push("Chips & Guac");
+      //  Display_Order.push("Chips & Guac");
     }
 
 
@@ -298,13 +280,148 @@ var Display_Order = [];
 
     const handleOrder = (e)=>{
 
+
+      // Loop and check button conditionals //
+      // here
+      if ( document.getElementById("Tacoo").style.backgroundColor== "grey"){
+
+        if(  document.getElementById("BeefTaco").style.color== "red"){
+            order_summary.push("Beef");
+            Display_Order.push("Taco Seasoned Beef");
+
+        }else if (  document.getElementById("MedleyTaco").style.color== "red"){
+          order_summary.push("Medley");
+          Display_Order.push("Taco Grilled Vegetable Medley");
+      }else if (  document.getElementById("SteakTaco").style.color== "red"){
+        order_summary.push("Steak");
+        Display_Order.push("Taco Marinated Steak");
+    }else if (  document.getElementById("ChickenTaco").style.color== "red"){
+      order_summary.push("Chicken");
+      Display_Order.push("Taco Chili Rubbed Chicken");
+  }else{
+    Display_Order.push("Taco");
+  }
+  if (document.getElementById("CheeseTaco").style.color== "red")order_summary.push("Cheese");
+  if (document.getElementById("BeansTaco").style.color== "red")order_summary.push("Cheese");
+  if (document.getElementById("BeansTaco").style.color== "red")order_summary.push("Beans");
+  if (document.getElementById("QuesoTaco").style.color== "red")order_summary.push("Queso");
+  if (document.getElementById("RiceTaco").style.color== "red")order_summary.push("Rice");
+  if (document.getElementById("SalsaTaco").style.color== "red")order_summary.push("Salsa");
+  if (document.getElementById("SourCreamTaco").style.color== "red")order_summary.push("SourCream");
+  if (document.getElementById("GuacTaco").style.color== "red")order_summary.push("Guac");
+
+  order_summary.push("Taco");
+      }
+
+      if ( document.getElementById("Burrito").style.backgroundColor== "grey"){
+
+        if(  document.getElementById("BeefBurrito").style.color== "red"){
+            order_summary.push("Beef");
+            Display_Order.push("Burrito Seasoned Beef");
+
+        }else if (  document.getElementById("MedleyBurrito").style.color== "red"){
+          order_summary.push("Medley");
+          Display_Order.push("Burrito Grilled Vegetable Medley");
+      }else if (  document.getElementById("SteakBurrito").style.color== "red"){
+        order_summary.push("Steak");
+        Display_Order.push("Burrito Marinated Steak");
+    }else if (  document.getElementById("ChickenBurrito").style.color== "red"){
+      order_summary.push("Chicken");
+      Display_Order.push("Burrito Chili Rubbed Chicken");
+  }else{
+    Display_Order.push("Burrito");
+  }
+
+  if (document.getElementById("CheeseBurrito").style.color== "red")order_summary.push("Cheese");
+  if (document.getElementById("BeansBurrito").style.color== "red")order_summary.push("Cheese");
+  if (document.getElementById("BeansBurrito").style.color== "red")order_summary.push("Beans");
+  if (document.getElementById("QuesoBurrito").style.color== "red")order_summary.push("Queso");
+  if (document.getElementById("RiceBurrito").style.color== "red")order_summary.push("Rice");
+  if (document.getElementById("SalsaBurrito").style.color== "red")order_summary.push("Salsa");
+  if (document.getElementById("SourCreamBurrito").style.color== "red")order_summary.push("SourCream");
+  if (document.getElementById("GuacBurrito").style.color== "red")order_summary.push("Guac");
+
+
+
+  order_summary.push("Burrito");
+      }
+      if ( document.getElementById("Bowl").style.backgroundColor== "grey"){
+
+        if(  document.getElementById("BeefBowl").style.color== "red"){
+            order_summary.push("Beef");
+            Display_Order.push("Bowl Seasoned Beef");
+
+        }else if (  document.getElementById("MedleyBowl").style.color== "red"){
+          order_summary.push("Medley");
+          Display_Order.push("Bowl Grilled Vegetable Medley");
+      }else if (  document.getElementById("SteakBowl").style.color== "red"){
+        order_summary.push("Steak");
+        Display_Order.push("Bowl Marinated Steak");
+    }else if (  document.getElementById("ChickenBowl").style.color== "red"){
+      order_summary.push("Chicken");
+      Display_Order.push("Bowl Chili Rubbed Chicken");
+  }else{
+    Display_Order.push("Bowl");
+  }
+  if (document.getElementById("CheeseBowl").style.color== "red")order_summary.push("Cheese");
+  if (document.getElementById("BeansBowl").style.color== "red")order_summary.push("Cheese");
+  if (document.getElementById("BeansBowl").style.color== "red")order_summary.push("Beans");
+  if (document.getElementById("QuesoBowl").style.color== "red")order_summary.push("Queso");
+  if (document.getElementById("RiceBowl").style.color== "red")order_summary.push("Rice");
+  if (document.getElementById("SalsaBowl").style.color== "red")order_summary.push("Salsa");
+  if (document.getElementById("SourCreamBowl").style.color== "red")order_summary.push("SourCream");
+  if (document.getElementById("GuacBowl").style.color== "red")order_summary.push("Guac");
+
+
+  order_summary.push("Bowl");
+      }
+      if ( document.getElementById("Salad").style.backgroundColor== "grey"){
+
+        if(  document.getElementById("BeefSalad").style.color== "red"){
+            order_summary.push("Beef");
+            Display_Order.push("Salad Seasoned Beef");
+
+        }else if (  document.getElementById("MedleySalad").style.color== "red"){
+          order_summary.push("Medley");
+          Display_Order.push("Salad Grilled Vegetable Medley");
+      }else if (  document.getElementById("SteakSalad").style.color== "red"){
+        order_summary.push("Steak");
+        Display_Order.push("Salad Marinated Steak");
+    }else if (  document.getElementById("ChickenSalad").style.color== "red"){
+      order_summary.push("Chicken");
+      Display_Order.push("Salad Chili Rubbed Chicken");
+  }else{
+    Display_Order.push("Salad");
+  }
+  if (document.getElementById("CheeseSalad").style.color== "red")order_summary.push("Cheese");
+  if (document.getElementById("BeansSalad").style.color== "red")order_summary.push("Cheese");
+  if (document.getElementById("BeansSalad").style.color== "red")order_summary.push("Beans");
+  if (document.getElementById("QuesoSalad").style.color== "red")order_summary.push("Queso");
+  if (document.getElementById("RiceSalad").style.color== "red")order_summary.push("Rice");
+  if (document.getElementById("SalsaSalad").style.color== "red")order_summary.push("Salsa");
+  if (document.getElementById("SourCreamSalad").style.color== "red")order_summary.push("SourCream");
+  if (document.getElementById("GuacSalad").style.color== "red")order_summary.push("Guac");
+
+  order_summary.push("Salad");
+      }
+
+
+
+
+
+
+
+
+
         stringorder= order_summary.join(" ");
-        //stringprice= Display_Order.toString();
+      //stringprice= Display_Order.toString();
         stringdislayorder= Display_Order.join(", ");
         let Contents = stringorder;
         let DisplayOrder = stringdislayorder;
         document.getElementById("Contents").innerHTML = Contents;
         document.getElementById("DisplayOrder").innerHTML = DisplayOrder;
+
+
         if(document.getElementById("Tacoo").backgroundColor=="grey"){
 
         }
@@ -346,6 +463,8 @@ var Display_Order = [];
 
 
     }
+
+
     const DeleteOrder = (e)=>{
         order_summary=[];
         Display_Order=[];
@@ -365,19 +484,7 @@ var Display_Order = [];
 
     }
 
-    const handleBeef = (e)=>{
- 
-      if (document.getElementById("BeefTaco").style.color!= "red"){
-        document.getElementById("BeefTaco").style.color="red";
-
-      }else{
-        document.getElementById("BeefTaco").style.color="black";
-
-      }
-      
-      order_summary.push("Beef");
-
-    }
+  
     const handleBeefTaco = (e)=>{
  
       if (document.getElementById("BeefTaco").style.color!= "red"){
@@ -391,7 +498,7 @@ var Display_Order = [];
 
       }
       
-      order_summary.push("Beef");
+   //   order_summary.push("Beef");
 
     }
 
@@ -409,7 +516,7 @@ var Display_Order = [];
 
       }
       
-      order_summary.push("Beef");
+   //   order_summary.push("Beef");
 
     }
     const handleMedleyTaco = (e)=>{
@@ -425,7 +532,7 @@ var Display_Order = [];
 
       }
       
-      order_summary.push("Beef");
+   //   order_summary.push("Beef");
 
     }
     const handleChickenTaco = (e)=>{
@@ -440,7 +547,7 @@ var Display_Order = [];
 
       }
       
-      order_summary.push("Beef");
+     // order_summary.push("Beef");
 
     }
 
@@ -458,7 +565,7 @@ var Display_Order = [];
 
       }
       
-      order_summary.push("Beef");
+      //order_summary.push("Beef");
 
     }
 
@@ -475,7 +582,7 @@ var Display_Order = [];
 
       }
       
-      order_summary.push("Beef");
+     // order_summary.push("Beef");
 
     }
     const handleMedleyBurrito = (e)=>{
@@ -490,7 +597,7 @@ var Display_Order = [];
 
       }
       
-      order_summary.push("Beef");
+     // order_summary.push("Beef");
 
     }
     const handleChickenBurrito = (e)=>{
@@ -505,50 +612,387 @@ var Display_Order = [];
 
       }
       
-      order_summary.push("Beef");
+     // order_summary.push("Beef");
 
+    }
+
+
+    const handleBeefBowl = (e)=>{
+ 
+      if (document.getElementById("BeefBowl").style.color!= "red"){
+        document.getElementById("SteakBowl").style.color="black";
+        document.getElementById("MedleyBowl").style.color="black";
+        document.getElementById("ChickenBowl").style.color="black";
+        document.getElementById("BeefBowl").style.color="red";
+
+      }else{
+        document.getElementById("BeefBowl").style.color="black";
+
+      }
+      
+     // order_summary.push("Beef");
+
+    }
+
+    const handleSteakBowl = (e)=>{
+ 
+      if (document.getElementById("SteakBowl").style.color!= "red"){
+        document.getElementById("SteakBowl").style.color="red";
+        document.getElementById("MedleyBowl").style.color="black";
+        document.getElementById("ChickenBowl").style.color="black";
+        document.getElementById("BeefBowl").style.color="black";
+
+      }else{
+        document.getElementById("SteakBowl").style.color="black";
+
+      }
+      
+      //order_summary.push("Beef");
+
+    }
+    const handleMedleyBowl = (e)=>{
+ 
+      if (document.getElementById("MedleyBowl").style.color!= "red"){
+        document.getElementById("MedleyBowl").style.color="red";
+        document.getElementById("SteakBowl").style.color="black";
+        document.getElementById("ChickenBowl").style.color="black";
+        document.getElementById("BeefBowl").style.color="black";
+      }else{
+        document.getElementById("MedleyBowl").style.color="black";
+
+      }
+      
+    //  order_summary.push("Beef");
+
+    }
+    const handleChickenBowl = (e)=>{
+ 
+      if (document.getElementById("ChickenBowl").style.color!= "red"){
+        document.getElementById("ChickenBowl").style.color="red";
+        document.getElementById("SteakBowl").style.color="black";
+        document.getElementById("MedleyBowl").style.color="black";
+        document.getElementById("BeefBowl").style.color="black";
+      }else{
+        document.getElementById("ChickenBowl").style.color="black";
+
+      }
+      
+     // order_summary.push("Beef");
+
+    }
+
+    const handleBeefSalad = (e)=>{
+ 
+      if (document.getElementById("BeefSalad").style.color!= "red"){
+        document.getElementById("SteakSalad").style.color="black";
+        document.getElementById("MedleySalad").style.color="black";
+        document.getElementById("ChickenSalad").style.color="black";
+        document.getElementById("BeefSalad").style.color="red";
+
+      }else{
+        document.getElementById("BeefSalad").style.color="black";
+
+      }
+      
+    //  order_summary.push("Beef");
+
+    }
+
+    const handleSteakSalad = (e)=>{
+ 
+      if (document.getElementById("SteakSalad").style.color!= "red"){
+        document.getElementById("SteakSalad").style.color="red";
+        document.getElementById("MedleySalad").style.color="black";
+        document.getElementById("ChickenSalad").style.color="black";
+        document.getElementById("BeefSalad").style.color="black";
+
+      }else{
+        document.getElementById("SteakSalad").style.color="black";
+
+      }
+      
+    //  order_summary.push("Beef");
+
+    }
+    const handleMedleySalad = (e)=>{
+ 
+      if (document.getElementById("MedleySalad").style.color!= "red"){
+        document.getElementById("MedleySalad").style.color="red";
+        document.getElementById("SteakSalad").style.color="black";
+        document.getElementById("ChickenSalad").style.color="black";
+        document.getElementById("BeefSalad").style.color="black";
+      }else{
+        document.getElementById("MedleySalad").style.color="black";
+
+      }
+      
+    //  order_summary.push("Beef");
+
+    }
+    const handleChickenSalad = (e)=>{
+ 
+      if (document.getElementById("ChickenSalad").style.color!= "red"){
+        document.getElementById("ChickenSalad").style.color="red";
+        document.getElementById("SteakSalad").style.color="black";
+        document.getElementById("MedleySalad").style.color="black";
+        document.getElementById("BeefSalad").style.color="black";
+      }else{
+        document.getElementById("ChickenSalad").style.color="black";
+
+      }
+      
+    //  order_summary.push("Beef");
+
+    }
+
+
+    const handleCheeseTaco = (e)=>{
+    //  order_summary.push("Cheese");
+      if (document.getElementById("CheeseTaco").style.color!= "red"){
+        document.getElementById("CheeseTaco").style.color= "red";
+      }else{
+        document.getElementById("CheeseTaco").style.color= "black";
+      }
+    }
+
+
+
+    const handleBeansTaco = (e)=>{
+     // order_summary.push("Beans");
+      if (document.getElementById("BeansTaco").style.color!= "red"){
+        document.getElementById("BeansTaco").style.color= "red";
+      }else{
+        document.getElementById("BeansTaco").style.color= "black";
+      }
+    }
+    const handleRiceTaco = (e)=>{
+    //  order_summary.push("Rice");
+      if (document.getElementById("RiceTaco").style.color!= "red"){
+        document.getElementById("RiceTaco").style.color= "red";
+      }else{
+        document.getElementById("RiceTaco").style.color= "black";
+      }
+    }
+    const handleSalsaTaco = (e)=>{
+    //  order_summary.push("Salsa");
+      if (document.getElementById("SalsaTaco").style.color!= "red"){
+        document.getElementById("SalsaTaco").style.color= "red";
+      }else{
+        document.getElementById("SalsaTaco").style.color= "black";
+      }
+    }
+    const handleCreamTaco = (e)=>{
+    //  order_summary.push("SourCream");
+      if (document.getElementById("SourCreamTaco").style.color!= "red"){
+        document.getElementById("SourCreamTaco").style.color= "red";
+      }else{
+        document.getElementById("SourCreamTaco").style.color= "black";
+      }
+    }
+    const handleGuacTaco = (e)=>{
+    //  order_summary.push("Guac");
+      if (document.getElementById("GuacTaco").style.color!= "red"){
+        document.getElementById("GuacTaco").style.color= "red";
+      }else{
+        document.getElementById("GuacTaco").style.color= "black";
+      }
+    }
+    const handleQuesoTaco = (e)=>{
+    //  order_summary.push("Queso");
+      if (document.getElementById("QuesoTaco").style.color!= "red"){
+        document.getElementById("QuesoTaco").style.color= "red";
+      }else{
+        document.getElementById("QuesoTaco").style.color= "black";
+      }
+    }
+
+    
+    const handleCheeseBowl = (e)=>{
+    //  order_summary.push("Cheese");
+      if (document.getElementById("CheeseBowl").style.color!= "red"){
+        document.getElementById("CheeseBowl").style.color= "red";
+      }else{
+        document.getElementById("CheeseBowl").style.color= "black";
+      }
+    }
+
+
+
+    const handleBeansBowl = (e)=>{
+    //  order_summary.push("Beans");
+      if (document.getElementById("BeansBowl").style.color!= "red"){
+        document.getElementById("BeansBowl").style.color= "red";
+      }else{
+        document.getElementById("BeansBowl").style.color= "black";
+      }
+    }
+    const handleRiceBowl = (e)=>{
+    //  order_summary.push("Rice");
+      if (document.getElementById("RiceBowl").style.color!= "red"){
+        document.getElementById("RiceBowl").style.color= "red";
+      }else{
+        document.getElementById("RiceBowl").style.color= "black";
+      }
+    }
+    const handleSalsaBowl = (e)=>{
+   //   order_summary.push("Salsa");
+      if (document.getElementById("SalsaBowl").style.color!= "red"){
+        document.getElementById("SalsaBowl").style.color= "red";
+      }else{
+        document.getElementById("SalsaBowl").style.color= "black";
+      }
+    }
+    const handleCreamBowl = (e)=>{
+    //  order_summary.push("SourCream");
+      if (document.getElementById("SourCreamBowl").style.color!= "red"){
+        document.getElementById("SourCreamBowl").style.color= "red";
+      }else{
+        document.getElementById("SourCreamBowl").style.color= "black";
+      }
+    }
+    const handleGuacBowl = (e)=>{
+   //   order_summary.push("Guac");
+      if (document.getElementById("GuacBowl").style.color!= "red"){
+        document.getElementById("GuacBowl").style.color= "red";
+      }else{
+        document.getElementById("GuacBowl").style.color= "black";
+      }
+    }
+    const handleQuesoBowl = (e)=>{
+    //  order_summary.push("Queso");
+      if (document.getElementById("QuesoBowl").style.color!= "red"){
+        document.getElementById("QuesoBowl").style.color= "red";
+      }else{
+        document.getElementById("QuesoBowl").style.color= "black";
+      }
+    }
+
+    const handleCheeseBurrito = (e)=>{
+    //  order_summary.push("Cheese");
+      if (document.getElementById("CheeseBurrito").style.color!= "red"){
+        document.getElementById("CheeseBurrito").style.color= "red";
+      }else{
+        document.getElementById("CheeseBurrito").style.color= "black";
+      }
+    }
+
+
+
+    const handleBeansBurrito = (e)=>{
+     // order_summary.push("Beans");
+      if (document.getElementById("BeansBurrito").style.color!= "red"){
+        document.getElementById("BeansBurrito").style.color= "red";
+      }else{
+        document.getElementById("BeansBurrito").style.color= "black";
+      }
+    }
+    const handleRiceBurrito = (e)=>{
+    //  order_summary.push("Rice");
+      if (document.getElementById("RiceBurrito").style.color!= "red"){
+        document.getElementById("RiceBurrito").style.color= "red";
+      }else{
+        document.getElementById("RiceBurrito").style.color= "black";
+      }
+    }
+    const handleSalsaBurrito = (e)=>{
+    //  order_summary.push("Salsa");
+      if (document.getElementById("SalsaBurrito").style.color!= "red"){
+        document.getElementById("SalsaBurrito").style.color= "red";
+      }else{
+        document.getElementById("SalsaBurrito").style.color= "black";
+      }
+    }
+    const handleCreamBurrito = (e)=>{
+   //   order_summary.push("SourCream");
+      if (document.getElementById("SourCreamBurrito").style.color!= "red"){
+        document.getElementById("SourCreamBurrito").style.color= "red";
+      }else{
+        document.getElementById("SourCreamBurrito").style.color= "black";
+      }
+    }
+    const handleGuacBurrito = (e)=>{
+    //  order_summary.push("Guac");
+      if (document.getElementById("GuacBurrito").style.color!= "red"){
+        document.getElementById("GuacBurrito").style.color= "red";
+      }else{
+        document.getElementById("GuacBurrito").style.color= "black";
+      }
+    }
+    const handleQuesoBurrito = (e)=>{
+    //  order_summary.push("Queso");
+      if (document.getElementById("QuesoBurrito").style.color!= "red"){
+        document.getElementById("QuesoBurrito").style.color= "red";
+      }else{
+        document.getElementById("QuesoBurrito").style.color= "black";
+      }
     }
 
 
 
 
 
-
-
-
-
-    const handleSteak = (e)=>{
-      order_summary.push("Steak");
+    const handleCheeseSalad = (e)=>{
+    //  order_summary.push("Cheese");
+      if (document.getElementById("CheeseSalad").style.color!= "red"){
+        document.getElementById("CheeseSalad").style.color= "red";
+      }else{
+        document.getElementById("CheeseSalad").style.color= "black";
+      }
     }
-    const handleMedley = (e)=>{
-      order_summary.push("Medley");
+
+
+
+    const handleBeansSalad = (e)=>{
+     // order_summary.push("Beans");
+      if (document.getElementById("BeansSalad").style.color!= "red"){
+        document.getElementById("BeansSalad").style.color= "red";
+      }else{
+        document.getElementById("BeansSalad").style.color= "black";
+      }
     }
-    const handleChicken = (e)=>{
-      order_summary.push("Chicken");
+    const handleRiceSalad = (e)=>{
+   //   order_summary.push("Rice");
+      if (document.getElementById("RiceSalad").style.color!= "red"){
+        document.getElementById("RiceSalad").style.color= "red";
+      }else{
+        document.getElementById("RiceSalad").style.color= "black";
+      }
     }
+    const handleSalsaSalad = (e)=>{
+    //  order_summary.push("Salsa");
+      if (document.getElementById("SalsaSalad").style.color!= "red"){
+        document.getElementById("SalsaSalad").style.color= "red";
+      }else{
+        document.getElementById("SalsaSalad").style.color= "black";
+      }
+    }
+    const handleCreamSalad = (e)=>{
+   //   order_summary.push("SourCream");
+      if (document.getElementById("SourCreamSalad").style.color!= "red"){
+        document.getElementById("SourCreamSalad").style.color= "red";
+      }else{
+        document.getElementById("SourCreamSalad").style.color= "black";
+      }
+    }
+    const handleGuacSalad = (e)=>{
+    //  order_summary.push("Guac");
+      if (document.getElementById("GuacSalad").style.color!= "red"){
+        document.getElementById("GuacSalad").style.color= "red";
+      }else{
+        document.getElementById("GuacSalad").style.color= "black";
+      }
+    }
+    const handleQuesoSalad = (e)=>{
+    //  order_summary.push("Queso");
+      if (document.getElementById("QuesoSalad").style.color!= "red"){
+        document.getElementById("QuesoSalad").style.color= "red";
+      }else{
+        document.getElementById("QuesoSalad").style.color= "black";
+      }
+    }
+
   
-    const handleCheese = (e)=>{
-      order_summary.push("Cheese");
-    }
-    const handleBeans = (e)=>{
-      order_summary.push("Beans");
-    }
-    const handleRice = (e)=>{
-      order_summary.push("Rice");
-    }
-    const handleSalsa = (e)=>{
-      order_summary.push("Salsa");
-    }
-    const handleCream = (e)=>{
-      order_summary.push("SourCream");
-    }
-    const handleGuac = (e)=>{
-      order_summary.push("Guac");
-    }
-    const handleQueso = (e)=>{
-      order_summary.push("Queso");
-    }
-
+   
 
       return (
         /*need to add on click event to show a menu customization options such as meat option and topping
@@ -570,13 +1014,13 @@ var Display_Order = [];
                   <button id="SteakTaco" onClick={handleSteakTaco}><p>Steak</p></button>
                   <button id="MedleyTaco" onClick={handleMedleyTaco}><p>Veggie Medley</p></button>
                   <button id="ChickenTaco" onClick={handleChickenTaco}><p>Chicken</p></button>
-                  <button id="CheeseTaco" onClick={handleCheese}><p>Cheese</p></button>
-                  <button id="BeansTaco" onClick={handleBeans}><p>Beans</p></button>
-                  <button id="RiceTaco" onClick={handleRice}><p>Rice</p></button>
-                  <button id="SalsaTaco" onClick={handleSalsa}><p>Salsa</p></button>
-                  <button id="SourCreamTaco" onClick={handleCream}><p>Sour Cream</p></button>
-                  <button id="GuacTaco" onClick={handleGuac}><p>Guacamole</p></button>
-                  <button id="QuesoTaco" onClick={handleQueso}><p>Queso</p></button>
+                  <button id= "CheeseTaco" onClick={handleCheeseTaco}><p>Cheese</p></button>
+                  <button id= "BeansTaco" onClick={handleBeansTaco}><p>Beans</p></button>
+                  <button id= "RiceTaco" onClick={handleRiceTaco}><p>Rice</p></button>
+                  <button id= "SalsaTaco" onClick={handleSalsaTaco}><p>Salsa</p></button>
+                  <button id= "SourCreamTaco" onClick={handleCreamTaco}><p>Sour Cream</p></button>
+                  <button id= "GuacTaco" onClick={handleGuacTaco}><p>Guacamole</p></button>
+                  <button id= "QuesoTaco" onClick={handleQuesoTaco}><p>Queso</p></button>
                 </div>
               </div>
               <button id= "Drink" onClick = {handleDrink}>
@@ -595,13 +1039,13 @@ var Display_Order = [];
                   <button id="SteakBurrito"onClick={handleSteakBurrito}><p>Steak</p></button>
                   <button id= "MedleyBurrito" onClick={handleMedleyBurrito}><p>Veggie Medley</p></button>
                   <button id= "ChickenBurrito" onClick={handleChickenBurrito}><p>Chicken</p></button>
-                  <button onClick={handleCheese}><p>Cheese</p></button>
-                  <button onClick={handleBeans}><p>Beans</p></button>
-                  <button onClick={handleRice}><p>Rice</p></button>
-                  <button onClick={handleSalsa}><p>Salsa</p></button>
-                  <button onClick={handleCream}><p>Sour Cream</p></button>
-                  <button onClick={handleGuac}><p>Guacamole</p></button>
-                  <button onClick={handleQueso}><p>Queso</p></button>
+                  <button id= "CheeseBurrito" onClick={handleCheeseBurrito}><p>Cheese</p></button>
+                  <button id= "BeansBurrito" onClick={handleBeansBurrito}><p>Beans</p></button>
+                  <button id= "RiceBurrito" onClick={handleRiceBurrito}><p>Rice</p></button>
+                  <button id= "SalsaBurrito" onClick={handleSalsaBurrito}><p>Salsa</p></button>
+                  <button id= "SourCreamBurrito" onClick={handleCreamBurrito}><p>Sour Cream</p></button>
+                  <button id= "GuacBurrito" onClick={handleGuacBurrito}><p>Guacamole</p></button>
+                  <button id= "QuesoBurrito" onClick={handleQuesoBurrito}><p>Queso</p></button>
                 </div>
                 </div>
               <button id= "Chips and Queso" onClick = {handleChips_and_Queso}>
@@ -616,17 +1060,18 @@ var Display_Order = [];
                   <p>Bowl</p>
               </button>
                 <div class="dropdown-content">
-                  <button onClick={handleBeef}><p>Beef</p></button>
-                  <button onClick={handleSteak}><p>Steak</p></button>
-                  <button onClick={handleMedley}><p>Veggie Medley</p></button>
-                  <button onClick={handleChicken}><p>Chicken</p></button>
-                  <button onClick={handleCheese}><p>Cheese</p></button>
-                  <button onClick={handleBeans}><p>Beans</p></button>
-                  <button onClick={handleRice}><p>Rice</p></button>
-                  <button onClick={handleSalsa}><p>Salsa</p></button>
-                  <button onClick={handleCream}><p>Sour Cream</p></button>
-                  <button onClick={handleGuac}><p>Guacamole</p></button>
-                  <button onClick={handleQueso}><p>Queso</p></button>
+                  <button id= "BeefBowl" onClick={handleBeefBowl}><p>Beef</p></button>
+                  <button id= "SteakBowl" onClick={handleSteakBowl}><p>Steak</p></button>
+                  <button id= "MedleyBowl" onClick={handleMedleyBowl}><p>Veggie Medley</p></button>
+                  <button id= "ChickenBowl" onClick={handleChickenBowl}><p>Chicken</p></button>
+
+                  <button id= "CheeseBowl" onClick={handleCheeseBowl}><p>Cheese</p></button>
+                  <button id= "BeansBowl" onClick={handleBeansBowl}><p>Beans</p></button>
+                  <button id= "RiceBowl" onClick={handleRiceBowl}><p>Rice</p></button>
+                  <button id= "SalsaBowl" onClick={handleSalsaBowl}><p>Salsa</p></button>
+                  <button id= "SourCreamBowl" onClick={handleCreamBowl}><p>Sour Cream</p></button>
+                  <button id= "GuacBowl" onClick={handleGuacBowl}><p>Guacamole</p></button>
+                  <button id= "QuesoBowl" onClick={handleQuesoBowl}><p>Queso</p></button>
                 </div>
               </div>
               <button id= "Chips and Salsa" onClick = {handleChips_and_Salsa}>
@@ -641,17 +1086,17 @@ var Display_Order = [];
                   <p>Salad</p>
               </button>
                 <div class="dropdown-content">
-                  <button onClick={handleBeef}><p>Beef</p></button>
-                  <button onClick={handleSteak}><p>Steak</p></button>
-                  <button onClick={handleMedley}><p>Veggie Medley</p></button>
-                  <button onClick={handleChicken}><p>Chicken</p></button>
-                  <button onClick={handleCheese}><p>Cheese</p></button>
-                  <button onClick={handleBeans}><p>Beans</p></button>
-                  <button onClick={handleRice}><p>Rice</p></button>
-                  <button onClick={handleSalsa}><p>Salsa</p></button>
-                  <button onClick={handleCream}><p>Sour Cream</p></button>
-                  <button onClick={handleGuac}><p>Guacamole</p></button>
-                  <button onClick={handleQueso}><p>Queso</p></button>
+                  <button id= "BeefSalad" onClick={handleBeefSalad}><p>Beef</p></button>
+                  <button id= "SteakSalad" onClick={handleSteakSalad}><p>Steak</p></button>
+                  <button id= "MedleySalad" onClick={handleMedleySalad}><p>Veggie Medley</p></button>
+                  <button id= "ChickenSalad" onClick={handleChickenSalad}><p>Chicken</p></button>
+                  <button id= "CheeseSalad" onClick={handleCheeseSalad}><p>Cheese</p></button>
+                  <button id= "BeansSalad" onClick={handleBeansSalad}><p>Beans</p></button>
+                  <button id= "RiceSalad" onClick={handleRiceSalad}><p>Rice</p></button>
+                  <button id= "SalsaSalad" onClick={handleSalsaSalad}><p>Salsa</p></button>
+                  <button id= "SourCreamSalad" onClick={handleCreamSalad}><p>Sour Cream</p></button>
+                  <button id= "GuacSalad" onClick={handleGuacSalad}><p>Guacamole</p></button>
+                  <button id= "QuesoSalad" onClick={handleQuesoSalad}><p>Queso</p></button>
                 </div>
                 </div>
               <button id= "Chips and Guac" onClick = {handleChips_and_Guac}>
