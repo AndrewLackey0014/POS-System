@@ -119,6 +119,9 @@ function App() {
         getEmployees();
       });
   }
+
+
+
   function deleteEmployee() {
     let id = prompt('Enter employeeid');
     // console.log(id);
