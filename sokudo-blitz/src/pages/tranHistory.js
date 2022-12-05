@@ -1,4 +1,4 @@
-
+import "./tranHistory.css"
 import React, { Component, useState, useEffect} from 'react';
 
 
@@ -61,21 +61,21 @@ export default function TranHistory() {
           component = <>
           <div>
 
-            <div class="column left">
+            <div class="search">
                 <form class="row">
-                    Begin Date: <input type="text"></input>
-                    End Date: <input type="text"></input>
-                    <button>Load Selected Data</button>
+                    <input placeholder = "BEGIN DATE" type="text"></input>
+                    <input placeholder = "END DATE" type="text"></input>
+                    <button>LOAD DATA</button>
                 </form> 
             </div>
-            <div class="column">
+            <div class="data">
                 <table>
                     <tr>
                     <th>Order Number</th>
-                        <th>Order ID</th>
-                        <th>Order Time</th>
-                        <th>Order Cost</th>
-                        <th>Order Contents</th>
+                    <th>Order ID</th>
+                    <th>Order Time</th>
+                    <th>Order Cost</th>
+                    <th>Order Contents</th>
 
                     </tr>
                      
