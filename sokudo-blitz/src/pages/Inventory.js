@@ -8,7 +8,7 @@ var obj;
 
 
 function getCurrentURL () {
-return window.location.href
+    return window.location.href
 }
 
 

@@ -99,6 +99,29 @@ app.post('/employees', (req, res) => {
   })
 })
 
+
+app.post('/create_item', (req, res) => {
+  db.createItem(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+
+app.post('/item_update', (req, res) => {
+  console.log(req.body);
+  db.updateItem(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
 app.delete('/delete_employee', (req, res) => {
   // console.log("hello");
   // console.log(req.params.id);

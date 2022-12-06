@@ -80,6 +80,30 @@ const createEmployee = (body) => {
     })
 }
 
+const createItem = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { price_amount, name, id } = body
+    pool.query('INSERT INTO items (item_id, name, price) VALUES($3, $2, $1) RETURNING *', [price_amount, name, id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(`A new item has been added added: ${results}`)
+    })
+  })
+}
+
+const updateItem = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { price_amount, item_id } = body
+    pool.query('UPDATE items SET price=$1 WHERE item_id=$2 RETURNING *', [price_amount, item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(`item has been updated: ${results}`)
+    })
+  })
+}
+
 const updateSalary = (body) => {
   return new Promise(function(resolve, reject) {
     const { employeeid, salary} = body
@@ -150,5 +174,7 @@ const deleteEmployee = (body) => {
     getInventory,
     getItems,
     updateInventory,
-    getCurrInv
+    getCurrInv,
+    createItem,
+    updateItem
 }
