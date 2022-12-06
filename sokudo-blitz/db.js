@@ -91,6 +91,33 @@ const updateSalary = (body) => {
   })
 }
 
+const updateInventory = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { curr_inv , item_id } = body
+   
+    pool.query('UPDATE inventory SET curr_inv=$1 WHERE item_id=$2 RETURNING *', [curr_inv, item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(`Employee salary has been updated: ${results}`)
+    })
+  })
+}
+const getCurrInv = (body) => {
+  return new Promise(function(resolve, reject) {
+    const {item_id} = body
+    console.log('inside db file' + item_id);
+    pool.query('SELECT curr_inv FROM inventory WHERE item_id=$1', [item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
+
 
 
 
@@ -120,5 +147,7 @@ const deleteEmployee = (body) => {
     updateSalary,
     getTranHist,
     getInventory,
-    getItems
+    getItems,
+    updateInventory,
+    getCurrInv
 }
