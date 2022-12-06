@@ -143,6 +143,21 @@ const getCurrInv = (body) => {
   }) 
 }
 
+// const getItemPrice = (body) => {
+//   return new Promise(function(resolve, reject) {
+//     const {?} = body
+//     console.log('inside db file');
+//     pool.query('SELECT ? FROM items WHERE ?=$1', [?], (error, results) => {
+//       if (error) {
+//         reject(error)
+//       }
+//       // resolve(results.rows);
+//       resolve(results.rows);
+
+//     })
+//   }) 
+// }
+
 
 
 
@@ -176,5 +191,6 @@ const deleteEmployee = (body) => {
     updateInventory,
     getCurrInv,
     createItem,
-    updateItem
+    updateItem,
+    getItemPrice
 }

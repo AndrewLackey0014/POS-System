@@ -19,6 +19,7 @@ import Toppings_Page from "./Toppings_Page"
 
 
 
+
 var order_summary = [];
 var temp_array = [];
 var obj;
@@ -27,8 +28,10 @@ var Display_Order = [];
  function CustomerGUI() {
     let component
     const [items_data, setItems] = useState(false);
+    const [inv_data, setInv] = useState(false);
     useEffect(() => {
         getItems();
+        getInventory();
     }, []);
     function getItems() {
         fetch('http://localhost:3001/items')
@@ -40,13 +43,32 @@ var Display_Order = [];
           });
     }
 
-    function updateInventory(curr_inv, item_id) {
+    function getInventory() {
+      fetch('http://localhost:3001/inventory')
+        .then(response => {
+          return response.text();
+        })
+        .then(data => {
+          setInv(data);
+        });
+    }
+
+    obj = JSON.parse(inv_data);
+    var temp_obj = {};
+    for (const [key, value] of Object.entries(obj)) {
+      temp_obj[value['item_id']] = value;
+    };
+    obj = temp_obj;
+    console.log(obj);
+
+
+    function updateInventory(order_amount, item_id) {
       fetch('http://localhost:3001/inventory_update', {
         method: 'POST',
         headers: {  
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({curr_inv, item_id}),
+        body: JSON.stringify({order_amount, item_id}),
       })
         .then(response => {
           return response.text();
@@ -73,12 +95,27 @@ var Display_Order = [];
           alert(data);
         });
     }
+
+    // function getItemPrice(?) {
+    //   console.log(?);
+    //   fetch('http://localhost:3001/item_price',{
+    //     method: 'GET',
+    //     headers: {  
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({item_id}),
+    //   })
+    //     .then(response => {
+    //       return response.text();
+    //     })
+    //     .then(data => {
+    //       alert(data);
+    //     });
+    // }
     
     const [toggle, setToggle] = useState(true)
 
-    console.log(obj);
-
-    obj = JSON.parse(items_data);
+    // obj = JSON.parse(items_data);
 
     switch (window.location.pathname) {
 
@@ -235,60 +272,72 @@ var Display_Order = [];
 
       for(var i = 0; i < order_summary.length; i++){
         if(order_summary[i] == ", Chips&Guac" || order_summary[i] == "Chips&Guac"){
-          let inventory = getCurrInv(17);
-          console.log(inventory);
-          updateInventory(inventory-.5, 17);
+          updateInventory(obj[17]['curr_inv']-.5, 17);
+          updateInventory(obj[14]['curr_inv']-.25,14);
         }
         if(order_summary[i] == ", Chips&Queso" || order_summary[i] == "Chips&Queso"){
-          
+          updateInventory(obj[17]['curr_inv']-.5,17);
+          updateInventory(obj[18]['curr_inv']-.25,18);
         }
         if(order_summary[i] == ", Chips&Salsa" || order_summary[i] == "Chips&Salsa"){
-          
+          updateInventory(obj[17]['curr_inv']-.5,17);
+          updateInventory(obj[16]['curr_inv']-.25,16);
         }
         if(order_summary[i] == ", Burrito" || order_summary[i] == "Burrito"){
-          
+          updateInventory(obj[7]['curr_inv']-1,7);
+          updateInventory(obj[9]['curr_inv']-1,9);
+          updateInventory(obj[6]['curr_inv']-.15,6);
         }
         if(order_summary[i] == ", Bowl" || order_summary[i] == "Bowl"){
-          
+          updateInventory(obj[8]['curr_inv']-1,8);
+          updateInventory(obj[20]['curr_inv']-1,20);
         }
         if(order_summary[i] == ", Salad" || order_summary[i] == "Salad"){
-          
+          updateInventory(obj[8]['curr_inv']-1,8);
+          updateInventory(obj[11]['curr_inv']-1,11);
         }
         if(order_summary[i] == ", Taco" || order_summary[i] == "Taco"){
-          
+          updateInventory(obj[10]['curr_inv']-2,10);
+          updateInventory(obj[6]['curr_inv']-.15,6);
         }
         if(order_summary[i] == "Beef"){
-          
+          updateInventory(obj[24]['curr_inv']-.25,24);
         }
         if(order_summary[i] == "Steak"){
-          
+          updateInventory(obj[3]['curr_inv']-.25,3);
         }
         if(order_summary[i] == "Medley"){
-          
+          updateInventory(obj[5]['curr_inv']-.25,5);
         }
         if(order_summary[i] == "Chicken"){
-          
+          updateInventory(obj[4]['curr_inv']-.25,4);
         }
         if(order_summary[i] == "Cheese"){
-          
+          updateInventory(obj[12]['curr_inv']-.25,12);
         }
         if(order_summary[i] == "Beans"){
-          
+          updateInventory(obj[15]['curr_inv']-.25,15);
         }
         if(order_summary[i] == "Rice"){
-          
+          updateInventory(obj[2]['curr_inv']-.25,2);
         }
         if(order_summary[i] == "Salsa"){
-          
+          updateInventory(obj[16]['curr_inv']-.25,16);
         }
         if(order_summary[i] == "SourCream"){
-          
+          updateInventory(obj[13]['curr_inv']-.25,13);
         }
         if(order_summary[i] == "Guac"){
-          
+          updateInventory(obj[14]['curr_inv']-.25,14);
         }
         if(order_summary[i] == "Queso"){
-          
+          updateInventory(obj[18]['curr_inv']-.25,18);
+        }
+        if(order_summary[i] == ", Drink" || order_summary[i] == "Drink"){
+          updateInventory(obj[22]['curr_inv']-1,22);
+          updateInventory(obj[23]['curr_inv']-1,23);
+          updateInventory(obj[21]['curr_inv']-1,21);
+          updateInventory(obj[1]['curr_inv']-.15,1);
         }
         
 

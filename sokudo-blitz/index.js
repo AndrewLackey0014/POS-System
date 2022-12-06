@@ -148,6 +148,7 @@ app.post('/employee_update', (req, res) => {
 
 
 app.post('/inventory_update', (req, res) => {
+  console.log(req.body)
   db.updateInventory(req.body)
   .then(response => {
     res.status(200).send(response);
@@ -159,6 +160,16 @@ app.post('/inventory_update', (req, res) => {
 
 app.get('/curr_inv', (req, res) => {
   db.getCurrInv(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+app.get('/item_price', (req, res) => {
+  db.getItemPrice(req.body)
   .then(response => {
     res.status(200).send(response);
   })
