@@ -1,0 +1,44 @@
+.row{
+    /* display:flex;
+    margin:auto;
+    position:fixed;
+    text-align: center; */
+}
+
+.row input{
+    font-family: 'Courier New', monospace;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 1;
+    /* margin: 0 0 15px; */
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border:10px;
+
+    /* display:flex;
+    margin:auto;
+    position:fixed;
+    text-align: center; */
+}
+
+.row button{
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    outline: 0;
+    background: black;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+
+    /* display:flex;
+    margin:auto;
+    position:fixed;
+    text-align: center; */
+}

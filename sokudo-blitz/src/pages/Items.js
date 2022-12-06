@@ -1,4 +1,4 @@
-
+import "./Items.css"
 import React, { Component, useState, useEffect} from 'react';
 
 
@@ -109,13 +109,16 @@ export default function Items() {
                     </div>
                 </div>
 
-                <form class="row">
-                    Test: <input type="text"></input>
-                    Create Item: <input type="text"></input>
-                </form>
+                {/* <form class="row"> */}
+                <div class = "text">
+                    <input placeholder="TEST" type="text"></input>
+                    <input placeholder="CREATE ITEM" type="text"></input>
+                {/* </form> */}
 
-                <form>Order Amount: <input type="text"></input></form>
-
+                {/* <form> */}
+                    <input placeholder="ORDER AMOUNT"type="text"></input>
+                    {/* </form> */}
+                </div>
                 <button class="order_inv">Order Inventory</button>
 
             </div>

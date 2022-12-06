@@ -1,4 +1,4 @@
-
+import "./Inventory.css"
 import React, { Component, useState, useEffect} from 'react';
 
 
@@ -104,7 +104,7 @@ export default function Inventory() {
           component = <>
           <div class="column left">
                 <div class="dropdown row" onClick={handleClick}>
-                    <button class="dropbtn">Select Item</button>
+                    <button class="dropbtn">SELECT ITEM</button>
                     <div id ="myDropdown" class="dropdown-content">
                         <a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 1</a>
                         <a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 2</a>
@@ -114,7 +114,7 @@ export default function Inventory() {
                 </div>
                 
 
-                <form>Order Amount: <input type="text"></input></form>
+                <div class="brick"> <input placeholder="ORDER AMOUNT" type="text"></input></div>
 
                 <button class="order_inv">Order Inventory</button>
 

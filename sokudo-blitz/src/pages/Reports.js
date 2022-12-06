@@ -1,3 +1,4 @@
+import "./Reports.css"
 import React, { Component, useState, useEffect, useRef, isValidElement} from 'react';
 
 
@@ -375,14 +376,14 @@ export default function Reports(props) {
         <div class="column left">
             <div class="row">
             {/* Sales Report */}
-                <input ref={inputRef1} id="startDate" type="text" value={startDate} onChange={handleStartChange} placeholder="YYYYMMDD"></input>
-                <input ref={inputRef2} id="endDate" type="text" value={endDate} onChange={handleEndChange} placeholder="YYYYMMDD"></input>
+                <input ref={inputRef1} id="startDate" type="text" value={startDate} onChange={handleStartChange} placeholder="YYYY/MM/DD"></input>
+                <input ref={inputRef2} id="endDate" type="text" value={endDate} onChange={handleEndChange} placeholder="YYYY/MM/DD"></input>
                 <button id={numBtns[0]} onClick={changeRep(1, "sales")} value={false}>Sales Report</button><br/>
             </div>
 
             <div class="row">
             {/* Excess Report */}
-                <input ref={inputRef3} id="excessDate" type="text" value={excessDate} onChange={handleExcessDate} placeholder="YYYYMMDD"></input>
+                <input ref={inputRef3} id="excessDate" type="text" value={excessDate} onChange={handleExcessDate} placeholder="YYYY/MM/DD"></input>
                 <button id={numBtns[1]} onClick={changeRep(2, "excess")} value={false}>Excess Report</button><br/>
             </div>
 
@@ -393,8 +394,8 @@ export default function Reports(props) {
 
             <div class="row">
             {/* Combo Report */}
-                <input ref={inputRef4} id="startDateCombo" type="text" value={startDateCombo} onChange={handleStartChangeCombo} placeholder="YYYYMMDD"></input>
-                <input ref={inputRef5} id="endDateCombo" type="text" value={endDateCombo} onChange={handleEndChangeCombo} placeholder="YYYYMMDD"></input>
+                <input ref={inputRef4} id="startDateCombo" type="text" value={startDateCombo} onChange={handleStartChangeCombo} placeholder="YYYY/MM/DD"></input>
+                <input ref={inputRef5} id="endDateCombo" type="text" value={endDateCombo} onChange={handleEndChangeCombo} placeholder="YYYY/MM/DD"></input>
                 <button id={numBtns[3]} onClick={changeRep(4, "combo")} value={false}>Combo Report</button>
             </div>
         </div>

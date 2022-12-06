@@ -1,0 +1,47 @@
+.order_inv{
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    outline: 0;
+    background: black;
+    width: 400px;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.brick input{
+    /* font-family: 'Courier New', monospace;
+    outline: 0;
+    width: 400px;
+    border: 0;
+    padding-top: 15px;
+    font-size: 15px; */
+    font-family: 'Courier New', monospace;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    /* margin: 0 0 15px; */
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border:10px;
+}
+/* 
+.top_row{
+    display:flex;
+    gap: 50px;
+} */
+
+/* .idata{
+    font-family: 'Courier New', monospace;
+    background: grey;
+    width: 100%;
+    /* padding: 15px; */
+    /* box-sizing: border-box;
+    font-size: 20px;
+} */
