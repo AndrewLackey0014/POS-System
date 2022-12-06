@@ -66,6 +66,8 @@ const getItems = () => {
     })
   }) 
 }
+
+  
 const createEmployee = (body) => {
     return new Promise(function(resolve, reject) {
       const { employeeid, salary, name, managerid, role } = body
@@ -120,5 +122,5 @@ const deleteEmployee = (body) => {
     updateSalary,
     getTranHist,
     getInventory,
-    getItems
+    getItems,
 }

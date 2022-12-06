@@ -87,6 +87,8 @@ app.get('/get_employees', (req, res) => {
   })
 })
 
+
+
 app.post('/employees', (req, res) => {
   db.createEmployee(req.body)
   .then(response => {
@@ -119,6 +121,7 @@ app.post('/employee_update', (req, res) => {
     res.status(500).send(error);
   })
 })
+
 
 app.get('/getEnvironmentVars', (_, res) => {
   res.json({ ENVIRONMENT: url })
