@@ -227,6 +227,12 @@ var Display_Order = [];
 
 
     const FinishOrder = (e)=>{
+
+
+
+
+      //TODO add query to add thing in transaction history.
+
       for(var i = 0; i < order_summary.length; i++){
         if(order_summary[i] == ", Chips&Guac" || order_summary[i] == "Chips&Guac"){
           let inventory = getCurrInv(17);
@@ -288,6 +294,80 @@ var Display_Order = [];
 
 
       }
+
+
+      document.getElementById("Tacoo").style.backgroundColor= "white";
+      document.getElementById("Burrito").style.backgroundColor= "white";
+      document.getElementById("Bowl").style.backgroundColor= "white";
+      document.getElementById("Salad").style.backgroundColor= "white";
+
+      document.getElementById("Drink").style.backgroundColor= "white";
+      document.getElementById("Chips and Queso").style.backgroundColor= "white";
+      document.getElementById("Chips and Salsa").style.backgroundColor= "white";
+      document.getElementById("Chips and Guac").style.backgroundColor= "white";
+
+      document.getElementById("BeefTaco").style.color= "black";
+      document.getElementById("SteakTaco").style.color= "black";
+      document.getElementById("MedleyTaco").style.color= "black";
+      document.getElementById("ChickenTaco").style.color= "black";
+      document.getElementById("CheeseTaco").style.color= "black";
+      document.getElementById("BeansTaco").style.color= "black";
+      document.getElementById("RiceTaco").style.color= "black";
+      document.getElementById("SalsaTaco").style.color= "black";
+      document.getElementById("SourCreamTaco").style.color= "black";
+      document.getElementById("GuacTaco").style.color= "black";
+      document.getElementById("QuesoTaco").style.color= "black";
+
+      document.getElementById("BeefBurrito").style.color= "black";
+      document.getElementById("SteakBurrito").style.color= "black";
+      document.getElementById("MedleyBurrito").style.color= "black";
+      document.getElementById("ChickenBurrito").style.color= "black";
+      document.getElementById("CheeseBurrito").style.color= "black";
+      document.getElementById("BeansBurrito").style.color= "black";
+      document.getElementById("RiceBurrito").style.color= "black";
+      document.getElementById("SalsaBurrito").style.color= "black";
+      document.getElementById("SourCreamBurrito").style.color= "black";
+      document.getElementById("GuacBurrito").style.color= "black";
+      document.getElementById("QuesoBurrito").style.color= "black";
+      
+      document.getElementById("BeefBowl").style.color= "black";
+      document.getElementById("SteakBowl").style.color= "black";
+      document.getElementById("MedleyBowl").style.color= "black";
+      document.getElementById("ChickenBowl").style.color= "black";
+      document.getElementById("CheeseBowl").style.color= "black";
+      document.getElementById("BeansBowl").style.color= "black";
+      document.getElementById("RiceBowl").style.color= "black";
+      document.getElementById("SalsaBowl").style.color= "black";
+      document.getElementById("SourCreamBowl").style.color= "black";
+      document.getElementById("GuacBowl").style.color= "black";
+      document.getElementById("QuesoBowl").style.color= "black";
+
+      document.getElementById("BeefSalad").style.color= "black";
+      document.getElementById("SteakSalad").style.color= "black";
+      document.getElementById("MedleySalad").style.color= "black";
+      document.getElementById("ChickenSalad").style.color= "black";
+      document.getElementById("CheeseSalad").style.color= "black";
+      document.getElementById("BeansSalad").style.color= "black";
+      document.getElementById("RiceSalad").style.color= "black";
+      document.getElementById("SalsaSalad").style.color= "black";
+      document.getElementById("SourCreamSalad").style.color= "black";
+      document.getElementById("GuacSalad").style.color= "black";
+      document.getElementById("QuesoSalad").style.color= "black";
+
+
+      order_summary=[];
+      Display_Order=[];
+
+      stringorder= "Order Placed. Thank you for your time!";
+      stringprice = "";  //resetting stringprice
+      stringdislayorder= "";
+      
+      let Contents = stringorder;
+      let Price= stringprice;
+      let DisplayOrder= stringdislayorder;
+      document.getElementById("Contents").innerHTML = stringorder; 
+      document.getElementById("Price").innerHTML = Price; 
+      document.getElementById("DisplayOrder").innerHTML = DisplayOrder; 
     }
 
 
@@ -312,11 +392,12 @@ var Display_Order = [];
     }else if (  document.getElementById("ChickenTaco").style.color== "red"){
       order_summary.push("Chicken");
       Display_Order.push("Taco Chili Rubbed Chicken");
+
   }else{
     Display_Order.push("Taco");
   }
+  order_summary.push("Taco");
   if (document.getElementById("CheeseTaco").style.color== "red")order_summary.push("Cheese");
-  if (document.getElementById("BeansTaco").style.color== "red")order_summary.push("Cheese");
   if (document.getElementById("BeansTaco").style.color== "red")order_summary.push("Beans");
   if (document.getElementById("QuesoTaco").style.color== "red")order_summary.push("Queso");
   if (document.getElementById("RiceTaco").style.color== "red")order_summary.push("Rice");
@@ -324,7 +405,7 @@ var Display_Order = [];
   if (document.getElementById("SourCreamTaco").style.color== "red")order_summary.push("SourCream");
   if (document.getElementById("GuacTaco").style.color== "red")order_summary.push("Guac");
 
-  order_summary.push("Taco");
+ 
       }
 
       if ( document.getElementById("Burrito").style.backgroundColor== "grey"){
@@ -346,8 +427,8 @@ var Display_Order = [];
     Display_Order.push("Burrito");
   }
 
+  order_summary.push("Burrito");
   if (document.getElementById("CheeseBurrito").style.color== "red")order_summary.push("Cheese");
-  if (document.getElementById("BeansBurrito").style.color== "red")order_summary.push("Cheese");
   if (document.getElementById("BeansBurrito").style.color== "red")order_summary.push("Beans");
   if (document.getElementById("QuesoBurrito").style.color== "red")order_summary.push("Queso");
   if (document.getElementById("RiceBurrito").style.color== "red")order_summary.push("Rice");
@@ -357,7 +438,6 @@ var Display_Order = [];
 
 
 
-  order_summary.push("Burrito");
       }
       if ( document.getElementById("Bowl").style.backgroundColor== "grey"){
 
@@ -377,8 +457,9 @@ var Display_Order = [];
   }else{
     Display_Order.push("Bowl");
   }
+  
+  order_summary.push("Bowl");
   if (document.getElementById("CheeseBowl").style.color== "red")order_summary.push("Cheese");
-  if (document.getElementById("BeansBowl").style.color== "red")order_summary.push("Cheese");
   if (document.getElementById("BeansBowl").style.color== "red")order_summary.push("Beans");
   if (document.getElementById("QuesoBowl").style.color== "red")order_summary.push("Queso");
   if (document.getElementById("RiceBowl").style.color== "red")order_summary.push("Rice");
@@ -387,7 +468,6 @@ var Display_Order = [];
   if (document.getElementById("GuacBowl").style.color== "red")order_summary.push("Guac");
 
 
-  order_summary.push("Bowl");
       }
       if ( document.getElementById("Salad").style.backgroundColor== "grey"){
 
@@ -407,8 +487,8 @@ var Display_Order = [];
   }else{
     Display_Order.push("Salad");
   }
+  order_summary.push("Salad");
   if (document.getElementById("CheeseSalad").style.color== "red")order_summary.push("Cheese");
-  if (document.getElementById("BeansSalad").style.color== "red")order_summary.push("Cheese");
   if (document.getElementById("BeansSalad").style.color== "red")order_summary.push("Beans");
   if (document.getElementById("QuesoSalad").style.color== "red")order_summary.push("Queso");
   if (document.getElementById("RiceSalad").style.color== "red")order_summary.push("Rice");
@@ -416,42 +496,39 @@ var Display_Order = [];
   if (document.getElementById("SourCreamSalad").style.color== "red")order_summary.push("SourCream");
   if (document.getElementById("GuacSalad").style.color== "red")order_summary.push("Guac");
 
-  order_summary.push("Salad");
-      }
+  
+  }
+  if ( document.getElementById("Drink").style.backgroundColor== "grey"){
+    Display_Order.push("Fountain Drinks");
+    order_summary.push("Drink");
+  }
+  //Chips and Queso
+  if ( document.getElementById("Chips and Queso").style.backgroundColor== "grey"){
+    Display_Order.push("Chips & Queso");
+    order_summary.push("Chips&Queso");
+  }
+  if ( document.getElementById("Chips and Salsa").style.backgroundColor== "grey"){
+    Display_Order.push("Chips & Salsa");
+    order_summary.push("Chips&Salsa");
+  }
+  if ( document.getElementById("Chips and Guac").style.backgroundColor== "grey"){
+    Display_Order.push("Chips & Guac");
+    order_summary.push("Chips&Guac");
+  }
 
 
 
 
 
-
-
-
-
-        stringorder= order_summary.join(" ");
+        stringorder= order_summary.join(", ");
       //stringprice= Display_Order.toString();
         stringdislayorder= Display_Order.join(", ");
         let Contents = stringorder;
         let DisplayOrder = stringdislayorder;
         document.getElementById("Contents").innerHTML = Contents;
-        document.getElementById("DisplayOrder").innerHTML = DisplayOrder;
+        document.getElementById("DisplayOrder").innerHTML = "";
 
 
-        if(document.getElementById("Tacoo").backgroundColor=="grey"){
-
-        }
-
-        if(document.getElementById("Burrito").backgroundColor=="grey"){
-
-        }
-
-
-        if(document.getElementById("Burrito").backgroundColor=="grey"){
-
-        }
-
-        if(document.getElementById("Salad").backgroundColor=="grey"){
-
-        }
         if(document.getElementById("Chips and Guac").backgroundColor=="grey"){
 
         }
@@ -476,6 +553,66 @@ var Display_Order = [];
       document.getElementById("Price").innerHTML = Price;
 
 
+
+
+      // reset highlights here TODO
+      document.getElementById("Tacoo").style.backgroundColor= "white";
+      document.getElementById("Burrito").style.backgroundColor= "white";
+      document.getElementById("Bowl").style.backgroundColor= "white";
+      document.getElementById("Salad").style.backgroundColor= "white";
+
+      document.getElementById("Drink").style.backgroundColor= "white";
+      document.getElementById("Chips and Queso").style.backgroundColor= "white";
+      document.getElementById("Chips and Salsa").style.backgroundColor= "white";
+      document.getElementById("Chips and Guac").style.backgroundColor= "white";
+
+      document.getElementById("BeefTaco").style.color= "black";
+      document.getElementById("SteakTaco").style.color= "black";
+      document.getElementById("MedleyTaco").style.color= "black";
+      document.getElementById("ChickenTaco").style.color= "black";
+      document.getElementById("CheeseTaco").style.color= "black";
+      document.getElementById("BeansTaco").style.color= "black";
+      document.getElementById("RiceTaco").style.color= "black";
+      document.getElementById("SalsaTaco").style.color= "black";
+      document.getElementById("SourCreamTaco").style.color= "black";
+      document.getElementById("GuacTaco").style.color= "black";
+      document.getElementById("QuesoTaco").style.color= "black";
+
+      document.getElementById("BeefBurrito").style.color= "black";
+      document.getElementById("SteakBurrito").style.color= "black";
+      document.getElementById("MedleyBurrito").style.color= "black";
+      document.getElementById("ChickenBurrito").style.color= "black";
+      document.getElementById("CheeseBurrito").style.color= "black";
+      document.getElementById("BeansBurrito").style.color= "black";
+      document.getElementById("RiceBurrito").style.color= "black";
+      document.getElementById("SalsaBurrito").style.color= "black";
+      document.getElementById("SourCreamBurrito").style.color= "black";
+      document.getElementById("GuacBurrito").style.color= "black";
+      document.getElementById("QuesoBurrito").style.color= "black";
+      
+      document.getElementById("BeefBowl").style.color= "black";
+      document.getElementById("SteakBowl").style.color= "black";
+      document.getElementById("MedleyBowl").style.color= "black";
+      document.getElementById("ChickenBowl").style.color= "black";
+      document.getElementById("CheeseBowl").style.color= "black";
+      document.getElementById("BeansBowl").style.color= "black";
+      document.getElementById("RiceBowl").style.color= "black";
+      document.getElementById("SalsaBowl").style.color= "black";
+      document.getElementById("SourCreamBowl").style.color= "black";
+      document.getElementById("GuacBowl").style.color= "black";
+      document.getElementById("QuesoBowl").style.color= "black";
+
+      document.getElementById("BeefSalad").style.color= "black";
+      document.getElementById("SteakSalad").style.color= "black";
+      document.getElementById("MedleySalad").style.color= "black";
+      document.getElementById("ChickenSalad").style.color= "black";
+      document.getElementById("CheeseSalad").style.color= "black";
+      document.getElementById("BeansSalad").style.color= "black";
+      document.getElementById("RiceSalad").style.color= "black";
+      document.getElementById("SalsaSalad").style.color= "black";
+      document.getElementById("SourCreamSalad").style.color= "black";
+      document.getElementById("GuacSalad").style.color= "black";
+      document.getElementById("QuesoSalad").style.color= "black";
     }
 
 
@@ -495,6 +632,63 @@ var Display_Order = [];
         document.getElementById("DisplayOrder").innerHTML = DisplayOrder; 
 
       //  alert("Deleted Contents")   
+      document.getElementById("Tacoo").style.backgroundColor= "white";
+      document.getElementById("Burrito").style.backgroundColor= "white";
+      document.getElementById("Bowl").style.backgroundColor= "white";
+      document.getElementById("Salad").style.backgroundColor= "white";
+
+      document.getElementById("Drink").style.backgroundColor= "white";
+      document.getElementById("Chips and Queso").style.backgroundColor= "white";
+      document.getElementById("Chips and Salsa").style.backgroundColor= "white";
+      document.getElementById("Chips and Guac").style.backgroundColor= "white";
+
+      document.getElementById("BeefTaco").style.color= "black";
+      document.getElementById("SteakTaco").style.color= "black";
+      document.getElementById("MedleyTaco").style.color= "black";
+      document.getElementById("ChickenTaco").style.color= "black";
+      document.getElementById("CheeseTaco").style.color= "black";
+      document.getElementById("BeansTaco").style.color= "black";
+      document.getElementById("RiceTaco").style.color= "black";
+      document.getElementById("SalsaTaco").style.color= "black";
+      document.getElementById("SourCreamTaco").style.color= "black";
+      document.getElementById("GuacTaco").style.color= "black";
+      document.getElementById("QuesoTaco").style.color= "black";
+
+      document.getElementById("BeefBurrito").style.color= "black";
+      document.getElementById("SteakBurrito").style.color= "black";
+      document.getElementById("MedleyBurrito").style.color= "black";
+      document.getElementById("ChickenBurrito").style.color= "black";
+      document.getElementById("CheeseBurrito").style.color= "black";
+      document.getElementById("BeansBurrito").style.color= "black";
+      document.getElementById("RiceBurrito").style.color= "black";
+      document.getElementById("SalsaBurrito").style.color= "black";
+      document.getElementById("SourCreamBurrito").style.color= "black";
+      document.getElementById("GuacBurrito").style.color= "black";
+      document.getElementById("QuesoBurrito").style.color= "black";
+      
+      document.getElementById("BeefBowl").style.color= "black";
+      document.getElementById("SteakBowl").style.color= "black";
+      document.getElementById("MedleyBowl").style.color= "black";
+      document.getElementById("ChickenBowl").style.color= "black";
+      document.getElementById("CheeseBowl").style.color= "black";
+      document.getElementById("BeansBowl").style.color= "black";
+      document.getElementById("RiceBowl").style.color= "black";
+      document.getElementById("SalsaBowl").style.color= "black";
+      document.getElementById("SourCreamBowl").style.color= "black";
+      document.getElementById("GuacBowl").style.color= "black";
+      document.getElementById("QuesoBowl").style.color= "black";
+
+      document.getElementById("BeefSalad").style.color= "black";
+      document.getElementById("SteakSalad").style.color= "black";
+      document.getElementById("MedleySalad").style.color= "black";
+      document.getElementById("ChickenSalad").style.color= "black";
+      document.getElementById("CheeseSalad").style.color= "black";
+      document.getElementById("BeansSalad").style.color= "black";
+      document.getElementById("RiceSalad").style.color= "black";
+      document.getElementById("SalsaSalad").style.color= "black";
+      document.getElementById("SourCreamSalad").style.color= "black";
+      document.getElementById("GuacSalad").style.color= "black";
+      document.getElementById("QuesoSalad").style.color= "black";
 
     }
 
@@ -1023,18 +1217,18 @@ var Display_Order = [];
               </button>
                 <div class="dropdown-content">
 
-                  <button id="BeefTaco" onClick={handleBeefTaco}><p>Beef</p></button>
+                  <button id="BeefTaco" onClick={handleBeefTaco}><h5>Beef</h5></button>
 
-                  <button id="SteakTaco" onClick={handleSteakTaco}><p>Steak</p></button>
-                  <button id="MedleyTaco" onClick={handleMedleyTaco}><p>Veggie Medley</p></button>
-                  <button id="ChickenTaco" onClick={handleChickenTaco}><p>Chicken</p></button>
-                  <button id= "CheeseTaco" onClick={handleCheeseTaco}><p>Cheese</p></button>
-                  <button id= "BeansTaco" onClick={handleBeansTaco}><p>Beans</p></button>
-                  <button id= "RiceTaco" onClick={handleRiceTaco}><p>Rice</p></button>
-                  <button id= "SalsaTaco" onClick={handleSalsaTaco}><p>Salsa</p></button>
-                  <button id= "SourCreamTaco" onClick={handleCreamTaco}><p>Sour Cream</p></button>
-                  <button id= "GuacTaco" onClick={handleGuacTaco}><p>Guacamole</p></button>
-                  <button id= "QuesoTaco" onClick={handleQuesoTaco}><p>Queso</p></button>
+                  <button id="SteakTaco" onClick={handleSteakTaco}><h5>Steak</h5></button>
+                  <button id="MedleyTaco" onClick={handleMedleyTaco}><h5>Veggie Medley</h5></button>
+                  <button id="ChickenTaco" onClick={handleChickenTaco}><h5>Chicken</h5></button>
+                  <button id= "CheeseTaco" onClick={handleCheeseTaco}><h5>Cheese</h5></button>
+                  <button id= "BeansTaco" onClick={handleBeansTaco}><h5>Beans</h5></button>
+                  <button id= "RiceTaco" onClick={handleRiceTaco}><h5>Rice</h5></button>
+                  <button id= "SalsaTaco" onClick={handleSalsaTaco}><h5>Salsa</h5></button>
+                  <button id= "SourCreamTaco" onClick={handleCreamTaco}><h5>Sour Cream</h5></button>
+                  <button id= "GuacTaco" onClick={handleGuacTaco}><h5>Guacamole</h5></button>
+                  <button id= "QuesoTaco" onClick={handleQuesoTaco}><h5>Queso</h5></button>
                 </div>
               </div>
               <button id= "Drink" onClick = {handleDrink}>
@@ -1047,19 +1241,19 @@ var Display_Order = [];
               <button id= "Burrito" onClick = {handleBurrito}>
                   <img alt = "burrito" title = "burrito" className = "mainItems" src="https://media.istockphoto.com/id/1313361282/photo/mexican-rice-and-chorizo-sausage-wrap.jpg?s=612x612&w=0&k=20&c=7BgOT-kuluQIlZ50l-p-DNvajA66EeB_HIUvW6O_GPM=" />
                   <p>Burrito</p>
-              </button>
+              </button> 
                 <div class="dropdown-content">
-                  <button id= "BeefBurrito" onClick={handleBeefBurrito}><p>Beef</p></button>
-                  <button id="SteakBurrito"onClick={handleSteakBurrito}><p>Steak</p></button>
-                  <button id= "MedleyBurrito" onClick={handleMedleyBurrito}><p>Veggie Medley</p></button>
-                  <button id= "ChickenBurrito" onClick={handleChickenBurrito}><p>Chicken</p></button>
-                  <button id= "CheeseBurrito" onClick={handleCheeseBurrito}><p>Cheese</p></button>
-                  <button id= "BeansBurrito" onClick={handleBeansBurrito}><p>Beans</p></button>
-                  <button id= "RiceBurrito" onClick={handleRiceBurrito}><p>Rice</p></button>
-                  <button id= "SalsaBurrito" onClick={handleSalsaBurrito}><p>Salsa</p></button>
-                  <button id= "SourCreamBurrito" onClick={handleCreamBurrito}><p>Sour Cream</p></button>
-                  <button id= "GuacBurrito" onClick={handleGuacBurrito}><p>Guacamole</p></button>
-                  <button id= "QuesoBurrito" onClick={handleQuesoBurrito}><p>Queso</p></button>
+                  <button id= "BeefBurrito" onClick={handleBeefBurrito}><h5>Beef</h5></button>
+                  <button id="SteakBurrito"onClick={handleSteakBurrito}><h5>Steak</h5></button>
+                  <button id= "MedleyBurrito" onClick={handleMedleyBurrito}><h5>Veggie Medley</h5></button>
+                  <button id= "ChickenBurrito" onClick={handleChickenBurrito}><h5>Chicken</h5></button>
+                  <button id= "CheeseBurrito" onClick={handleCheeseBurrito}><h5>Cheese</h5></button>
+                  <button id= "BeansBurrito" onClick={handleBeansBurrito}><h5>Beans</h5></button>
+                  <button id= "RiceBurrito" onClick={handleRiceBurrito}><h5>Rice</h5></button>
+                  <button id= "SalsaBurrito" onClick={handleSalsaBurrito}><h5>Salsa</h5></button>
+                  <button id= "SourCreamBurrito" onClick={handleCreamBurrito}><h5>Sour Cream</h5></button>
+                  <button id= "GuacBurrito" onClick={handleGuacBurrito}><h5>Guacamole</h5></button>
+                  <button id= "QuesoBurrito" onClick={handleQuesoBurrito}><h5>Queso</h5></button>
                 </div>
                 </div>
               <button id= "Chips and Queso" onClick = {handleChips_and_Queso}>
@@ -1074,18 +1268,18 @@ var Display_Order = [];
                   <p>Bowl</p>
               </button>
                 <div class="dropdown-content">
-                  <button id= "BeefBowl" onClick={handleBeefBowl}><p>Beef</p></button>
-                  <button id= "SteakBowl" onClick={handleSteakBowl}><p>Steak</p></button>
-                  <button id= "MedleyBowl" onClick={handleMedleyBowl}><p>Veggie Medley</p></button>
-                  <button id= "ChickenBowl" onClick={handleChickenBowl}><p>Chicken</p></button>
+                  <button id= "BeefBowl" onClick={handleBeefBowl}><h5>Beef</h5></button>
+                  <button id= "SteakBowl" onClick={handleSteakBowl}><h5>Steak</h5></button>
+                  <button id= "MedleyBowl" onClick={handleMedleyBowl}><h5>Veggie Medley</h5></button>
+                  <button id= "ChickenBowl" onClick={handleChickenBowl}><h5>Chicken</h5></button>
 
-                  <button id= "CheeseBowl" onClick={handleCheeseBowl}><p>Cheese</p></button>
-                  <button id= "BeansBowl" onClick={handleBeansBowl}><p>Beans</p></button>
-                  <button id= "RiceBowl" onClick={handleRiceBowl}><p>Rice</p></button>
-                  <button id= "SalsaBowl" onClick={handleSalsaBowl}><p>Salsa</p></button>
-                  <button id= "SourCreamBowl" onClick={handleCreamBowl}><p>Sour Cream</p></button>
-                  <button id= "GuacBowl" onClick={handleGuacBowl}><p>Guacamole</p></button>
-                  <button id= "QuesoBowl" onClick={handleQuesoBowl}><p>Queso</p></button>
+                  <button id= "CheeseBowl" onClick={handleCheeseBowl}><h5>Cheese</h5></button>
+                  <button id= "BeansBowl" onClick={handleBeansBowl}><h5>Beans</h5></button>
+                  <button id= "RiceBowl" onClick={handleRiceBowl}><h5>Rice</h5></button>
+                  <button id= "SalsaBowl" onClick={handleSalsaBowl}><h5>Salsa</h5></button>
+                  <button id= "SourCreamBowl" onClick={handleCreamBowl}><h5>Sour Cream</h5></button>
+                  <button id= "GuacBowl" onClick={handleGuacBowl}><h5>Guacamole</h5></button>
+                  <button id= "QuesoBowl" onClick={handleQuesoBowl}><h5>Queso</h5></button>
                 </div>
               </div>
               <button id= "Chips and Salsa" onClick = {handleChips_and_Salsa}>
@@ -1100,17 +1294,17 @@ var Display_Order = [];
                   <p>Salad</p>
               </button>
                 <div class="dropdown-content">
-                  <button id= "BeefSalad" onClick={handleBeefSalad}><p>Beef</p></button>
-                  <button id= "SteakSalad" onClick={handleSteakSalad}><p>Steak</p></button>
-                  <button id= "MedleySalad" onClick={handleMedleySalad}><p>Veggie Medley</p></button>
-                  <button id= "ChickenSalad" onClick={handleChickenSalad}><p>Chicken</p></button>
-                  <button id= "CheeseSalad" onClick={handleCheeseSalad}><p>Cheese</p></button>
-                  <button id= "BeansSalad" onClick={handleBeansSalad}><p>Beans</p></button>
-                  <button id= "RiceSalad" onClick={handleRiceSalad}><p>Rice</p></button>
-                  <button id= "SalsaSalad" onClick={handleSalsaSalad}><p>Salsa</p></button>
-                  <button id= "SourCreamSalad" onClick={handleCreamSalad}><p>Sour Cream</p></button>
-                  <button id= "GuacSalad" onClick={handleGuacSalad}><p>Guacamole</p></button>
-                  <button id= "QuesoSalad" onClick={handleQuesoSalad}><p>Queso</p></button>
+                  <button id= "BeefSalad" onClick={handleBeefSalad}><h5>Beef</h5></button>
+                  <button id= "SteakSalad" onClick={handleSteakSalad}><h5>Steak</h5></button>
+                  <button id= "MedleySalad" onClick={handleMedleySalad}><h5>Veggie Medley</h5></button>
+                  <button id= "ChickenSalad" onClick={handleChickenSalad}><h5>Chicken</h5></button>
+                  <button id= "CheeseSalad" onClick={handleCheeseSalad}><h5>Cheese</h5></button>
+                  <button id= "BeansSalad" onClick={handleBeansSalad}><h5>Beans</h5></button>
+                  <button id= "RiceSalad" onClick={handleRiceSalad}><h5>Rice</h5></button>
+                  <button id= "SalsaSalad" onClick={handleSalsaSalad}><h5>Salsa</h5></button>
+                  <button id= "SourCreamSalad" onClick={handleCreamSalad}><h5>Sour Cream</h5></button>
+                  <button id= "GuacSalad" onClick={handleGuacSalad}><h5>Guacamole</h5></button>
+                  <button id= "QuesoSalad" onClick={handleQuesoSalad}><h5>Queso</h5></button>
                 </div>
                 </div>
               <button id= "Chips and Guac" onClick = {handleChips_and_Guac}>
