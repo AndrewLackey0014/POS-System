@@ -123,6 +123,7 @@ app.post('/employee_update', (req, res) => {
 })
 
 
+
 app.post('/inventory_update', (req, res) => {
   db.updateInventory(req.body)
   .then(response => {
@@ -134,7 +135,6 @@ app.post('/inventory_update', (req, res) => {
 })
 
 app.get('/curr_inv', (req, res) => {
-  console.log('inside the router');
   db.getCurrInv(req.body)
   .then(response => {
     res.status(200).send(response);

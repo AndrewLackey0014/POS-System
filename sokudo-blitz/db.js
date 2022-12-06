@@ -95,9 +95,8 @@ const updateSalary = (body) => {
 
 const updateInventory = (body) => {
   return new Promise(function(resolve, reject) {
-    const { curr_inv , item_id } = body
-   
-    pool.query('UPDATE inventory SET curr_inv=$1 WHERE item_id=$2 RETURNING *', [curr_inv, item_id], (error, results) => {
+    const { order_amount , item_id } = body
+    pool.query('UPDATE inventory SET curr_inv=$1 WHERE item_id=$2 RETURNING *', [order_amount, item_id], (error, results) => {
       if (error) {
         reject(error)
       }
