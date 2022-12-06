@@ -8,6 +8,7 @@ import Home from "./pages/Home"
 import Transaction from "./pages/tranHistory";
 import Employees from "./pages/Employees";
 import Items from "./pages/Items";
+import Serverorder from "./pages/Serverorder";
 import Reports from "./pages/Reports";
 import Inventory from "./pages/Inventory";
 import ManagerGUI from "./pages/ManagerGUI"
@@ -119,6 +120,9 @@ function App() {
         getEmployees();
       });
   }
+
+
+
   function deleteEmployee() {
     let id = prompt('Enter employeeid');
     // console.log(id);
@@ -209,6 +213,12 @@ function App() {
       </>
       break
 
+      case "/ServerGUI/Serverorder":
+        component = <>
+        <NavBarServer/>
+        <Serverorder/>
+        </>
+        break
       case "/ServerGUI/Reports":
         component = <>
         <NavBarServer/>

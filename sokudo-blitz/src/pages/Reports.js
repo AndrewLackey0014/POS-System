@@ -17,12 +17,16 @@ var data = ["hello", "howdy"]
 export default function Reports(props) {
 
     const [reports_data, setReports] = useState(false); //  Report Selection
+    const [reports_data_secondary, setReportsSecondary] = useState(false);
     const [rep_type, setRepType] = useState({});    //  Report Selection 
 
     const [startDate, setStartDate] = useState(''); //  Sales Report
     const [endDate, setEndDate] = useState(''); //  Sales Report
     
     const [excessDate, setExcessDate] = useState('');   //  Excess Report
+
+    const [startDateCombo, setStartDateCombo] = useState('');    //  Combo Report
+    const [endDateCombo, setEndDateCombo] = useState('')    //  Combo Report
 
     
 
@@ -41,10 +45,23 @@ export default function Reports(props) {
         console.log(excess)
     }
 
+    const handleStartChangeCombo = event => {    //  On click, Gets Combo Report Start Time
+        setStartDateCombo(event.target.value);    start = inputRef4.current.value;
+        console.log(start)
+    }
+    
+    const handleEndChangeCombo = event => {  //  On click, gets Combo Report End time
+        setEndDateCombo(event.target.value);        end = inputRef5.current.value;
+        console.log(end)
+    }
+
     const inputRef1 = useRef(null); //  Sales Report
     const inputRef2 = useRef(null); //  Sales Report
 
     const inputRef3 = useRef(null); //  Excess Report
+
+    const inputRef4 = useRef(null); //  Combo Report
+    const inputRef5 = useRef(null); //  Combo Report
 
 
     const handleType = (type) => {  //  Determines which Report is being requested & calls for that data
@@ -91,7 +108,7 @@ export default function Reports(props) {
         }else if (type === "excess"){   //  If Requesting Excess Report
             console.log("Fetching Excess Report Data...")
 
-            var temp_hist_data = ["Secondary"]  //  Used to get All Transaction History
+            // var temp_hist_data = ["Secondary"]  //  Used to get All Transaction History
             var hist_data = []    //  Used to get filtered Transaction History
 
             fetch('http://localhost:3001/inventory')    //  Fetch Inventory Data for Current Inventory
@@ -99,9 +116,9 @@ export default function Reports(props) {
                     return response.text(); 
                     })
                 .then(data => {
-                    setReports(data);
+                    setReportsSecondary(data);
                     });
-            obj_inv = JSON.parse(reports_data);
+            obj_inv = JSON.parse(reports_data_secondary);
 
             fetch("http://localhost:3001/tranHist") //  Fetch Transaction Data for Items Sold
                     .then(response => {
@@ -113,7 +130,7 @@ export default function Reports(props) {
             obj_hist = JSON.parse(reports_data);
 
             //  Filter Data based on input date
-            temp_hist_data = obj_hist.map((val, key) => {
+            var temp_hist_data = obj_hist.map((val, key) => {
                 var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
                 if (itemTime >= excessDate){
                     hist_data.push(val.order_contents)
@@ -121,51 +138,208 @@ export default function Reports(props) {
                 
             })
 
-            for(var i = 0; i < hist_data.length(); i++){
-                //  Dictionary to go through each order's contents and tally the values of each item type
+            var order_dict = {};
+            for(var i = 0; i < hist_data.length; i++){
+                //  order_dictionary to go through each order's contents and tally the values of each item type
                 //  Collect # of each item sold, Do the math with data from the item's current value (from obj_inv-> val.curr_inv) to determine if its excess
+                var splitString = hist_data[i].split(/[ ]+/);
+                for(var j = 0; j < splitString.length; j++){
+                    if (!order_dict[splitString[j]]){
+                        order_dict[splitString[j]] = 1;
+                    }else{
+                        order_dict[splitString[j]] += 1;
+                    }
+                }
+                
             }
-            console.log(hist_data)
+            delete order_dict["&"];   delete order_dict[""];    delete order_dict["and"];     //  Remove Non-Inventory Words
+            console.log(order_dict)
 
-            // data = obj_inv.map((val,key) => {
-            //     console.log(val.curr_inv)
-            // });
-            // console.log("Inventory: " + inventory_data);
+            var sold_dict = {
+                "Big Tortilla": 0,
+                "Plates": 0,
+                "Foil": 0,
+                "Bowls w/ Lids": 0,
+                "Plastic ware": 0,
+                "Small Tortilla": 0,
+                "Beef": 0,
+                "Steak": 0,
+                "Spice Chicken": 0,
+                "Vegetables": 0,
+                "Chips": 0,
+                "Salsa": 0,
+                "Guacamole": 0,
+                "Queso": 0,
+                "Soda Syrup": 0,
+                "Cups": 0,
+                "Straws": 0,
+                "Lids": 0,
+                "Rice": 0,
+                "Cheese": 0,
+                "Sour Cream": 0,
+                "Beans": 0
+            };
+            for(var key in order_dict){
+                if (key === "BurritoSteak" || key === "BurritoBeef" || key === "BurritoChicken" || key === "BurritoMedley" || key === "Burrito"){
+                    sold_dict["Big Tortilla"] += order_dict[key] * 1.0;
+                    sold_dict["Plates"] += order_dict[key] * 1.0;
+                    sold_dict["Foil"] += order_dict[key] * 0.1;
+                }else if (key === ("BowlSteak")||(key === ("BowlBeef"))||(key === ("BowlChicken"))||(key === ("BowlMedley"))||(key === ("Bowl"))){
+                    sold_dict["Bowls w/ Lids"] += order_dict[key] * 1.0;
+                    sold_dict["Plastic ware"] += order_dict[key] * 1.0;
+                }else if (key === ("TacoSteak")||(key === ("TacoBeef"))||(key === ("TacoChicken"))||(key === ("TacoMedley"))||(key === ("Taco"))){
+                    sold_dict["Small Tortilla"] += order_dict[key] * 2.0;
+                    sold_dict["Plates"] += order_dict[key] * 2.0;
+                    sold_dict["Foil"] += order_dict[key] * 0.09;
+                }else if (key === ("SaladSteak")||(key === ("SaladBeef"))||(key === ("SaladChicken"))||(key === ("SaladMedley"))||(key === ("Salad"))){
+                    sold_dict["Bowls w/ Lids"] += order_dict[key] * 1.0;
+                    sold_dict["Plastic ware"] += order_dict[key] * 1.0;
+                }
+
+                if (key === ("BurritoBeef")||(key === ("TacoBeef"))||(key === ("SaladBeef"))||(key === ("BowlBeef"))){
+                    sold_dict["Beef"] += order_dict[key] * 0.25;
+                }else if (key === ("BurritoSteak")||(key === ("TacoSteak"))||key === ("SaladSteak")||key === ("BowlSteak")){
+                    sold_dict["Steak"] += order_dict[key] * 0.25;
+                }else if (key === ("BurritoChicken")||(key === ("TacoChicken"))||key === ("SaladChicken")||key === ("BowlChicken")){
+                    sold_dict["Spice Chicken"] += order_dict[key] * 0.25;
+                }else if (key === ("BurritoMedley")||(key === ("TacoMedley"))||key === ("SaladMedley")||key === ("BowlMedley")){
+                    sold_dict["Vegetables"] += order_dict[key] * 0.25;
+                }else if (key === ("Chips")){
+                    sold_dict["Chips"] += order_dict[key] * 0.15;
+                }else if (key === ("and")){
+                    //  NOTHING
+                }else if (key === ("Salsa")){
+                    sold_dict["Salsa"] += order_dict[key] * 0.15;
+                }else if (key === ("Guac")){
+                    sold_dict["Guacamole"] += order_dict[key] * 0.15;
+                }else if (key === ("Queso")){
+                    sold_dict["Queso"] += order_dict[key] * 0.15;
+                }else if (key === ("Drink")){
+                    sold_dict["Soda Syrup"] += order_dict[key] * 0.015;
+                    sold_dict["Cups"] += order_dict[key] * 1.0;
+                    sold_dict["Straws"] += order_dict[key] * 1.0;
+                    sold_dict["Lids"] += order_dict[key] * 1.0;
+                }else if (key === ("Rice")){
+                    sold_dict["Rice"] += order_dict[key] * 0.15;
+                }else if (key === ("Cheese")){
+                    sold_dict["Cheese"] += order_dict[key] * 0.15;
+                }else if (key === ("SourCream")){
+                    sold_dict["Sour Cream"] += order_dict[key] * 0.15;
+                }else if (key === ("Beans")){
+                    sold_dict["Beans"] += order_dict[key] * 0.15;
+                }
+            }
+            console.log(sold_dict)
             
-            return (
-                <div>EXCESS DATA BB</div>
-            )
-
-            // itemData = obj.map((val, key) => {
-            // var curInv = parseInt(val.curr_inv);
-            // if(curInv > 0){
-            //     console.log(end)
-            //     // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )
-            //     // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
             // return (
-            //     <div>
-            //         <table>
-            //             <tr>
-            //                 <th>Order Number</th>
-            //                 <th>Order ID</th>
-            //                 <th>Order Time</th>
-            //                 <th>Order Cost</th>
-            //                 <th>Order Contents</th>
-            //             </tr>
-            //         </table>
-            //         <tr key={key}>
-            //             <td>{val.order_number}</td>
-            //             <td>{val.order_id}</td>
-            //             <td>{val.order_time}</td>
-            //             <td>{val.order_cost}</td>
-            //             <td>{val.order_contents}</td>
-            //         </tr>
-            //     </div>
-            // )}else{
-            //     console.log("NO VALID DATA ")
-            //     // alert("Correct Date Format: YYYYMMDD")
-            //     return false;
-            // }})
+            //     <div>EXCESS DATA BB</div>
+            // )
+            // console.log(obj_inv[0])
+            data = obj_inv.map((val, key) => {
+                // console.log("FIRST: " + (parseInt(val.curr_inv) + parseInt(sold_dict[val.item.trim()]) * 0.1) + "\tSECOND: " + parseInt(sold_dict[val.item.trim()]))
+            // console.log("CURR: " + parseInt(val.curr_inv) + "\tSOLD: " + parseInt(sold_dict[val.item.trim()]))
+            // console.log("VAL: " + val.curr_inv + "\tNAME: " + val.item.trim() + "\tSOLD: " + sold_dict[val.item.trim()])
+            if(((parseInt(val.curr_inv) + parseInt(sold_dict[val.item.trim()]) * 0.1 ) >= parseInt(sold_dict[val.item.trim()]))){
+            return (
+                // <div>SOLD LESS THAN 10%</div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Item Name</th>
+                            <th>Max Inv</th>
+                            <th>Amt Sold</th>
+                        </tr>
+                        <tr key={key}>
+                            <td>{val.item_id}</td>
+                            <td>{val.item.trim()}</td>
+                            <td>{val.max_inv}</td>
+                            <td>{sold_dict[val.item.trim()]}</td>
+                        </tr>
+                    </table>
+                </div>
+            )}else{
+                
+                console.log("NO VALID DATA ")
+                // alert("Correct Date Format: YYYYMMDD")
+                return false;
+            }})
+        }else if (type === "restock"){  //  If Requesting Restock Report
+            console.log("ENTERING RESTOCK...")
+            fetch('http://localhost:3001/inventory')
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReports(data);
+                    });
+            obj = JSON.parse(reports_data);
+
+            data = obj.map((val,key) => {
+                // console.log("Current: " + val.curr_inv + "\tMin: " + val.min_inv)
+                if ((val.curr_inv) < (val.min_inv)){
+                    return (
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Current Inv</th>
+                                    <th>Max Inv</th>
+                                    <th>Min Inv</th>
+                                </tr>
+                            
+                            <tr key={key}>
+                                <td>{val.item}</td>
+                                <td>{val.curr_inv}</td>
+                                <td>{val.max_inv}</td>
+                                <td>{val.min_inv}</td>
+                            </tr></table>
+                        </div>
+                )}else{
+                    console.log("NO VALID DATA ")
+                    return false;
+                }
+            })
+        }else if (type === "combo"){    //  If Requesting Combo Report
+            console.log("ENTERING COMBO...")
+            fetch('http://localhost:3001/tranHist')
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReports(data);
+                    });
+            obj = JSON.parse(reports_data);
+
+            data = obj.map((val, key) => {
+                var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
+                if((itemTime > startDateCombo) && (itemTime < endDateCombo)){
+                    console.log(end)
+                    // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+    
+                return (
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>Order ID</th>
+                                <th>Order Time</th>
+                                <th>Order Cost</th>
+                                <th>Order Contents</th>
+                            </tr>
+                        
+                        <tr key={key}>
+                            <td>{val.order_number}</td>
+                            <td>{val.order_id}</td>
+                            <td>{val.order_time}</td>
+                            <td>{val.order_cost}</td>
+                            <td>{val.order_contents}</td>
+                        </tr></table>
+                    </div>
+                )}else{
+                    console.log("NO VALID DATA ")
+                    return false;
+                }})
         }
         
     }
@@ -200,21 +374,27 @@ export default function Reports(props) {
     component = <> 
         <div class="column left">
             <div class="row">
+            {/* Sales Report */}
                 <input ref={inputRef1} id="startDate" type="text" value={startDate} onChange={handleStartChange} placeholder="YYYYMMDD"></input>
                 <input ref={inputRef2} id="endDate" type="text" value={endDate} onChange={handleEndChange} placeholder="YYYYMMDD"></input>
                 <button id={numBtns[0]} onClick={changeRep(1, "sales")} value={false}>Sales Report</button><br/>
             </div>
 
             <div class="row">
+            {/* Excess Report */}
                 <input ref={inputRef3} id="excessDate" type="text" value={excessDate} onChange={handleExcessDate} placeholder="YYYYMMDD"></input>
                 <button id={numBtns[1]} onClick={changeRep(2, "excess")} value={false}>Excess Report</button><br/>
             </div>
 
-            <div class="row">
+            <div class="row"> 
+            {/* Restock Report */}
                 <button id={numBtns[2]} onClick={changeRep(3, "restock")} value={false}>Restock Report</button><br/>
             </div>
 
             <div class="row">
+            {/* Combo Report */}
+                <input ref={inputRef4} id="startDateCombo" type="text" value={startDateCombo} onChange={handleStartChangeCombo} placeholder="YYYYMMDD"></input>
+                <input ref={inputRef5} id="endDateCombo" type="text" value={endDateCombo} onChange={handleEndChangeCombo} placeholder="YYYYMMDD"></input>
                 <button id={numBtns[3]} onClick={changeRep(4, "combo")} value={false}>Combo Report</button>
             </div>
         </div>

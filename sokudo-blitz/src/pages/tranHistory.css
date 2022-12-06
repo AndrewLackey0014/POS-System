@@ -1,0 +1,35 @@
+.search{
+    font-family: 'Courier New', monospace;
+    outline: 0;
+    background: grey;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.search button{
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    outline: 0;
+    background: black;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.data{
+    font-family: 'Courier New', monospace;
+    background: grey;
+    width: 100%;
+    /* padding: 15px; */
+    box-sizing: border-box;
+    font-size: 20px;
+}

@@ -1,5 +1,6 @@
 
-import React, { Component, useState, useEffect, useRef } from 'react';
+import "./tranHistory.css"
+import React, { Component, useState, useEffect, useRef} from 'react';
 
 
 const temp_data = []
@@ -118,15 +119,16 @@ export default function TranHistory() {
                     End Date: <input ref={inputRef2} onChange={handleTHEndDate} type="text" value={thEndDate}></input>
                     <button onClick={getTranHist  }>Load Selected Data</button>
                 </div> 
+
             </div>
-            <div class="column">
+            <div class="data">
                 <table>
                     <tr>
                     <th>Order Number</th>
-                        <th>Order ID</th>
-                        <th>Order Time</th>
-                        <th>Order Cost</th>
-                        <th>Order Contents</th>
+                    <th>Order ID</th>
+                    <th>Order Time</th>
+                    <th>Order Cost</th>
+                    <th>Order Contents</th>
 
                     </tr>
                      

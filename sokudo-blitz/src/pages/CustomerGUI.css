@@ -10,6 +10,13 @@
     grid-auto-rows: 200px;
 } */
 
+h5{
+    text-align: center;
+    font-size:15px;
+
+}
+
+
 .item{
     display:block;
     position: relative;
@@ -20,14 +27,15 @@
 
 .content{
     text-align: left;
-    border: 2px solid;
-    width: 40%;
-    height: 66%;
+    border: 3px solid;
+    width: 42%;
+    height: 55%;
     position: absolute;
     right: 0px;
-    top: 155px;
+    top: 185px;
     overflow-y: auto;
     overflow-x: scroll;
+    background-color:rgb(202, 202, 84); 
 }
 
 .mainItems{
@@ -73,7 +81,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     font-size: 12px;
-    height: 200px;
+    height: 400px;
     overflow-y: scroll;
   }
 
@@ -103,10 +111,10 @@
     padding: 5 16px;
     border-radius: 4px;
     color: #fff;
-    background: brown;
+    background: rgb(181, 47, 47);
     line-height: 1.15;
-    font-size: 20px;
-    height: 36px;
+    font-size: 30px;
+    height: 50px;
     word-spacing: 0px;
     letter-spacing: .0892857143em;
     text-decoration: none;

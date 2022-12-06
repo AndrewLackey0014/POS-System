@@ -8,6 +8,8 @@ import NavBarServer from "./NavBarServer";
 //import Items from "./Items";
 import Reports from "./Reports";
 import Login from "./LoginServer";
+import Serverorder from "./Serverorder";
+
 //import Inventory from "./Inventory";
 //import "./navMstyle.css"
  function ServerGUI() {
@@ -19,6 +21,10 @@ import Login from "./LoginServer";
       case "/Reports":
         component = <Reports/>
         break
+      
+      case "/Serverorder":
+          component = <Serverorder/>
+          break
 
         default: 
           component = <Login/>
