@@ -45,7 +45,7 @@ import React, { useState, useRef } from "react"
       // console.log("Val Name: " + val.name + "\tMSG: " + msg + "\tEVAl: " + ((test + "                                            " === val.name)))
       if ((val.name === (msg+"                                            ")) && (((String(val.employeeid)) + (String(val.managerid))) === pwd) ){
         console.log("Successfully Logged In: " + msg + "\tPWD: " + pwd)
-        window.location.pathname="/ServerGUI/Items";
+        window.location.pathname="/ServerGUI/Serverorder";
         return true;
       }else{
         console.log("Failed to Login")
