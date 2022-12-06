@@ -39,6 +39,40 @@ var Display_Order = [];
             setItems(data);
           });
     }
+
+    function updateInventory(curr_inv, item_id) {
+      fetch('http://localhost:3001/inventory_update', {
+        method: 'POST',
+        headers: {  
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({curr_inv, item_id}),
+      })
+        .then(response => {
+          return response.text();
+        })
+        .then(data => {
+          alert(data);
+        });
+    }
+
+
+    function getCurrInv(item_id) {
+      console.log(item_id);
+      fetch('http://localhost:3001/curr_inv',{
+        method: 'GET',
+        headers: {  
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({item_id}),
+      })
+        .then(response => {
+          return response.text();
+        })
+        .then(data => {
+          alert(data);
+        });
+    }
     
     const [toggle, setToggle] = useState(true)
 
@@ -194,47 +228,27 @@ var Display_Order = [];
 
     const FinishOrder = (e)=>{
       for(var i = 0; i < order_summary.length; i++){
-        if(order_summary[i] == ", Chips&Guac"){
-
+        if(order_summary[i] == ", Chips&Guac" || order_summary[i] == "Chips&Guac"){
+          let inventory = getCurrInv(17);
+          console.log(inventory);
+          updateInventory(inventory-.5, 17);
         }
-        if(order_summary[i] == "Chips&Guac"){
+        if(order_summary[i] == ", Chips&Queso" || order_summary[i] == "Chips&Queso"){
           
         }
-        if(order_summary[i] == ", Chips&Queso"){
+        if(order_summary[i] == ", Chips&Salsa" || order_summary[i] == "Chips&Salsa"){
           
         }
-        if(order_summary[i] == "Chips&Queso"){
+        if(order_summary[i] == ", Burrito" || order_summary[i] == "Burrito"){
           
         }
-        if(order_summary[i] == ", Chips&Salsa"){
+        if(order_summary[i] == ", Bowl" || order_summary[i] == "Bowl"){
           
         }
-        if(order_summary[i] == "Chips&Salsa"){
-          // functionality for chips and salsa for inventory?
-          // EDIT INV
-        }
-        if(order_summary[i] == ", Burrito"){
+        if(order_summary[i] == ", Salad" || order_summary[i] == "Salad"){
           
         }
-        if(order_summary[i] == "Burrito"){
-          
-        }
-        if(order_summary[i] == ", Bowl"){
-          
-        }
-        if(order_summary[i] == "Bowl"){
-          
-        }
-        if(order_summary[i] == ", Salad"){
-          
-        }
-        if(order_summary[i] == "Salad"){
-          
-        }
-        if(order_summary[i] == ", Taco"){
-          
-        }
-        if(order_summary[i] == "Taco"){
+        if(order_summary[i] == ", Taco" || order_summary[i] == "Taco"){
           
         }
         if(order_summary[i] == "Beef"){

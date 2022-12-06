@@ -120,6 +120,27 @@ app.post('/employee_update', (req, res) => {
   })
 })
 
+app.post('/inventory_update', (req, res) => {
+  db.updateInventory(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+app.get('/curr_inv', (req, res) => {
+  console.log('inside the router');
+  db.getCurrInv(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
 app.get('/getEnvironmentVars', (_, res) => {
   res.json({ ENVIRONMENT: url })
 })

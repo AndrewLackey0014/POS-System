@@ -1,5 +1,5 @@
 //import React, { Component }  from 'react';
-
+import "./Employees.css"
 import React, { Component, useState, useEffect} from 'react';
 
 
@@ -67,7 +67,7 @@ export default function Employees() {
         
         default: 
           component = <>
-            <div class="column">
+            <div class="edata">
                 <table>
                     <tr>
                         <th>Employee ID</th>
