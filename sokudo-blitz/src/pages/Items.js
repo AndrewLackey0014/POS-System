@@ -9,10 +9,6 @@ function getCurrentURL () {
     return window.location.href
   }
 
-function getCurrentURL () {
-    return window.location.href
-}
-
 
 export default function Items() {
     const [price, setPrice] = useState('');

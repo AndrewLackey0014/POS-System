@@ -9,19 +9,6 @@ function getCurrentURL () {
     return window.location.href
   }
 
-const url = getCurrentURL()
-  var backend_url = "";
-  // console.log(url);
-  if (url.substring(0,21) == 'http://localhost:3000') {
-    backend_url = 'http://localhost:3001/';
-  }
-  else {
-    backend_url = 'https://sokudoblitzbackend.onrender.com/';
-  }
-
-function getCurrentURL () {
-    return window.location.href
-}
 
 
 

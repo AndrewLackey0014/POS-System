@@ -14,10 +14,6 @@ function getCurrentURL () {
 }
 
 
-function getCurrentURL () {
-    return window.location.href
-  }
-
 const url = getCurrentURL()
   var backend_url = "";
   // console.log(url);
