@@ -87,8 +87,33 @@ app.get('/get_employees', (req, res) => {
   })
 })
 
+
+
 app.post('/employees', (req, res) => {
   db.createEmployee(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+
+app.post('/create_item', (req, res) => {
+  db.createItem(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+
+app.post('/item_update', (req, res) => {
+  console.log(req.body);
+  db.updateItem(req.body)
   .then(response => {
     res.status(200).send(response);
   })
@@ -120,7 +145,10 @@ app.post('/employee_update', (req, res) => {
   })
 })
 
+
+
 app.post('/inventory_update', (req, res) => {
+  console.log(req.body)
   db.updateInventory(req.body)
   .then(response => {
     res.status(200).send(response);
@@ -131,8 +159,17 @@ app.post('/inventory_update', (req, res) => {
 })
 
 app.get('/curr_inv', (req, res) => {
-  console.log('inside the router');
   db.getCurrInv(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+app.get('/item_price', (req, res) => {
+  db.getItemPrice(req.body)
   .then(response => {
     res.status(200).send(response);
   })

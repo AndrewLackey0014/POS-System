@@ -11,7 +11,7 @@ body {
 }
 
 .navbar {
-  background-color: grey;
+  background-color: teal;
   color: white;
   display: flex;
   align-items:center;
@@ -20,7 +20,8 @@ body {
 }
 
 .nav_title {
-    text-decoration: none;
+    text-decoration: underline;
+    /* font-style: bold; */
     font-size: 30px;
     color: white;    /* Made redundant by .nav a font-size, unless going to be used different*/
 }

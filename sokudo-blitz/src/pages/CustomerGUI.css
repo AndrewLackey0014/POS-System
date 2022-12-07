@@ -10,6 +10,13 @@
     grid-auto-rows: 200px;
 } */
 
+h5{
+    text-align: center;
+    font-size:15px;
+
+}
+
+
 .item{
     display:block;
     position: relative;
@@ -21,13 +28,14 @@
 .content{
     text-align: left;
     border: 2px solid;
-    width: 40%;
-    height: 66%;
+    width: 550px;
+    height: 500px;
     position: absolute;
-    right: 0px;
-    top: 155px;
+    right: 25px;
+    top: 210px;
     overflow-y: auto;
     overflow-x: scroll;
+    font-size: 25px;
 }
 
 .mainItems{
@@ -73,15 +81,18 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     font-size: 12px;
-    height: 200px;
+    height: 400px;
     overflow-y: scroll;
   }
 
   .dropdown-content a {
-    color: black;
-    padding: 12px 12px;
-    text-decoration: none;
-    display: block;
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
   }
 
 .dropdown-content a:hover {background-color: #ddd;}
@@ -92,8 +103,16 @@
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 .orderButton{
+    padding: 10px;
+    position: relative;
+    background-color: teal;
+    margin: 10px;
+    align-content: center;
+    display:flex;
+    gap: 0.900%
+}
 
-    display: block;
+.orderButton button{
     font-family: 'Courier New', monospace;
     margin: auto;
     outline: none;
@@ -103,50 +122,20 @@
     padding: 5 16px;
     border-radius: 4px;
     color: #fff;
-    background: brown;
+    background: rgb(181, 47, 47);
     line-height: 1.15;
-    font-size: 20px;
-    height: 36px;
+    font-size: 30px;
+    height: 50px;
     word-spacing: 0px;
     letter-spacing: .0892857143em;
     text-decoration: none;
     text-transform: uppercase;
-    min-width: 64px;
-    border: none;
-    text-align: center;
-    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
-    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* margin: 0 auto;
-    background-color: white;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-    display: block;
-    clear: both;
-    counter-increment: orderButton;
-    border-radius: 12px;
-    position: relative;
-    display: grid;
-    grid-gap: 10px;
-    border: 1px solid transparent;
+    background: black;
+    color: #FFFFFF;
+    font-size: 15px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
     cursor: pointer;
-
-    font-size: 30px;
-    letter-spacing: 2px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #8B4513;
-    cursor: pointer;
-    border: 3px solid;
-    padding: 0.25em 0.5em;
-    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-    position: relative;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-
-    padding-top: 10px;
-    padding-left: 50px;
-    padding-right: 50px; */
+    width: 500px;
 }
 

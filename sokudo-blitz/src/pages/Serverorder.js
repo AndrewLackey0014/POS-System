@@ -1,55 +1,25 @@
-
-import NavBarCustomer from "./NavBarCustomer";
-import "./CustomerGUI.css";
- import { Button } from 'react'
-
 import React, { Component, useState, useEffect} from 'react';
 import {ToggleButtonGroup} from 'react';
 import Items from "./Items";
+import "./ServerGUI.css";
+const temp_data = [];
 
-import Login from "./LoginCustomer";
-
-//import Transaction from "./tranHistory";
-//import Employees from "./Employees";
-//import Items from "./Items";
-//import Reports from "./Reports";
-//import Inventory from "./Inventory";
-//import "./navMstyle.css"
-import Toppings_Page from "./Toppings_Page"
-
-function getCurrentURL () {
-  return window.location.href
-}
-
-const url = getCurrentURL()
-var backend_url = "";
-// console.log(url);
-if (url.substring(0,21) == 'http://localhost:3000') {
-  backend_url = 'http://localhost:3001/';
-}
-else {
-  backend_url = 'https://sokudoblitzbackend.onrender.com/';
-}
 
 
 var order_summary = [];
 var temp_array = [];
 var obj;
-var obj2;
 var Display_Order = [];
 
- function CustomerGUI() {
+export default function Serverorder() {
+
     let component
     const [items_data, setItems] = useState(false);
-    const [inv_data, setInv] = useState(false);
-    const [price_data, setPrice] = useState(false);
     useEffect(() => {
         getItems();
-        getInventory();
-        getPrice();
     }, []);
     function getItems() {
-        fetch(backend_url + 'items')
+        fetch('http://localhost:3001/items')
           .then(response => {
             return response.text();
           })
@@ -58,50 +28,13 @@ var Display_Order = [];
           });
     }
 
-    function getInventory() {
-      fetch('http://localhost:3001/inventory')
-        .then(response => {
-          return response.text();
-        })
-        .then(data => {
-          setInv(data);
-        });
-    }
-
-    obj = JSON.parse(inv_data);
-    var temp_obj = {};
-    for (const [key, value] of Object.entries(obj)) {
-      temp_obj[value['item_id']] = value;
-    };
-    obj = temp_obj;
-    console.log(obj);
-
-    function getPrice() {
-      fetch('http://localhost:3001/items')
-        .then(response => {
-          return response.text();
-        })
-        .then(data => {
-          setPrice(data);
-        });
-    }
-
-    obj2 = JSON.parse(price_data);
-    var temp_obj2 = {};
-    for (const [key, value] of Object.entries(obj2)) {
-      temp_obj2[value['item_id']] = value;
-    };
-    obj2 = temp_obj2;
-    console.log(obj2);
-
-
-    function updateInventory(order_amount, item_id) {
+    function updateInventory(curr_inv, item_id) {
       fetch('http://localhost:3001/inventory_update', {
         method: 'POST',
         headers: {  
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({order_amount, item_id}),
+        body: JSON.stringify({curr_inv, item_id}),
       })
         .then(response => {
           return response.text();
@@ -112,49 +45,32 @@ var Display_Order = [];
     }
 
 
-    // function getCurrInv(item_id) {
-    //   console.log(item_id);
-    //   fetch('http://localhost:3001/curr_inv',{
-    //     method: 'GET',
-    //     headers: {  
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({item_id}),
-    //   })
-    //     .then(response => {
-    //       return response.text();
-    //     })
-    //     .then(data => {
-    //       alert(data);
-    //     });
-    // }
-
-    // function getItemPrice(?) {
-    //   console.log(?);
-    //   fetch('http://localhost:3001/item_price',{
-    //     method: 'GET',
-    //     headers: {  
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({item_id}),
-    //   })
-    //     .then(response => {
-    //       return response.text();
-    //     })
-    //     .then(data => {
-    //       alert(data);
-    //     });
-    // }
+    function getCurrInv(item_id) {
+      console.log(item_id);
+      fetch('http://localhost:3001/curr_inv',{
+        method: 'GET',
+        headers: {  
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({item_id}),
+      })
+        .then(response => {
+          return response.text();
+        })
+        .then(data => {
+          alert(data);
+        });
+    }
     
     const [toggle, setToggle] = useState(true)
 
-    // obj = JSON.parse(items_data);
+    console.log(obj);
+
+    obj = JSON.parse(items_data);
 
     switch (window.location.pathname) {
 
-        case"/Toppings_Page":
-            component= <Toppings_Page/>
-            break;
+      
         default: 
           component = <Items/>
           //return <Login/>;
@@ -305,78 +221,60 @@ var Display_Order = [];
 
       for(var i = 0; i < order_summary.length; i++){
         if(order_summary[i] == ", Chips&Guac" || order_summary[i] == "Chips&Guac"){
-          updateInventory(obj[17]['curr_inv']-.5, 17);
-          updateInventory(obj[14]['curr_inv']-.25,14);
+          let inventory = getCurrInv(17);
+          console.log(inventory);
+          updateInventory(inventory-.5, 17);
         }
         if(order_summary[i] == ", Chips&Queso" || order_summary[i] == "Chips&Queso"){
           
-          updateInventory(obj[17]['curr_inv']-.5,17);
-          updateInventory(obj[18]['curr_inv']-.25,18);
         }
         if(order_summary[i] == ", Chips&Salsa" || order_summary[i] == "Chips&Salsa"){
           
-          updateInventory(obj[17]['curr_inv']-.5,17);
-          updateInventory(obj[16]['curr_inv']-.25,16);
         }
         if(order_summary[i] == ", Burrito" || order_summary[i] == "Burrito"){
           
-          updateInventory(obj[7]['curr_inv']-1,7);
-          updateInventory(obj[9]['curr_inv']-1,9);
-          updateInventory(obj[6]['curr_inv']-.15,6);
         }
         if(order_summary[i] == ", Bowl" || order_summary[i] == "Bowl"){
           
-          updateInventory(obj[8]['curr_inv']-1,8);
-          updateInventory(obj[20]['curr_inv']-1,20);
         }
         if(order_summary[i] == ", Salad" || order_summary[i] == "Salad"){
           
-          updateInventory(obj[8]['curr_inv']-1,8);
-          updateInventory(obj[11]['curr_inv']-1,11);
         }
         if(order_summary[i] == ", Taco" || order_summary[i] == "Taco"){
           
-          updateInventory(obj[10]['curr_inv']-2,10);
-          updateInventory(obj[6]['curr_inv']-.15,6);
         }
         if(order_summary[i] == "Beef"){
-          updateInventory(obj[24]['curr_inv']-.25,24);
+          
         }
         if(order_summary[i] == "Steak"){
-          updateInventory(obj[3]['curr_inv']-.25,3);
+          
         }
         if(order_summary[i] == "Medley"){
-          updateInventory(obj[5]['curr_inv']-.25,5);
+          
         }
         if(order_summary[i] == "Chicken"){
-          updateInventory(obj[4]['curr_inv']-.25,4);
+          
         }
         if(order_summary[i] == "Cheese"){
-          updateInventory(obj[12]['curr_inv']-.25,12);
+          
         }
         if(order_summary[i] == "Beans"){
-          updateInventory(obj[15]['curr_inv']-.25,15);
+          
         }
         if(order_summary[i] == "Rice"){
-          updateInventory(obj[2]['curr_inv']-.25,2);
+          
         }
         if(order_summary[i] == "Salsa"){
-          updateInventory(obj[16]['curr_inv']-.25,16);
+          
         }
         if(order_summary[i] == "SourCream"){
-          updateInventory(obj[13]['curr_inv']-.25,13);
+          
         }
         if(order_summary[i] == "Guac"){
-          updateInventory(obj[14]['curr_inv']-.25,14);
+          
         }
         if(order_summary[i] == "Queso"){
-          updateInventory(obj[18]['curr_inv']-.25,18);
-        }
-        if(order_summary[i] == ", Drink" || order_summary[i] == "Drink"){
-          updateInventory(obj[22]['curr_inv']-1,22);
-          updateInventory(obj[23]['curr_inv']-1,23);
-          updateInventory(obj[21]['curr_inv']-1,21);
-          updateInventory(obj[1]['curr_inv']-.15,1);
+          
         }
         
 
@@ -446,7 +344,7 @@ var Display_Order = [];
       order_summary=[];
       Display_Order=[];
 
-      stringorder= "Order Placed. Thank you for your time!";
+      stringorder= "Order Placed.";
       stringprice = "";  //resetting stringprice
       stringdislayorder= "";
       
@@ -469,20 +367,20 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefTaco").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push(11);
+            Display_Order.push("Taco Seasoned Beef");
 
         }else if (  document.getElementById("MedleyTaco").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push(12);
+          Display_Order.push("Taco Grilled Vegetable Medley");
       }else if (  document.getElementById("SteakTaco").style.color== "red"){
         order_summary.push("Steak");
-        Display_Order.push(10);
+        Display_Order.push("Taco Marinated Steak");
     }else if (  document.getElementById("ChickenTaco").style.color== "red"){
       order_summary.push("Chicken");
-      Display_Order.push(9);
+      Display_Order.push("Taco Chili Rubbed Chicken");
 
   }else{
-    Display_Order.push("Taco ");
+    Display_Order.push("Taco");
   }
   order_summary.push("Taco");
   if (document.getElementById("CheeseTaco").style.color== "red")order_summary.push("Cheese");
@@ -500,17 +398,17 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefBurrito").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push(3);
+            Display_Order.push("Burrito Seasoned Beef");
 
         }else if (  document.getElementById("MedleyBurrito").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push(4);
+          Display_Order.push("Burrito Grilled Vegetable Medley");
       }else if (  document.getElementById("SteakBurrito").style.color== "red"){
         order_summary.push("Steak");
-        Display_Order.push(2);
+        Display_Order.push("Burrito Marinated Steak");
     }else if (  document.getElementById("ChickenBurrito").style.color== "red"){
       order_summary.push("Chicken");
-      Display_Order.push(1);
+      Display_Order.push("Burrito Chili Rubbed Chicken");
   }else{
     Display_Order.push("Burrito");
   }
@@ -531,11 +429,11 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefBowl").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push(7);
+            Display_Order.push("Bowl Seasoned Beef");
 
         }else if (  document.getElementById("MedleyBowl").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push(8);
+          Display_Order.push("Bowl Grilled Vegetable Medley");
       }else if (  document.getElementById("SteakBowl").style.color== "red"){
         order_summary.push("Steak");
         Display_Order.push("Bowl Marinated Steak");
@@ -623,11 +521,9 @@ var Display_Order = [];
 
         
         stringprice=0;
-        console.log(Display_Order)
       for(var i = 0; i < Display_Order.length; i++){
   //calculate for string price?
-        console.log(obj2[Display_Order[i]]);
-        stringprice += parseFloat(obj2[Display_Order[i]]['price']); //actually an integer
+        stringprice += 5.01; //actually an integer
         
         //TODO query from database with Display_Order[i], these are from the items table in database/
         // also, Display_Order[i] has the exact name given from database, making querying easier
@@ -1301,11 +1197,10 @@ var Display_Order = [];
           <div className = "rowCust">
             <div className = "columnCust">
               <div class="dropdown">
-              <button id= "Tacoo" onClick = {handleTaco}>
-                  <img alt = "tacos" title = "tacos" className = "mainItems" src="https://www.isabeleats.com/wp-content/uploads/2022/09/chicken-tacos-small-5.jpg" />
-                  <p>Tacos</p>
+              <button class= "entree" id= "Tacoo" onClick = {handleTaco}>
+                  <h55>Tacos</h55>
               </button>
-                <div class="dropdown-content">
+               
 
                   <button id="BeefTaco" onClick={handleBeefTaco}><h5>Beef</h5></button>
 
@@ -1319,20 +1214,18 @@ var Display_Order = [];
                   <button id= "SourCreamTaco" onClick={handleCreamTaco}><h5>Sour Cream</h5></button>
                   <button id= "GuacTaco" onClick={handleGuacTaco}><h5>Guacamole</h5></button>
                   <button id= "QuesoTaco" onClick={handleQuesoTaco}><h5>Queso</h5></button>
-                </div>
+                
               </div>
-              <button id= "Drink" onClick = {handleDrink}>
-                  <img alt = "drink" title = "drink" className = "mainItems" src="https://media.istockphoto.com/id/467108213/photo/red-cardboard-cup-with-a-straw.jpg?s=612x612&w=0&k=20&c=tkx8YkdZTYJWaslh571sKof3v78yrl_HapEvTawfGDE=" />
-                  <p>Drink</p>
+              <button class= "entree" id= "Drink" onClick = {handleDrink}>
+                  <h5>Drink</h5>
               </button>
             </div>
             <div className = "columnCust">
             <div class="dropdown">
-              <button id= "Burrito" onClick = {handleBurrito}>
-                  <img alt = "burrito" title = "burrito" className = "mainItems" src="https://media.istockphoto.com/id/1313361282/photo/mexican-rice-and-chorizo-sausage-wrap.jpg?s=612x612&w=0&k=20&c=7BgOT-kuluQIlZ50l-p-DNvajA66EeB_HIUvW6O_GPM=" />
-                  <p>Burrito</p>
+              <button class= "entree" id= "Burrito" onClick = {handleBurrito}>
+                  <h55>Burrito</h55>
               </button> 
-                <div class="dropdown-content">
+              
                   <button id= "BeefBurrito" onClick={handleBeefBurrito}><h5>Beef</h5></button>
                   <button id="SteakBurrito"onClick={handleSteakBurrito}><h5>Steak</h5></button>
                   <button id= "MedleyBurrito" onClick={handleMedleyBurrito}><h5>Veggie Medley</h5></button>
@@ -1344,20 +1237,18 @@ var Display_Order = [];
                   <button id= "SourCreamBurrito" onClick={handleCreamBurrito}><h5>Sour Cream</h5></button>
                   <button id= "GuacBurrito" onClick={handleGuacBurrito}><h5>Guacamole</h5></button>
                   <button id= "QuesoBurrito" onClick={handleQuesoBurrito}><h5>Queso</h5></button>
+                
                 </div>
-                </div>
-              <button id= "Chips and Queso" onClick = {handleChips_and_Queso}>
-                  <img alt = "chips and queso" title = "chips and queso" className = "mainItems" src="https://www.tacobueno.com/assets/food/nachos/Nachos_chips_queso_990x725.jpg" />
-                  <p>Chips and Queso</p>
+              <button class= "entree" id= "Chips and Queso" onClick = {handleChips_and_Queso}>
+                  <h5>Chips and Queso</h5>
               </button>
             </div>
             <div className = "columnCust">
               <div class="dropdown">
-              <button id= "Bowl" onClick = {handleBowl}>
-                  <img alt = "bowl" title = "bowl" className = "mainItems" src="https://www.threelittlechickpeas.com/wp-content/uploads/2020/01/vegan-taco-bowl-with-lime-crema.jpg" />
-                  <p>Bowl</p>
+              <button class= "entree" id= "Bowl" onClick = {handleBowl}>
+                  <h55>Bowl</h55>
               </button>
-                <div class="dropdown-content">
+               
                   <button id= "BeefBowl" onClick={handleBeefBowl}><h5>Beef</h5></button>
                   <button id= "SteakBowl" onClick={handleSteakBowl}><h5>Steak</h5></button>
                   <button id= "MedleyBowl" onClick={handleMedleyBowl}><h5>Veggie Medley</h5></button>
@@ -1370,20 +1261,18 @@ var Display_Order = [];
                   <button id= "SourCreamBowl" onClick={handleCreamBowl}><h5>Sour Cream</h5></button>
                   <button id= "GuacBowl" onClick={handleGuacBowl}><h5>Guacamole</h5></button>
                   <button id= "QuesoBowl" onClick={handleQuesoBowl}><h5>Queso</h5></button>
-                </div>
+                
               </div>
-              <button id= "Chips and Salsa" onClick = {handleChips_and_Salsa}>
-                  <img alt = "chips and salsa" title = "chips and salsa" className = "mainItems" src="https://media.chefdehome.com/740/0/0/salsa/homemade-salsa.jpg" />
-                  <p>Chips and Salsa</p>
+              <button class= "entree" id= "Chips and Salsa" onClick = {handleChips_and_Salsa}>
+                  <h5>Chips and Salsa</h5>
               </button>
             </div>
             <div className = "columnCust">
               <div class="dropdown">
-                <button id= "Salad" onClick = {handleSalad}>
-                  <img alt = "salad" title = "salad" className = "mainItems" src="https://assets.bonappetit.com/photos/624215f8a76f02a99b29518f/3:4/w_1812,h_2416,c_limit/0328-ceasar-salad-lede.jpg" />
-                  <p>Salad</p>
+                <button class= "entree"id= "Salad" onClick = {handleSalad}>
+                  <h55>Salad</h55>
               </button>
-                <div class="dropdown-content">
+              
                   <button id= "BeefSalad" onClick={handleBeefSalad}><h5>Beef</h5></button>
                   <button id= "SteakSalad" onClick={handleSteakSalad}><h5>Steak</h5></button>
                   <button id= "MedleySalad" onClick={handleMedleySalad}><h5>Veggie Medley</h5></button>
@@ -1395,46 +1284,55 @@ var Display_Order = [];
                   <button id= "SourCreamSalad" onClick={handleCreamSalad}><h5>Sour Cream</h5></button>
                   <button id= "GuacSalad" onClick={handleGuacSalad}><h5>Guacamole</h5></button>
                   <button id= "QuesoSalad" onClick={handleQuesoSalad}><h5>Queso</h5></button>
+              
                 </div>
-                </div>
-              <button id= "Chips and Guac" onClick = {handleChips_and_Guac}>
-                  <img alt = "chips and quac" title = "chips and quacamole" className = "mainItems" src="https://brokebankvegan.com/wp-content/uploads/2021/06/Guacamole-Feature.jpg" />
-                  <p>Chips and Guacamole</p>
+                
+              <button class= "entree"id= "Chips and Guac" onClick = {handleChips_and_Guac}>
+                  <h5>Chips and Guacamole</h5>
               </button>
             </div>
           </div>
 
-          <table class="content">
-            <li id="Contents">Contents</li>
-            <li id="DisplayOrder">Display Order</li>
-            <li id="Price">Price </li>
-          </table>
 
-          <div class ="orderButton">
-            <button onClick = {handleOrder}>
+        {
+          <table class="contentt">
+
+<div className = "orderButtonn" onClick = {handleOrder}>
                 <p>ADD TO ORDER</p>
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */
                 //displayOrder()
                 }
-            </button>
-            
-            <button onClick = {FinishOrder}>
+            </div>
+
+            <div className = "orderButtonn" onClick = {FinishOrder}>
                 <p>Finish Order</p>
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */}
-            </button>
-
-            <button onClick = {DeleteOrder}>
+            </div>
+            <div className = "orderButtonn" onClick = {DeleteOrder}>
                 <p>Delete Contents</p>
 
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */}
-            </button>
-          </div>
+            </div>
+
+  
+          </table>
+      }
+            
+           
+
+            <table class = "ordertext">
+            <p id="Contents">Contents</p>
+                <p id="DisplayOrder"></p>
+                <p 
+                    id="Price">Price </p>
+                    </table>
+
 
             {/* Contents changes to whatever is in the order_summary string when add to order is pressed */}
         </body>
@@ -1451,4 +1349,3 @@ var Display_Order = [];
 
 
 }   
-export default CustomerGUI;
