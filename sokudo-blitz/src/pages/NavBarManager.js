@@ -1,7 +1,37 @@
 import "./navMstyle.css"
+import { useEffect } from "react";
 
+
+var duplicate_google_translate_counter = 0;//this stops google adding button multiple times
 export default function NavBarManager() {
-    return (
+
+    const googleTranslateElementInit = () => {
+        if (duplicate_google_translate_counter == 0) {
+          
+            new window.google.translate.TranslateElement(
+              {
+                pageLanguage: "en",
+                autoDisplay: false
+              },
+              "google_translate_element"
+            );
+            duplicate_google_translate_counter++;
+    
+        }
+    };
+      
+      useEffect(() => {
+        
+        var addScript = document.createElement("script");
+        addScript.setAttribute(
+          "src",
+          "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+        );
+        document.body.appendChild(addScript);
+        window.googleTranslateElementInit = googleTranslateElementInit;
+      }, []);
+
+    return (    
         <nav>
             
             <ul class="navbar">  
@@ -18,6 +48,8 @@ export default function NavBarManager() {
                 <a href="/ManagerGUI/Items" class="nav_title">Items</a>
 
                 <a href="/ManagerGUI/Reports" class="nav_title">Reports</a>
+
+                <a><div id="google_translate_element"></div></a>
             </ul>
         </nav>
     );
