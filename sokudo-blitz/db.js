@@ -179,6 +179,22 @@ const deleteEmployee = (body) => {
     })
   })
 }
+
+
+const getItemPrice = (body) => {
+  return new Promise(function(resolve, reject) {
+    const {name} = body
+    console.log('inside db file' + item_id);
+    pool.query('SELECT PRICE FROM inventory WHERE name=$1', [name], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
   
   module.exports = {
     getEmployees,
