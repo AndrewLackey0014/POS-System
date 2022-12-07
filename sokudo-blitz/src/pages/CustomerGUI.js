@@ -23,15 +23,18 @@ import Toppings_Page from "./Toppings_Page"
 var order_summary = [];
 var temp_array = [];
 var obj;
+var obj2;
 var Display_Order = [];
 
  function CustomerGUI() {
     let component
     const [items_data, setItems] = useState(false);
     const [inv_data, setInv] = useState(false);
+    const [price_data, setPrice] = useState(false);
     useEffect(() => {
         getItems();
         getInventory();
+        getPrice();
     }, []);
     function getItems() {
         fetch('http://localhost:3001/items')
@@ -61,6 +64,24 @@ var Display_Order = [];
     obj = temp_obj;
     console.log(obj);
 
+    function getPrice() {
+      fetch('http://localhost:3001/items')
+        .then(response => {
+          return response.text();
+        })
+        .then(data => {
+          setPrice(data);
+        });
+    }
+
+    obj2 = JSON.parse(price_data);
+    var temp_obj2 = {};
+    for (const [key, value] of Object.entries(obj2)) {
+      temp_obj2[value['item_id']] = value;
+    };
+    obj2 = temp_obj2;
+    console.log(obj2);
+
 
     function updateInventory(order_amount, item_id) {
       fetch('http://localhost:3001/inventory_update', {
@@ -79,22 +100,22 @@ var Display_Order = [];
     }
 
 
-    function getCurrInv(item_id) {
-      console.log(item_id);
-      fetch('http://localhost:3001/curr_inv',{
-        method: 'GET',
-        headers: {  
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({item_id}),
-      })
-        .then(response => {
-          return response.text();
-        })
-        .then(data => {
-          alert(data);
-        });
-    }
+    // function getCurrInv(item_id) {
+    //   console.log(item_id);
+    //   fetch('http://localhost:3001/curr_inv',{
+    //     method: 'GET',
+    //     headers: {  
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({item_id}),
+    //   })
+    //     .then(response => {
+    //       return response.text();
+    //     })
+    //     .then(data => {
+    //       alert(data);
+    //     });
+    // }
 
     // function getItemPrice(?) {
     //   console.log(?);
@@ -430,20 +451,20 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefTaco").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push("Taco Seasoned Beef");
+            Display_Order.push(11);
 
         }else if (  document.getElementById("MedleyTaco").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push("Taco Grilled Vegetable Medley");
+          Display_Order.push(12);
       }else if (  document.getElementById("SteakTaco").style.color== "red"){
         order_summary.push("Steak");
-        Display_Order.push("Taco Marinated Steak");
+        Display_Order.push(10);
     }else if (  document.getElementById("ChickenTaco").style.color== "red"){
       order_summary.push("Chicken");
-      Display_Order.push("Taco Chili Rubbed Chicken");
+      Display_Order.push(9);
 
   }else{
-    Display_Order.push("Taco");
+    Display_Order.push("Taco ");
   }
   order_summary.push("Taco");
   if (document.getElementById("CheeseTaco").style.color== "red")order_summary.push("Cheese");
@@ -461,17 +482,17 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefBurrito").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push("Burrito Seasoned Beef");
+            Display_Order.push(3);
 
         }else if (  document.getElementById("MedleyBurrito").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push("Burrito Grilled Vegetable Medley");
+          Display_Order.push(4);
       }else if (  document.getElementById("SteakBurrito").style.color== "red"){
         order_summary.push("Steak");
-        Display_Order.push("Burrito Marinated Steak");
+        Display_Order.push(2);
     }else if (  document.getElementById("ChickenBurrito").style.color== "red"){
       order_summary.push("Chicken");
-      Display_Order.push("Burrito Chili Rubbed Chicken");
+      Display_Order.push(1);
   }else{
     Display_Order.push("Burrito");
   }
@@ -492,11 +513,11 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefBowl").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push("Bowl Seasoned Beef");
+            Display_Order.push(7);
 
         }else if (  document.getElementById("MedleyBowl").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push("Bowl Grilled Vegetable Medley");
+          Display_Order.push(8);
       }else if (  document.getElementById("SteakBowl").style.color== "red"){
         order_summary.push("Steak");
         Display_Order.push("Bowl Marinated Steak");
@@ -584,9 +605,11 @@ var Display_Order = [];
 
         
         stringprice=0;
+        console.log(Display_Order)
       for(var i = 0; i < Display_Order.length; i++){
   //calculate for string price?
-        stringprice += 5.01; //actually an integer
+        console.log(obj2[Display_Order[i]]);
+        stringprice += parseFloat(obj2[Display_Order[i]]['price']); //actually an integer
         
         //TODO query from database with Display_Order[i], these are from the items table in database/
         // also, Display_Order[i] has the exact name given from database, making querying easier
