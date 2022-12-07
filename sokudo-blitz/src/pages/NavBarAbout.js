@@ -1,5 +1,8 @@
 import "./navMstyle.css"
 
+/**
+ * Displays Navigation Bar for About/Google Maps Page
+ */
 export default function Navbar() {
     return (
         <nav>

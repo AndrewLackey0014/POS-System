@@ -1,7 +1,6 @@
 const Pool = require('pg').Pool;
 
 const pool = new Pool({
-
     host: "csce-315-db.engr.tamu.edu",
     user: "csce315_906_juttu",
     database: "csce315_906_62",
@@ -13,6 +12,9 @@ const pool = new Pool({
     
 });
 
+/**
+ * Get Employee data from database.
+ */
 const getEmployees = () => {
     return new Promise(function(resolve, reject) {
       pool.query('SELECT * FROM employees', (error, results) => {
@@ -26,6 +28,9 @@ const getEmployees = () => {
     }) 
 }
 
+/**
+ * Get Transaction History from database.
+ */
 const getTranHist = () => {
   return new Promise(function(resolve, reject) {
     pool.query('SELECT * FROM transaction3', (error, results) => {
@@ -39,6 +44,9 @@ const getTranHist = () => {
   }) 
 }
 
+/**
+ * Get Inventory data from database.
+ */
 const getInventory = () => {
   return new Promise(function(resolve, reject) {
     pool.query('SELECT * FROM inventory', (error, results) => {
@@ -53,7 +61,9 @@ const getInventory = () => {
 }
 
 
-
+/**
+ * Get Item data from database.
+ */
 const getItems = () => {
   return new Promise(function(resolve, reject) {
     pool.query('SELECT * FROM items', (error, results) => {
@@ -67,7 +77,10 @@ const getItems = () => {
   }) 
 }
 
-  
+/**
+ * Create Employee in Employee Database
+ * @param {Map} body - Input Employee Data
+ */
 const createEmployee = (body) => {
     return new Promise(function(resolve, reject) {
       const { employeeid, salary, name, managerid, role } = body
@@ -80,6 +93,10 @@ const createEmployee = (body) => {
     })
 }
 
+/**
+ * Create Item in Item Database
+ * @param {Map} body - Input Item Data
+ */
 const createItem = (body) => {
   return new Promise(function(resolve, reject) {
     const { price_amount, name, id } = body
@@ -92,6 +109,10 @@ const createItem = (body) => {
   })
 }
 
+/**
+ * Update Item in Item Database
+ * @param {Map} body - Input Item Data
+ */
 const updateItem = (body) => {
   return new Promise(function(resolve, reject) {
     const { price_amount, item_id } = body
@@ -104,6 +125,10 @@ const updateItem = (body) => {
   })
 }
 
+/**
+ * Update Employee in Employee Database
+ * @param {Map} body - Input Employee Data
+ */
 const updateSalary = (body) => {
   return new Promise(function(resolve, reject) {
     const { employeeid, salary} = body
@@ -117,6 +142,10 @@ const updateSalary = (body) => {
   })
 }
 
+/**
+ * Update Inventory in Inventory Database
+ * @param {Map} body - Input Inventory Data
+ */
 const updateInventory = (body) => {
   return new Promise(function(resolve, reject) {
     const { order_amount , item_id } = body
@@ -128,6 +157,11 @@ const updateInventory = (body) => {
     })
   })
 }
+
+/**
+ * Select item's current inventory from Inventory Database
+ * @param {Map} body - Input Item ID
+ */
 const getCurrInv = (body) => {
   return new Promise(function(resolve, reject) {
     const {item_id} = body
@@ -160,7 +194,10 @@ const getCurrInv = (body) => {
 
 
 
-
+/**
+ * Delete Employee in Employee Database
+ * @param {Map} body - Input Employee ID
+ */
 const deleteEmployee = (body) => {
   return new Promise(function(resolve, reject) {
     const { id } = body
@@ -180,7 +217,10 @@ const deleteEmployee = (body) => {
   })
 }
 
-
+/**
+ * Select Inventory item price from Inventory Database
+ * @param {Map} body - Input Item Name
+ */
 const getItemPrice = (body) => {
   return new Promise(function(resolve, reject) {
     const {name} = body
@@ -196,6 +236,10 @@ const getItemPrice = (body) => {
   }) 
 }
 
+/**
+ * Set Inventory item price in Inventory Database
+ * @param {Map} body - Input Inventory Data
+ */
 const InsertHistory = (body) => {
   return new Promise(function(resolve, reject) {
     const { order_amount , item_id } = body

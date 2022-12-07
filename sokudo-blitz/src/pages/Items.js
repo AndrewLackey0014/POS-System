@@ -5,11 +5,16 @@ import React, { Component, useState, useEffect, useRef} from 'react';
 const temp_data = [];
 var obj;
 
+/**
+ * Gets Current window's URL
+ */
 function getCurrentURL () {
     return window.location.href
   }
 
-
+/**
+ * Displays Item database information
+ */
 export default function Items() {
     const [price, setPrice] = useState('');
     const [name, setName] = useState('');
@@ -32,6 +37,10 @@ export default function Items() {
     useEffect(() => {
         getItems();
     }, []);
+
+    /**
+ * Gets Item information from Items Database
+ */
     function getItems() {
         fetch(backend_url + 'items')
           .then(response => {
@@ -41,6 +50,10 @@ export default function Items() {
             setItems(data);
           });
     }
+
+    /**
+ * Handles the creation of new items for database
+ */
     function handleItemCreate() {
         let price_amount = inputRef1.current.value;
         let name= inputRef2.current.value;
@@ -62,6 +75,10 @@ export default function Items() {
             getItems();
           });
     }
+
+    /**
+ * Handles Updating Item data in Database
+ */
     function handleUpdateItem() {
         let price_amount = inputRef1.current.value;
         var select = document.getElementById('items');
@@ -92,13 +109,23 @@ export default function Items() {
     obj = JSON.parse(items_data);
     // console.log(obj);
 
-
+/**
+ * Sets Item Price when being updated
+ */
     const handlePrice = event => {
         setPrice(event.target.value);
       };
+
+/**
+ * Sets Item Name when being updated
+ */
     const handleName = event => {
         setName(event.target.value);
     };
+
+/**
+ * Sets Item ID when being updated
+ */
     const handleID = event => {
         setId(event.target.value);
       };

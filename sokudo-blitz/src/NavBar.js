@@ -1,5 +1,8 @@
 import React, { Component }  from 'react';
 
+/**
+ * Creates Navigation bar for home page
+ */
 export default function Navbar() {
     return (
         <nav className="nav">

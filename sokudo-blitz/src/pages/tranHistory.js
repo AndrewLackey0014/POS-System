@@ -8,7 +8,9 @@ var obj;
 var customTranRange = 0;
 
 
-
+/**
+ * Gets Current window's URL
+ */
 function getCurrentURL () {
   return window.location.href
 }
@@ -24,6 +26,9 @@ const url = getCurrentURL()
     backend_url = 'https://sokudoblitzbackend.onrender.com/';
   }
 
+  /**
+ * Displays Transaction History Data from Database
+ */
 export default function TranHistory() {
 
   const url = getCurrentURL()
@@ -43,6 +48,9 @@ export default function TranHistory() {
     // useEffect(() => {
     //     getTranHist();
     // }, []);
+    /**
+ * Dets Transaction History Data from Database
+ */
     function getTranHist() {
         fetch(backend_url + 'tranHist')
           .then(response => {
@@ -68,11 +76,15 @@ export default function TranHistory() {
  
     obj = JSON.parse(transactionHist);
     
-
+/**
+ * Handles Input Start Date for Transaction History Selection
+ */
     const handleTHStartDate = event => {
       setTHStartDate(event.target.value);
     };
-
+/**
+ * Handles Input End Date for Transaction History Selection
+ */
     const handleTHEndDate = event => {
       setTHEndDate(event.target.value);
 

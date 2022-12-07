@@ -13,6 +13,9 @@ var sales; var excess; var restock; var combo;
 var start; var end;
 var inventory_data;
 
+/**
+ * Gets Current window's URL
+ */
 function getCurrentURL () {
     return window.location.href
   }
@@ -28,6 +31,10 @@ const url = getCurrentURL()
   }
 
 var data = ["Empty Data"]
+
+/**
+ * Displays Reports Page of Manager GUI
+ */
 export default function Reports(props) {
 
     const [reports_data, setReports] = useState(false); //  Report Selection
@@ -43,27 +50,41 @@ export default function Reports(props) {
     const [endDateCombo, setEndDateCombo] = useState('')    //  Combo Report
 
     
-
+/**
+ * Handles Sales Report Start Date Input
+ */
     const handleStartChange = event => {    //  On click, Gets Sales Report Start Time
         setStartDate(event.target.value);    start = inputRef1.current.value;
         console.log(start)
     }
-    
+
+    /**
+ * Handles Sales Report End Date Input
+ */
     const handleEndChange = event => {  //  On click, gets Sales Report End time
         setEndDate(event.target.value);        end = inputRef2.current.value;
         console.log(end)
     }
 
+    /**
+ * Handles Excess Report Date Input
+ */
     const handleExcessDate = event => { //  On click, gets Excess Report Date (for transaction history table)
         setExcessDate(event.target.value);      excessDate = inputRef3.current.value;
         console.log(excess)
     }
 
+/**
+ * Handle Combo Report Start Time Input
+ */
     const handleStartChangeCombo = event => {    //  On click, Gets Combo Report Start Time
         setStartDateCombo(event.target.value);    start = inputRef4.current.value;
         console.log(start)
     }
-    
+
+/**
+ * Handle Combo Report End Time Input
+ */
     const handleEndChangeCombo = event => {  //  On click, gets Combo Report End time
         setEndDateCombo(event.target.value);        end = inputRef5.current.value;
         console.log(end)
@@ -77,7 +98,10 @@ export default function Reports(props) {
     const inputRef4 = useRef(null); //  Combo Report
     const inputRef5 = useRef(null); //  Combo Report
 
-
+/**
+ * Displays the type of Report based on button clicked
+ * @param {String} type - Name/Type of Report requested via button click
+ */
     const handleType = (type) => {  //  Determines which Report is being requested & calls for that data
         if (type === "sales"){  //  If Requesting Sales Report...
             console.log("Fetching Sales Report Data...")
@@ -366,6 +390,11 @@ export default function Reports(props) {
         } 
     }
 
+    /**
+ * Displays currently requested report, hiding the others
+ * @param {int} index - Number of which report is being requested via button click
+ * @param {String} type - Name of which report is being requested via button click
+ */
     const changeRep = (index, type) => {    //  Handles Displaying selected information, changing based on which report
         
     // this will be run for the amount of button you have

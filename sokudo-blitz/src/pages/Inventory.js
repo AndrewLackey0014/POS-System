@@ -4,14 +4,18 @@ import React, { Component, useState, useEffect, useRef} from 'react';
 
 const temp_data = [];
 var obj;
-
+/**
+ * Gets Current window's URL
+ */
 function getCurrentURL () {
     return window.location.href
   }
 
 
 
-
+/**
+ * Displays Inventory Database Information
+ */
 export default function Inventory() {
 
 
@@ -32,6 +36,10 @@ export default function Inventory() {
     useEffect(() => {
         getInventory();
     }, []);
+
+    /**
+ * Gets Inventory data from database
+ */
     function getInventory() {
         fetch(backend_url + 'inventory')
           .then(response => {
@@ -64,6 +72,10 @@ export default function Inventory() {
     }
     } 
 
+
+    /**
+ * Updates Inventory Database based on input
+ */
     function handleOrderInventory() {
             let order_amount = inputRef1.current.value;
             var select = document.getElementById('items');
@@ -87,7 +99,9 @@ export default function Inventory() {
               });
     }
 
-
+/**
+ * Handles the amount being ordered by user
+ */
     const handleOrderCount = event => {
         setOrderCount(event.target.value);
       };

@@ -3,8 +3,15 @@ import { useEffect } from "react";
 
 
 var duplicate_google_translate_counter = 0;//this stops google adding button multiple times
+
+/**
+ * Displays Navigation Bar for Manager GUI
+ */
 export default function NavBarManager() {
 
+  /**
+ * Adds Google Translate Functionality
+ */
     const googleTranslateElementInit = () => {
         if (duplicate_google_translate_counter == 0) {
           

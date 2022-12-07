@@ -2,8 +2,15 @@ import "./navMstyle.css"
 import { useEffect } from "react";
 var duplicate_google_translate_counter = 0;//this stops google adding button multiple times
 
+
+/**
+ * Displays Navigation Bar for Customer GUI
+ */
 export default function Navbar() {
 
+  /**
+ * Adds Google Translate Functionality
+ */
     const googleTranslateElementInit = () => {
         if (duplicate_google_translate_counter == 0) {
           

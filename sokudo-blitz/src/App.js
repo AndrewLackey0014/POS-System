@@ -28,6 +28,8 @@ import Gmap from "./gmap.js";
 
 
 var url = "";
+
+
 const urlweb = getCurrentURL()
   var backend_urlweb = "";
   // console.log(url);
@@ -38,7 +40,9 @@ const urlweb = getCurrentURL()
     backend_urlweb = 'https://sokudoblitzbackend.onrender.com/';
   }
 
-
+/**
+ * Grabs environmental variables from backend
+ */
 export async function getEnvironmentVarsFromExpress() {
   return await fetch(backend_urlweb+'webgetEnvironmentVars').then((res) => {
     url = res.json();
@@ -47,18 +51,19 @@ export async function getEnvironmentVarsFromExpress() {
   })
 }
 
+/**
+ * Decides whether on local host or deploy
+ */
 function getCurrentURL () {
   return window.location.href
 }
 
 // Example
 
-
+/**
+ * Displays Webpage
+ */
 function App() {
-
- 
-
-
 
   const url = getCurrentURL()
   var backend_url = "";
@@ -76,6 +81,9 @@ function App() {
   }, []);
 
 
+  /**
+ * Gets Employee data from Employee database
+ */
   function getEmployees() {
     fetch(backend_url+'get_employees',{
       method: 'GET',
@@ -91,6 +99,10 @@ function App() {
         setEmployees(data);
       });
   }
+
+  /**
+ * Create Employee to add to database
+ */
   function createEmployee() {
     let employeeid = prompt('Enter employee id');
     let salary = prompt('Enter salary');
@@ -112,6 +124,10 @@ function App() {
         getEmployees();
       });
   }
+
+  /**
+ * Updates Employee salary in Database
+ */
   function updateSalary() {
     let employeeid = prompt('Enter employee id');
     let salary = prompt('Enter salary');
@@ -132,7 +148,9 @@ function App() {
   }
 
 
-
+/**
+ * Delete Employee Data from Database
+ */
   function deleteEmployee() {
     let id = prompt('Enter employeeid');
     // console.log(id);

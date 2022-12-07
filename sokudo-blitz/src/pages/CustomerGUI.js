@@ -17,6 +17,9 @@ import Login from "./LoginCustomer";
 //import "./navMstyle.css"
 import Toppings_Page from "./Toppings_Page"
 
+/**
+ * Gets Current window's URL
+ */
 function getCurrentURL () {
   return window.location.href
 }
@@ -38,6 +41,9 @@ var obj;
 var obj2;
 var Display_Order = [];
 
+/**
+ * Loads GUI for customer view
+ */
  function CustomerGUI() {
     let component
     const [items_data, setItems] = useState(false);
@@ -48,6 +54,10 @@ var Display_Order = [];
         getInventory();
         getPrice();
     }, []);
+
+    /**
+ * Grabs Item data from Item Database
+ */
     function getItems() {
         fetch(backend_url + 'items')
           .then(response => {
@@ -58,6 +68,9 @@ var Display_Order = [];
           });
     }
 
+    /**
+ * Grabs Inventory data from Inventory Database
+ */
     function getInventory() {
       fetch(backend_url + 'inventory')
         .then(response => {
@@ -76,6 +89,9 @@ var Display_Order = [];
     obj = temp_obj;
     console.log(obj);
 
+    /**
+ * Grabs item price data from Items Database
+ */
     function getPrice() {
       fetch(backend_url + 'items')
         .then(response => {
@@ -94,7 +110,11 @@ var Display_Order = [];
     obj2 = temp_obj2;
     console.log(obj2);
 
-
+/**
+ * Updates Inventory database
+ * @param {int} order_amount - Amount to set item's inventory to
+ * @param {int} item_id - ID of item to be updated
+ */
     function updateInventory(order_amount, item_id) {
       fetch(backend_url + 'inventory_update', {
         method: 'POST',
@@ -169,6 +189,10 @@ var Display_Order = [];
       var stringprice= 0;
       var stringdislayorder = Display_Order.toString();
       var stringpricee= "";
+
+    /**
+ * Handles Customer Ordering Tacos
+ */
     const handleTaco = (e)=>{
         if (order_summary.length == 0){
 
@@ -182,7 +206,9 @@ var Display_Order = [];
 
         }
 
-
+/**
+ * Handles Customer Ordering Burritos
+ */
     }
     const handleBurrito = (e)=>{
     //   alert("Taco")
@@ -200,7 +226,9 @@ var Display_Order = [];
 
 
 
-
+/**
+ * Handles Customer Ordering Salads
+ */
     }
     const handleSalad = (e)=>{
       if (order_summary.length == 0){
@@ -215,6 +243,10 @@ var Display_Order = [];
 
         }
     }
+
+    /**
+ * Handles Customer Ordering Bowls
+ */
     const handleBowl = (e)=>{
       if (order_summary.length == 0){
       }else{
@@ -227,6 +259,10 @@ var Display_Order = [];
 
       }
     }
+
+    /**
+ * Handles Customer Ordering Drinks
+ */
     const handleDrink= (e)=>{
       if (order_summary.length == 0){
 
@@ -243,6 +279,10 @@ var Display_Order = [];
         }
 
     }
+
+    /**
+ * Handles Customer Ordering Chips and Salsa
+ */
     const handleChips_and_Salsa= (e)=>{
       if (order_summary.length == 0){
       }else{
@@ -259,6 +299,10 @@ var Display_Order = [];
       }
 
     }
+
+    /**
+ * Handles Customer Ordering Chips and Queso
+ */
     const handleChips_and_Queso= (e)=>{
       if (order_summary.length == 0){
 
@@ -276,6 +320,10 @@ var Display_Order = [];
       }
 
     }
+
+    /**
+ * Handles Customer Ordering Chips and Guacamole
+ */
     const handleChips_and_Guac= (e)=>{
       if (order_summary.length == 0){
 
@@ -295,7 +343,9 @@ var Display_Order = [];
 
 
 
-
+/**
+ * Updates Inventory Database based on Order's contents
+ */
     const FinishOrder = (e)=>{
 
 
@@ -464,7 +514,9 @@ var Display_Order = [];
     }
 
 
-
+/**
+ * Gather's user selected order contents and handles the selection process
+ */
     const handleOrder = (e)=>{
 
 
@@ -710,7 +762,9 @@ var Display_Order = [];
       document.getElementById("QuesoSalad").style.color= "black";
     }
 
-
+/**
+ * Handle's user cancelling a selected order
+ */
     const DeleteOrder = (e)=>{
         order_summary=[];
         Display_Order=[];
@@ -787,7 +841,9 @@ var Display_Order = [];
 
     }
 
-  
+  /**
+ * Handles Customer Ordering Beef Tacos
+ */
     const handleBeefTaco = (e)=>{
  
       if (document.getElementById("BeefTaco").style.color!= "red"){
@@ -804,7 +860,9 @@ var Display_Order = [];
    //   order_summary.push("Beef");
 
     }
-
+  /**
+ * Handles Customer Ordering Steak Tacos
+ */
     const handleSteakTaco = (e)=>{
  
       if (document.getElementById("SteakTaco").style.color!= "red"){
@@ -820,7 +878,9 @@ var Display_Order = [];
       }
       
    //   order_summary.push("Beef");
-
+  /**
+ * Handles Customer Ordering Medley Tacos
+ */
     }
     const handleMedleyTaco = (e)=>{
  
@@ -838,6 +898,10 @@ var Display_Order = [];
    //   order_summary.push("Beef");
 
     }
+
+      /**
+ * Handles Customer Ordering Chicken Tacos
+ */
     const handleChickenTaco = (e)=>{
  
       if (document.getElementById("ChickenTaco").style.color!= "red"){
@@ -854,7 +918,9 @@ var Display_Order = [];
 
     }
 
-
+  /**
+ * Handles Customer Ordering Beef Burrito
+ */
     const handleBeefBurrito = (e)=>{
  
       if (document.getElementById("BeefBurrito").style.color!= "red"){
@@ -872,6 +938,9 @@ var Display_Order = [];
 
     }
 
+      /**
+ * Handles Customer Ordering Steak Burrito
+ */
     const handleSteakBurrito = (e)=>{
  
       if (document.getElementById("SteakBurrito").style.color!= "red"){
@@ -888,6 +957,10 @@ var Display_Order = [];
      // order_summary.push("Beef");
 
     }
+
+      /**
+ * Handles Customer Ordering Medley Burrito
+ */
     const handleMedleyBurrito = (e)=>{
  
       if (document.getElementById("MedleyBurrito").style.color!= "red"){
@@ -903,6 +976,10 @@ var Display_Order = [];
      // order_summary.push("Beef");
 
     }
+
+      /**
+ * Handles Customer Ordering Chicken Burrito
+ */
     const handleChickenBurrito = (e)=>{
  
       if (document.getElementById("ChickenBurrito").style.color!= "red"){
@@ -919,7 +996,9 @@ var Display_Order = [];
 
     }
 
-
+  /**
+ * Handles Customer Ordering Beef Bowl
+ */
     const handleBeefBowl = (e)=>{
  
       if (document.getElementById("BeefBowl").style.color!= "red"){
@@ -936,7 +1015,9 @@ var Display_Order = [];
      // order_summary.push("Beef");
 
     }
-
+  /**
+ * Handles Customer Ordering Steak Bowl
+ */
     const handleSteakBowl = (e)=>{
  
       if (document.getElementById("SteakBowl").style.color!= "red"){
@@ -953,6 +1034,10 @@ var Display_Order = [];
       //order_summary.push("Beef");
 
     }
+
+      /**
+ * Handles Customer Ordering Medley Bowl
+ */
     const handleMedleyBowl = (e)=>{
  
       if (document.getElementById("MedleyBowl").style.color!= "red"){
@@ -968,6 +1053,9 @@ var Display_Order = [];
     //  order_summary.push("Beef");
 
     }
+      /**
+ * Handles Customer Ordering Chicken Bowl
+ */
     const handleChickenBowl = (e)=>{
  
       if (document.getElementById("ChickenBowl").style.color!= "red"){
@@ -984,6 +1072,9 @@ var Display_Order = [];
 
     }
 
+      /**
+ * Handles Customer Ordering Beef Salad
+ */
     const handleBeefSalad = (e)=>{
  
       if (document.getElementById("BeefSalad").style.color!= "red"){
@@ -1001,6 +1092,9 @@ var Display_Order = [];
 
     }
 
+      /**
+ * Handles Customer Ordering Steak Tacos
+ */
     const handleSteakSalad = (e)=>{
  
       if (document.getElementById("SteakSalad").style.color!= "red"){
@@ -1017,6 +1111,10 @@ var Display_Order = [];
     //  order_summary.push("Beef");
 
     }
+
+      /**
+ * Handles Customer Ordering Medley Salad
+ */
     const handleMedleySalad = (e)=>{
  
       if (document.getElementById("MedleySalad").style.color!= "red"){
@@ -1032,6 +1130,10 @@ var Display_Order = [];
     //  order_summary.push("Beef");
 
     }
+
+      /**
+ * Handles Customer Ordering Chicken Salad
+ */
     const handleChickenSalad = (e)=>{
  
       if (document.getElementById("ChickenSalad").style.color!= "red"){
@@ -1048,7 +1150,9 @@ var Display_Order = [];
 
     }
 
-
+  /**
+ * Handles Customer Ordering Cheese with Taco
+ */
     const handleCheeseTaco = (e)=>{
     //  order_summary.push("Cheese");
       if (document.getElementById("CheeseTaco").style.color!= "red"){
@@ -1059,7 +1163,9 @@ var Display_Order = [];
     }
 
 
-
+  /**
+ * Handles Customer Ordering Beans with Tacos
+ */
     const handleBeansTaco = (e)=>{
      // order_summary.push("Beans");
       if (document.getElementById("BeansTaco").style.color!= "red"){
@@ -1068,6 +1174,10 @@ var Display_Order = [];
         document.getElementById("BeansTaco").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Rice with Tacos
+ */
     const handleRiceTaco = (e)=>{
     //  order_summary.push("Rice");
       if (document.getElementById("RiceTaco").style.color!= "red"){
@@ -1076,6 +1186,10 @@ var Display_Order = [];
         document.getElementById("RiceTaco").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Salsa with Tacos
+ */
     const handleSalsaTaco = (e)=>{
     //  order_summary.push("Salsa");
       if (document.getElementById("SalsaTaco").style.color!= "red"){
@@ -1084,6 +1198,10 @@ var Display_Order = [];
         document.getElementById("SalsaTaco").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Sour Cream with Tacos
+ */
     const handleCreamTaco = (e)=>{
     //  order_summary.push("SourCream");
       if (document.getElementById("SourCreamTaco").style.color!= "red"){
@@ -1092,6 +1210,10 @@ var Display_Order = [];
         document.getElementById("SourCreamTaco").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Guacamole with Tacos
+ */
     const handleGuacTaco = (e)=>{
     //  order_summary.push("Guac");
       if (document.getElementById("GuacTaco").style.color!= "red"){
@@ -1100,6 +1222,10 @@ var Display_Order = [];
         document.getElementById("GuacTaco").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Queso with Tacos
+ */
     const handleQuesoTaco = (e)=>{
     //  order_summary.push("Queso");
       if (document.getElementById("QuesoTaco").style.color!= "red"){
@@ -1109,7 +1235,9 @@ var Display_Order = [];
       }
     }
 
-    
+    /**
+ * Handles Customer Ordering Cheese with Bowl
+ */
     const handleCheeseBowl = (e)=>{
     //  order_summary.push("Cheese");
       if (document.getElementById("CheeseBowl").style.color!= "red"){
@@ -1120,7 +1248,9 @@ var Display_Order = [];
     }
 
 
-
+/**
+ * Handles Customer Ordering Beans with Bowl
+ */
     const handleBeansBowl = (e)=>{
     //  order_summary.push("Beans");
       if (document.getElementById("BeansBowl").style.color!= "red"){
@@ -1129,6 +1259,10 @@ var Display_Order = [];
         document.getElementById("BeansBowl").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Rice with Bowl
+ */
     const handleRiceBowl = (e)=>{
     //  order_summary.push("Rice");
       if (document.getElementById("RiceBowl").style.color!= "red"){
@@ -1137,6 +1271,10 @@ var Display_Order = [];
         document.getElementById("RiceBowl").style.color= "black";
       }
     }
+    
+    /**
+ * Handles Customer Ordering Salsa with Bowl
+ */
     const handleSalsaBowl = (e)=>{
    //   order_summary.push("Salsa");
       if (document.getElementById("SalsaBowl").style.color!= "red"){
@@ -1145,6 +1283,10 @@ var Display_Order = [];
         document.getElementById("SalsaBowl").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Sour Cream with Bowl
+ */
     const handleCreamBowl = (e)=>{
     //  order_summary.push("SourCream");
       if (document.getElementById("SourCreamBowl").style.color!= "red"){
@@ -1153,6 +1295,10 @@ var Display_Order = [];
         document.getElementById("SourCreamBowl").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Guacamole with Bowl
+ */
     const handleGuacBowl = (e)=>{
    //   order_summary.push("Guac");
       if (document.getElementById("GuacBowl").style.color!= "red"){
@@ -1161,6 +1307,10 @@ var Display_Order = [];
         document.getElementById("GuacBowl").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Queso with Bowl
+ */
     const handleQuesoBowl = (e)=>{
     //  order_summary.push("Queso");
       if (document.getElementById("QuesoBowl").style.color!= "red"){
@@ -1170,6 +1320,9 @@ var Display_Order = [];
       }
     }
 
+    /**
+ * Handles Customer Ordering Cheese with Burrito
+ */
     const handleCheeseBurrito = (e)=>{
     //  order_summary.push("Cheese");
       if (document.getElementById("CheeseBurrito").style.color!= "red"){
@@ -1180,7 +1333,9 @@ var Display_Order = [];
     }
 
 
-
+/**
+ * Handles Customer Ordering Beans with Burrito
+ */
     const handleBeansBurrito = (e)=>{
      // order_summary.push("Beans");
       if (document.getElementById("BeansBurrito").style.color!= "red"){
@@ -1189,6 +1344,10 @@ var Display_Order = [];
         document.getElementById("BeansBurrito").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Rice with Burrito
+ */
     const handleRiceBurrito = (e)=>{
     //  order_summary.push("Rice");
       if (document.getElementById("RiceBurrito").style.color!= "red"){
@@ -1197,6 +1356,10 @@ var Display_Order = [];
         document.getElementById("RiceBurrito").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Salsa with Burrito
+ */
     const handleSalsaBurrito = (e)=>{
     //  order_summary.push("Salsa");
       if (document.getElementById("SalsaBurrito").style.color!= "red"){
@@ -1205,6 +1368,10 @@ var Display_Order = [];
         document.getElementById("SalsaBurrito").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Sour Cream with Burrito
+ */
     const handleCreamBurrito = (e)=>{
    //   order_summary.push("SourCream");
       if (document.getElementById("SourCreamBurrito").style.color!= "red"){
@@ -1213,6 +1380,10 @@ var Display_Order = [];
         document.getElementById("SourCreamBurrito").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Guacamole with Burrito
+ */
     const handleGuacBurrito = (e)=>{
     //  order_summary.push("Guac");
       if (document.getElementById("GuacBurrito").style.color!= "red"){
@@ -1221,6 +1392,10 @@ var Display_Order = [];
         document.getElementById("GuacBurrito").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Queso with Burrito
+ */
     const handleQuesoBurrito = (e)=>{
     //  order_summary.push("Queso");
       if (document.getElementById("QuesoBurrito").style.color!= "red"){
@@ -1233,7 +1408,9 @@ var Display_Order = [];
 
 
 
-
+/**
+ * Handles Customer Ordering Cheese with Salad
+ */
     const handleCheeseSalad = (e)=>{
     //  order_summary.push("Cheese");
       if (document.getElementById("CheeseSalad").style.color!= "red"){
@@ -1244,7 +1421,9 @@ var Display_Order = [];
     }
 
 
-
+/**
+ * Handles Customer Ordering Beans with Salad
+ */
     const handleBeansSalad = (e)=>{
      // order_summary.push("Beans");
       if (document.getElementById("BeansSalad").style.color!= "red"){
@@ -1253,6 +1432,10 @@ var Display_Order = [];
         document.getElementById("BeansSalad").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Rice with Salad
+ */
     const handleRiceSalad = (e)=>{
    //   order_summary.push("Rice");
       if (document.getElementById("RiceSalad").style.color!= "red"){
@@ -1261,6 +1444,10 @@ var Display_Order = [];
         document.getElementById("RiceSalad").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Salsa with Salad
+ */
     const handleSalsaSalad = (e)=>{
     //  order_summary.push("Salsa");
       if (document.getElementById("SalsaSalad").style.color!= "red"){
@@ -1269,6 +1456,10 @@ var Display_Order = [];
         document.getElementById("SalsaSalad").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Sour Cream with Salad
+ */
     const handleCreamSalad = (e)=>{
    //   order_summary.push("SourCream");
       if (document.getElementById("SourCreamSalad").style.color!= "red"){
@@ -1277,6 +1468,10 @@ var Display_Order = [];
         document.getElementById("SourCreamSalad").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Guacamole with Salad
+ */
     const handleGuacSalad = (e)=>{
     //  order_summary.push("Guac");
       if (document.getElementById("GuacSalad").style.color!= "red"){
@@ -1285,6 +1480,10 @@ var Display_Order = [];
         document.getElementById("GuacSalad").style.color= "black";
       }
     }
+
+    /**
+ * Handles Customer Ordering Queso with Salad
+ */
     const handleQuesoSalad = (e)=>{
     //  order_summary.push("Queso");
       if (document.getElementById("QuesoSalad").style.color!= "red"){

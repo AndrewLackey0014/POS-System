@@ -5,10 +5,17 @@ import React, { Component, useState, useEffect} from 'react';
 
 const temp_data = [];
 var obj;
+
+/**
+ * Gets Current window's URL
+ */
 function getCurrentURL () {
     return window.location.href
   }
-  
+
+  /**
+ * Displays Employee Database Information
+ */
 export default function Employees() {
 
     const url = getCurrentURL()
@@ -25,6 +32,9 @@ export default function Employees() {
     useEffect(() => {
         getEmployees();
     }, []);
+    /**
+ * Gets Employee Data from Database
+ */
     function getEmployees() {
         fetch(backend_url+'get_employees')
           .then(response => {

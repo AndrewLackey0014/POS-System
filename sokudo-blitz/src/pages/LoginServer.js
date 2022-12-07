@@ -6,6 +6,9 @@ import React, { useState, useRef } from "react"
      ["jon", "321"]
   ]
 
+  /**
+ * Gets Current window's URL
+ */
   function getCurrentURL () {
     return window.location.href
   }
@@ -22,17 +25,26 @@ const url = getCurrentURL()
 
   var obj;
 
+  /**
+ * Displays Login Page
+ */
   const Login = () => { 
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     var id, pswrd;
     const [reports_data, setReports] = useState({})
 
+    /**
+ * Handles user input Name/ID
+ */
     const handleNameChange = event => {
       setName(event.target.value);
       id = event.target.value;
     };
 
+    /**
+ * Gets Current window's Password
+ */
     const handlePwdChange = event => {
       setPassword(event.target.value);
       pswrd = event.target.value;
@@ -41,6 +53,9 @@ const url = getCurrentURL()
     const inputRef1 = useRef(null);
     const inputRef2 = useRef(null);
 
+    /**
+ * Checks input credentials when Login button clicked
+ */
     function handleClick() {
 
     var msg = inputRef1.current.value;

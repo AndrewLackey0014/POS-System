@@ -12,6 +12,9 @@ import Serverorder from "./Serverorder";
 
 //import Inventory from "./Inventory";
 //import "./navMstyle.css"
+/**
+ * Displays Server GUI Page based on which page is selected
+ */
  function ServerGUI() {
     let component
     switch (window.location.pathname) {

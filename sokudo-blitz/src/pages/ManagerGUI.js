@@ -13,6 +13,10 @@ import Login from "./LoginManager";
 //import Reports from "./Reports";
 //import Inventory from "./Inventory";
 //import "./navMstyle.css"
+
+/**
+ * Displays Manager GUI page
+ */
  function ManagerGUI() {
     let component
     switch (window.location.pathname) {

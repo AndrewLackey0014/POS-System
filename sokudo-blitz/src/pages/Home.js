@@ -7,8 +7,14 @@ import { useEffect } from "react";
 
 var duplicate_google_translate_counter = 0;//this stops google adding button multiple times
 
+/**
+ * Displays Home Page of GUI
+ */
 export default function Home() {
 
+    /**
+ * Adds Google Translate Functionality
+ */
     const googleTranslateElementInit = () => {
         if (duplicate_google_translate_counter == 0) {
           

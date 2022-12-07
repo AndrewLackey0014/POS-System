@@ -7,6 +7,9 @@ import React, { useState, useRef } from "react"
 
   var obj;
 
+  /**
+ * Gets Current window's URL
+ */
   function getCurrentURL () {
     return window.location.href
   }
@@ -21,6 +24,9 @@ const url = getCurrentURL()
     backend_url = 'https://sokudoblitzbackend.onrender.com/';
   }
 
+  /**
+ * Displays Login Page
+ */
   const Login = () => { 
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -28,11 +34,17 @@ const url = getCurrentURL()
     const [reports_data, setReports] = useState({})
 
 
+    /**
+ * Handles User input Name/ID
+ */
     const handleNameChange = event => {
       setName(event.target.value);
       id = event.target.value;
     };
 
+/**
+ * Handles User input Password
+ */
     const handlePwdChange = event => {
       setPassword(event.target.value);
       pswrd = event.target.value;
@@ -41,6 +53,9 @@ const url = getCurrentURL()
     const inputRef1 = useRef(null);
     const inputRef2 = useRef(null);
 
+    /**
+ * Checks input Credentials when Login Button Clicked
+ */
     function handleClick() {
 
     var msg = inputRef1.current.value;
