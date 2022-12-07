@@ -674,17 +674,11 @@ var Display_Order = [];
               </button>
             </div>
           </div>
+
           <table class="content">
-
-          <p id="Contents">Contents</p>
-
-          
-
-          <p id="DisplayOrder">DisplayOrder</p>
-
-           <p 
-          
-          id="Price">Price </p>
+            <li id="Contents">Contents</li>
+            <li id="DisplayOrder">Display Order</li>
+            <li id="Price">Price </li>
           </table>
 
           <div class ="orderButton">
