@@ -59,7 +59,7 @@ var Display_Order = [];
     }
 
     function getInventory() {
-      fetch('http://localhost:3001/inventory')
+      fetch(backend_url + 'inventory')
         .then(response => {
           return response.text();
         })
@@ -77,7 +77,7 @@ var Display_Order = [];
     console.log(obj);
 
     function getPrice() {
-      fetch('http://localhost:3001/items')
+      fetch(backend_url + 'items')
         .then(response => {
           return response.text();
         })
@@ -96,7 +96,7 @@ var Display_Order = [];
 
 
     function updateInventory(order_amount, item_id) {
-      fetch('http://localhost:3001/inventory_update', {
+      fetch(backend_url + 'inventory_update', {
         method: 'POST',
         headers: {  
           'Content-Type': 'application/json',
