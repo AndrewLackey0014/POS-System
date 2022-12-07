@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: db.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: db.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Pool = require('pg').Pool;
+
+const pool = new Pool({
+    host: "csce-315-db.engr.tamu.edu",
+    user: "csce315_906_juttu",
+    database: "csce315_906_62",
+    password: "131000407",
+    port: 5432,
+    ssl: {
+        rejectUnauthorized: false
+      }
+    
+});
+
+/**
+ * Get Employee data from database.
+ */
+const getEmployees = () => {
+    return new Promise(function(resolve, reject) {
+      pool.query('SELECT * FROM employees', (error, results) => {
+        if (error) {
+          reject(error)
+        }
+        // resolve(results.rows);
+        resolve(results.rows);
+
+      })
+    }) 
+}
+
+/**
+ * Get Transaction History from database.
+ */
+const getTranHist = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM transaction3', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
+
+/**
+ * Get Inventory data from database.
+ */
+const getInventory = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM inventory', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
+
+
+/**
+ * Get Item data from database.
+ */
+const getItems = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM items', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
+
+/**
+ * Create Employee in Employee Database
+ * @param {Map} body - Input Employee Data
+ */
+const createEmployee = (body) => {
+    return new Promise(function(resolve, reject) {
+      const { employeeid, salary, name, managerid, role } = body
+      pool.query('INSERT INTO employees (employeeid, salary, name, managerid, role) VALUES($1, $2, $3, $4, $5) RETURNING *', [employeeid, salary, name, managerid, role], (error, results) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(`A new employee has been added added: ${results}`)
+      })
+    })
+}
+
+/**
+ * Create Item in Item Database
+ * @param {Map} body - Input Item Data
+ */
+const createItem = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { price_amount, name, id } = body
+    pool.query('INSERT INTO items (item_id, name, price) VALUES($3, $2, $1) RETURNING *', [price_amount, name, id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(`A new item has been added added: ${results}`)
+    })
+  })
+}
+
+/**
+ * Update Item in Item Database
+ * @param {Map} body - Input Item Data
+ */
+const updateItem = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { price_amount, item_id } = body
+    pool.query('UPDATE items SET price=$1 WHERE item_id=$2 RETURNING *', [price_amount, item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(`item has been updated: ${results}`)
+    })
+  })
+}
+
+/**
+ * Update Employee in Employee Database
+ * @param {Map} body - Input Employee Data
+ */
+const updateSalary = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { employeeid, salary} = body
+    
+    pool.query('UPDATE employees SET salary=$2 WHERE employeeid=$1 RETURNING *', [employeeid, salary], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(`Employee salary has been updated: ${results}`)
+    })
+  })
+}
+
+/**
+ * Update Inventory in Inventory Database
+ * @param {Map} body - Input Inventory Data
+ */
+const updateInventory = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { order_amount , item_id } = body
+    pool.query('UPDATE inventory SET curr_inv=$1 WHERE item_id=$2 RETURNING *', [order_amount, item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+     // resolve(`Employee salary has been updated: ${results}`)
+    })
+  })
+}
+
+/**
+ * Select item's current inventory from Inventory Database
+ * @param {Map} body - Input Item ID
+ */
+const getCurrInv = (body) => {
+  return new Promise(function(resolve, reject) {
+    const {item_id} = body
+    console.log('inside db file' + item_id);
+    pool.query('SELECT curr_inv FROM inventory WHERE item_id=$1', [item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
+
+// const getItemPrice = (body) => {
+//   return new Promise(function(resolve, reject) {
+//     const {?} = body
+//     console.log('inside db file');
+//     pool.query('SELECT ? FROM items WHERE ?=$1', [?], (error, results) => {
+//       if (error) {
+//         reject(error)
+//       }
+//       // resolve(results.rows);
+//       resolve(results.rows);
+
+//     })
+//   }) 
+// }
+
+
+
+/**
+ * Delete Employee in Employee Database
+ * @param {Map} body - Input Employee ID
+ */
+const deleteEmployee = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { id } = body
+    console.log(id);
+    pool.query('DELETE FROM employees WHERE employeeid=$1', [id], (error, results) => {
+      
+      if (error) {
+          console.log(error);
+          console.log(results);
+
+          reject(error)
+      }
+      console.log(results);
+      
+      resolve(`Employee deleted with ID: ${id}`)
+    })
+  })
+}
+
+/**
+ * Select Inventory item price from Inventory Database
+ * @param {Map} body - Input Item Name
+ */
+const getItemPrice = (body) => {
+  return new Promise(function(resolve, reject) {
+    const {name} = body
+    console.log('inside db file' + item_id);
+    pool.query('SELECT PRICE FROM inventory WHERE name=$1', [name], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      // resolve(results.rows);
+      resolve(results.rows);
+
+    })
+  }) 
+}
+
+/**
+ * Set Inventory item price in Inventory Database
+ * @param {Map} body - Input Inventory Data
+ */
+const InsertHistory = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { order_amount , item_id } = body
+    pool.query('UPDATE inventory SET curr_inv=$1 WHERE item_id=$2 RETURNING *', [order_amount, item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+    //  resolve(`Employee salary has been updated: ${results}`)
+    })
+  })
+}
+
+
+  
+  module.exports = {
+    getEmployees,
+    createEmployee,
+    deleteEmployee,
+    updateSalary,
+    getTranHist,
+    getInventory,
+    getItems,
+    updateInventory,
+    getCurrInv,
+    createItem,
+    updateItem,
+    getItemPrice,
+    InsertHistory
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CustomerGUI">CustomerGUI</a></li><li><a href="global.html#InsertHistory">InsertHistory</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#ManagerGUI">ManagerGUI</a></li><li><a href="global.html#Map">Map</a></li><li><a href="global.html#ServerGUI">ServerGUI</a></li><li><a href="global.html#createEmployee">createEmployee</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#deleteEmployee">deleteEmployee</a></li><li><a href="global.html#getCurrInv">getCurrInv</a></li><li><a href="global.html#getCurrentURL">getCurrentURL</a></li><li><a href="global.html#getEmployees">getEmployees</a></li><li><a href="global.html#getEnvironmentVarsFromExpress">getEnvironmentVarsFromExpress</a></li><li><a href="global.html#getInventory">getInventory</a></li><li><a href="global.html#getItemPrice">getItemPrice</a></li><li><a href="global.html#getItems">getItems</a></li><li><a href="global.html#getTranHist">getTranHist</a></li><li><a href="global.html#updateInventory">updateInventory</a></li><li><a href="global.html#updateItem">updateItem</a></li><li><a href="global.html#updateSalary">updateSalary</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 23:46:22 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/tranHistory.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/tranHistory.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import "./tranHistory.css"
+import React, { Component, useState, useEffect, useRef} from 'react';
+
+
+const temp_data = []
+var obj;
+var customTranRange = 0;
+
+
+/**
+ * Gets Current window's URL
+ */
+function getCurrentURL () {
+  return window.location.href
+}
+
+
+const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
+
+  /**
+ * Displays Transaction History Data from Database
+ */
+export default function TranHistory() {
+
+  const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
+
+    const [transactionHist, setTranHist] = useState(false);
+    const [thStartDate, setTHStartDate] = useState('');
+    const [thEndDate, setTHEndDate] = useState('')
+
+    // useEffect(() => {
+    //     getTranHist();
+    // }, []);
+    /**
+ * Dets Transaction History Data from Database
+ */
+    function getTranHist() {
+        fetch(backend_url + 'tranHist')
+          .then(response => {
+            return response.text();
+          })
+          .then(data => {
+            if (inputRef1.current.value &amp;&amp; inputRef2.current.value)  {
+              console.log(data)
+              var item = JSON.parse(data);
+              var final_item = [];
+              for (const [key, value] of Object.entries(item)) {
+                if (value['order_time'] >= (inputRef1.current.value +'T00:00:00.000Z') &amp;&amp; value['order_time'] &lt;= (inputRef2.current.value + 'T23:49:59.000Z')) {
+                  final_item.push(value);
+                }
+              };
+              data = JSON.stringify(final_item);
+              console.log(data)
+            }
+            setTranHist(data);
+          });
+    }
+
+ 
+    obj = JSON.parse(transactionHist);
+    
+/**
+ * Handles Input Start Date for Transaction History Selection
+ */
+    const handleTHStartDate = event => {
+      setTHStartDate(event.target.value);
+    };
+/**
+ * Handles Input End Date for Transaction History Selection
+ */
+    const handleTHEndDate = event => {
+      setTHEndDate(event.target.value);
+
+    };
+
+
+
+    const inputRef1 = useRef(null);
+    const inputRef2 = useRef(null);
+    
+    let component;
+    switch (obj) {
+        case false:
+          component = &lt;>
+          &lt;div class="column left">
+                &lt;div class="row">
+                    Begin Date: &lt;input ref={inputRef1} onChange={handleTHStartDate} type="text" value={thStartDate}>&lt;/input>
+                    End Date: &lt;input ref={inputRef2} onChange={handleTHEndDate} type="text" value={thEndDate}>&lt;/input>
+                    &lt;button onClick={getTranHist}>Load Selected Data&lt;/button>
+                &lt;/div>
+            &lt;/div>
+            &lt;div class="column right">
+                &lt;table>
+                    &lt;tr>
+                        &lt;th>Order Number&lt;/th>
+                        &lt;th>Order ID&lt;/th>
+                        &lt;th>Order Time&lt;/th>
+                        &lt;th>Order Cost&lt;/th>
+                        &lt;th>Order Contents&lt;/th>
+
+                    &lt;/tr>
+                        {temp_data.map((val, key) => {
+                        return (
+                            &lt;tr key={key}>
+                            &lt;td>{val.name}&lt;/td>
+                            &lt;td>{val.age}&lt;/td>
+                            &lt;td>{val.gender}&lt;/td>
+                            &lt;/tr>
+                        )
+                        })}
+                &lt;/table>
+            &lt;/div>
+          
+          &lt;/>
+          break
+        
+        default: 
+          component = &lt;>
+          &lt;div>
+
+            &lt;div class="column left">
+                &lt;div class="row">
+                    Begin Date: &lt;input ref={inputRef1} onChange={handleTHStartDate} type="text" value={thStartDate}>&lt;/input>
+                    End Date: &lt;input ref={inputRef2} onChange={handleTHEndDate} type="text" value={thEndDate}>&lt;/input>
+                    &lt;button onClick={getTranHist  }>Load Selected Data&lt;/button>
+                &lt;/div> 
+
+            &lt;/div>
+            &lt;div class="data">
+                &lt;table>
+                    &lt;tr>
+                    &lt;th>Order Number&lt;/th>
+                    &lt;th>Order ID&lt;/th>
+                    &lt;th>Order Time&lt;/th>
+                    &lt;th>Order Cost&lt;/th>
+                    &lt;th>Order Contents&lt;/th>
+
+                    &lt;/tr>
+                     
+                    {obj.map((val, key) => {
+                    return (
+                        &lt;tr key={key}>
+                        &lt;td>{val.order_number}&lt;/td>
+                        &lt;td>{val.order_id}&lt;/td>
+                        &lt;td>{val.order_time}&lt;/td>
+                        &lt;td>{val.order_cost}&lt;/td>
+                        &lt;td>{val.order_contents}&lt;/td>
+                        &lt;/tr>
+                    )
+                    })}
+                &lt;/table>
+            &lt;/div>  
+          &lt;/div>
+          &lt;/>
+          break
+      }
+
+return(
+
+    &lt;>
+        {component}
+    &lt;/>
+        );
+ }</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CustomerGUI">CustomerGUI</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#ManagerGUI">ManagerGUI</a></li><li><a href="global.html#Map">Map</a></li><li><a href="global.html#ServerGUI">ServerGUI</a></li><li><a href="global.html#getCurrentURL">getCurrentURL</a></li><li><a href="global.html#getEnvironmentVarsFromExpress">getEnvironmentVarsFromExpress</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 23:43:37 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
