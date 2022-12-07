@@ -1,5 +1,5 @@
-
-import React, { Component, useState, useEffect, useRef} from 'react';
+import "./Items.css"
+import React, { Component, useState, useEffect} from 'react';
 
 
 const temp_data = [];
@@ -200,6 +200,17 @@ export default function Items() {
                     {/* </div> */}
                 </div>
 
+                {/* <form class="row"> */}
+                <div class = "text">
+                    <input placeholder="TEST" type="text"></input>
+                    <input placeholder="CREATE ITEM" type="text"></input>
+                {/* </form> */}
+
+                {/* <form> */}
+                    <input placeholder="ORDER AMOUNT"type="text"></input>
+                    {/* </form> */}
+                </div>
+                <button class="order_inv">Order Inventory</button>
                 {/* <form class="row">
                     Update Name: <input type="text"></input>
                 </form> */}

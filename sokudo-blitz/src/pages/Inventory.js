@@ -1,4 +1,4 @@
-
+import "./Inventory.css"
 import React, { Component, useState, useEffect, useRef} from 'react';
 
 
@@ -155,7 +155,7 @@ export default function Inventory() {
           component = <>
           <div class="column left">
                 <div class="dropdown row">
-                    {/* <button class="dropbtn">Select Item</button> */}
+                    {/* <button class="dropbtn">SELECT ITEM</button> */}
 
                  
                     {/* <div id ="myDropdown" class="dropdown-content"> */}
@@ -175,7 +175,7 @@ export default function Inventory() {
                 </div>
                 
 
-                <form>Order Amount: <input type="text" ref={inputRef1} onChange={handleOrderCount} value={orderCount}></input></form>
+                <div class="brick"> <input placeholder="ORDER AMOUNT" type="text" ref={inputRef1} onChange={handleOrderCount} value={orderCount}></input></div>
 
                 <button class="order_inv" onClick={handleOrderInventory}>Order Inventory</button>
 

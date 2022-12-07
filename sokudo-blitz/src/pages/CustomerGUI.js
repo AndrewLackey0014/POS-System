@@ -1398,28 +1398,31 @@ var Display_Order = [];
           id="Price">Price </p>
           </table>
 
-            <div className = "orderButton" onClick = {handleOrder}>
+          <div class ="orderButton">
+            <button onClick = {handleOrder}>
                 <p>ADD TO ORDER</p>
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */
                 //displayOrder()
                 }
-            </div>
+            </button>
             
-            <div className = "orderButton" onClick = {FinishOrder}>
+            <button onClick = {FinishOrder}>
                 <p>Finish Order</p>
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */}
-            </div>
-            <div className = "orderButton" onClick = {DeleteOrder}>
+            </button>
+
+            <button onClick = {DeleteOrder}>
                 <p>Delete Contents</p>
 
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */}
-            </div>
+            </button>
+          </div>
 
             {/* Contents changes to whatever is in the order_summary string when add to order is pressed */}
         </body>
