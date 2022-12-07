@@ -55,6 +55,11 @@ function getCurrentURL () {
 
 
 function App() {
+
+ 
+
+
+
   const url = getCurrentURL()
   var backend_url = "";
   // console.log(url);
@@ -69,7 +74,8 @@ function App() {
   useEffect(() => {
     getEmployees();
   }, []);
-  
+
+
   function getEmployees() {
     fetch(backend_url+'get_employees',{
       method: 'GET',
@@ -250,32 +256,15 @@ function App() {
   return (
     <>
       {/* {getEnvironmentVarsFromExpress()} */}
+      {/* <div id="google_translate_element"></div> */}
       {component}
-      {/* <div>
-        {employees ? employees : 'There is no employee data available'}
-        <br />
-        <button onClick={createEmployee}>Add employee</button>
-        <br />
-        <button onClick={deleteEmployee}>Delete employee</button>
-        <br />
-        <button onClick={updateSalary}>update employee</button>
-      </div> */}
+    
+      
     </>
   )
 
 
 
   
-  // return (
-  //   <div>
-  //     {employees ? employees : 'There is no employee data available'}
-  //     <br />
-  //     <button onClick={createEmployee}>Add employee</button>
-  //     <br />
-  //     <button onClick={deleteEmployee}>Delete employee</button>
-  //     <br />
-  //     <button onClick={updateSalary}>update employee</button>
-  //   </div>
-  // );
 }
 export default App;
