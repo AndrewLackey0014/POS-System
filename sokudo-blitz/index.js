@@ -112,7 +112,8 @@ app.post('/create_item', (req, res) => {
 
 
 app.post('/item_update', (req, res) => {
-  console.log(req.body);
+  
+ // console.log(req.body);
   db.updateItem(req.body)
   .then(response => {
     res.status(200).send(response);

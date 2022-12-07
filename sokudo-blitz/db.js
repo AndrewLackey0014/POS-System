@@ -124,7 +124,7 @@ const updateInventory = (body) => {
       if (error) {
         reject(error)
       }
-      resolve(`Employee salary has been updated: ${results}`)
+     // resolve(`Employee salary has been updated: ${results}`)
     })
   })
 }
@@ -195,6 +195,20 @@ const getItemPrice = (body) => {
     })
   }) 
 }
+
+const InsertHistory = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { order_amount , item_id } = body
+    pool.query('UPDATE inventory SET curr_inv=$1 WHERE item_id=$2 RETURNING *', [order_amount, item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+    //  resolve(`Employee salary has been updated: ${results}`)
+    })
+  })
+}
+
+
   
   module.exports = {
     getEmployees,
@@ -208,5 +222,6 @@ const getItemPrice = (body) => {
     getCurrInv,
     createItem,
     updateItem,
-    getItemPrice
+    getItemPrice,
+    InsertHistory
 }
