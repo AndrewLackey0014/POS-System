@@ -10,6 +10,13 @@
     grid-auto-rows: 200px;
 } */
 
+h5{
+    text-align: center;
+    font-size:15px;
+
+}
+
+
 .item{
     display:block;
     position: relative;
@@ -74,7 +81,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     font-size: 12px;
-    height: 200px;
+    height: 400px;
     overflow-y: scroll;
   }
 
@@ -107,6 +114,21 @@
 
 .orderButton button{
     font-family: 'Courier New', monospace;
+    margin: auto;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 3px;
+    padding: 5 16px;
+    border-radius: 4px;
+    color: #fff;
+    background: rgb(181, 47, 47);
+    line-height: 1.15;
+    font-size: 30px;
+    height: 50px;
+    word-spacing: 0px;
+    letter-spacing: .0892857143em;
+    text-decoration: none;
     text-transform: uppercase;
     background: black;
     color: #FFFFFF;

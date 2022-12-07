@@ -9,9 +9,6 @@ export default function Navbar() {
 
                 <a href="/" class="nav_title">Home Page</a>
 
-                <a href="/ServerGUI/Items" class="nav_title">Items</a>
-
-                <a href="/ServerGUI/Reports" class="nav_title">Reports</a>
             </ul>
         </nav>
     )

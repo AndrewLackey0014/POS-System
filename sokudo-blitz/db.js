@@ -66,6 +66,8 @@ const getItems = () => {
     })
   }) 
 }
+
+  
 const createEmployee = (body) => {
     return new Promise(function(resolve, reject) {
       const { employeeid, salary, name, managerid, role } = body
@@ -76,6 +78,30 @@ const createEmployee = (body) => {
         resolve(`A new employee has been added added: ${results}`)
       })
     })
+}
+
+const createItem = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { price_amount, name, id } = body
+    pool.query('INSERT INTO items (item_id, name, price) VALUES($3, $2, $1) RETURNING *', [price_amount, name, id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(`A new item has been added added: ${results}`)
+    })
+  })
+}
+
+const updateItem = (body) => {
+  return new Promise(function(resolve, reject) {
+    const { price_amount, item_id } = body
+    pool.query('UPDATE items SET price=$1 WHERE item_id=$2 RETURNING *', [price_amount, item_id], (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(`item has been updated: ${results}`)
+    })
+  })
 }
 
 const updateSalary = (body) => {
@@ -93,9 +119,8 @@ const updateSalary = (body) => {
 
 const updateInventory = (body) => {
   return new Promise(function(resolve, reject) {
-    const { curr_inv , item_id } = body
-   
-    pool.query('UPDATE inventory SET curr_inv=$1 WHERE item_id=$2 RETURNING *', [curr_inv, item_id], (error, results) => {
+    const { order_amount , item_id } = body
+    pool.query('UPDATE inventory SET curr_inv=$1 WHERE item_id=$2 RETURNING *', [order_amount, item_id], (error, results) => {
       if (error) {
         reject(error)
       }
@@ -117,6 +142,21 @@ const getCurrInv = (body) => {
     })
   }) 
 }
+
+// const getItemPrice = (body) => {
+//   return new Promise(function(resolve, reject) {
+//     const {?} = body
+//     console.log('inside db file');
+//     pool.query('SELECT ? FROM items WHERE ?=$1', [?], (error, results) => {
+//       if (error) {
+//         reject(error)
+//       }
+//       // resolve(results.rows);
+//       resolve(results.rows);
+
+//     })
+//   }) 
+// }
 
 
 
@@ -149,5 +189,8 @@ const deleteEmployee = (body) => {
     getInventory,
     getItems,
     updateInventory,
-    getCurrInv
+    getCurrInv,
+    createItem,
+    updateItem,
+    getItemPrice
 }
