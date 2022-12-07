@@ -379,9 +379,14 @@ var Display_Order = [];
           updateInventory(obj[1]['curr_inv']-.15,1);
         }
         
-
+        
 
       }
+
+     // String contenthistory = stringorder;
+      const contenthistory= stringorder;
+      
+
 
 
       document.getElementById("Tacoo").style.backgroundColor= "white";
@@ -482,7 +487,7 @@ var Display_Order = [];
       Display_Order.push(9);
 
   }else{
-    Display_Order.push("Taco ");
+    Display_Order.push(12);
   }
   order_summary.push("Taco");
   if (document.getElementById("CheeseTaco").style.color== "red")order_summary.push("Cheese");
@@ -512,7 +517,7 @@ var Display_Order = [];
       order_summary.push("Chicken");
       Display_Order.push(1);
   }else{
-    Display_Order.push("Burrito");
+    Display_Order.push(4);
   }
 
   order_summary.push("Burrito");
@@ -538,12 +543,12 @@ var Display_Order = [];
           Display_Order.push(8);
       }else if (  document.getElementById("SteakBowl").style.color== "red"){
         order_summary.push("Steak");
-        Display_Order.push("Bowl Marinated Steak");
+        Display_Order.push(6);
     }else if (  document.getElementById("ChickenBowl").style.color== "red"){
       order_summary.push("Chicken");
-      Display_Order.push("Bowl Chili Rubbed Chicken");
+      Display_Order.push(5);
   }else{
-    Display_Order.push("Bowl");
+    Display_Order.push(12);
   }
   
   order_summary.push("Bowl");
@@ -561,19 +566,19 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefSalad").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push("Salad Seasoned Beef");
+            Display_Order.push(7);
 
         }else if (  document.getElementById("MedleySalad").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push("Salad Grilled Vegetable Medley");
+          Display_Order.push(8);
       }else if (  document.getElementById("SteakSalad").style.color== "red"){
         order_summary.push("Steak");
-        Display_Order.push("Salad Marinated Steak");
+        Display_Order.push(6);
     }else if (  document.getElementById("ChickenSalad").style.color== "red"){
       order_summary.push("Chicken");
-      Display_Order.push("Salad Chili Rubbed Chicken");
+      Display_Order.push(5);
   }else{
-    Display_Order.push("Salad");
+    Display_Order.push(12);
   }
   order_summary.push("Salad");
   if (document.getElementById("CheeseSalad").style.color== "red")order_summary.push("Cheese");
@@ -587,20 +592,20 @@ var Display_Order = [];
   
   }
   if ( document.getElementById("Drink").style.backgroundColor== "grey"){
-    Display_Order.push("Fountain Drinks");
+    Display_Order.push(16);
     order_summary.push("Drink");
   }
   //Chips and Queso
   if ( document.getElementById("Chips and Queso").style.backgroundColor== "grey"){
-    Display_Order.push("Chips & Queso");
+    Display_Order.push(14);
     order_summary.push("Chips&Queso");
   }
   if ( document.getElementById("Chips and Salsa").style.backgroundColor== "grey"){
-    Display_Order.push("Chips & Salsa");
+    Display_Order.push(15);
     order_summary.push("Chips&Salsa");
   }
   if ( document.getElementById("Chips and Guac").style.backgroundColor== "grey"){
-    Display_Order.push("Chips & Guac");
+    Display_Order.push(13);
     order_summary.push("Chips&Guac");
   }
 
@@ -1406,10 +1411,10 @@ var Display_Order = [];
 
           <table class="content">
             <li id="Contents">Contents</li>
-            <li id="DisplayOrder">Display Order</li>
+           
             <li id="Price">Price </li>
           </table>
-
+          <li id="DisplayOrder"></li>
           <div class ="orderButton">
             <button onClick = {handleOrder}>
                 <p>ADD TO ORDER</p>
