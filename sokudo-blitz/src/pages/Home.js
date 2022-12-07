@@ -12,7 +12,7 @@ export default function Home() {
             <br></br>
             <button className = "list"><a href="ServerGUI">SERVER GUI</a></button>
             <br></br>
-            <button className = "list"><a href="About">ABOUT US</a></button>
+            <button className = "list"><a href="About">GOOGLE MAP</a></button>
         </body>
     );
 }

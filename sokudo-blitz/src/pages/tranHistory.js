@@ -5,13 +5,27 @@ import React, { Component, useState, useEffect} from 'react';
 const temp_data = []
 var obj;
 
+function getCurrentURL () {
+    return window.location.href
+  }
+
+const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
+
 export default function TranHistory() {
     const [transactionHist, setTranHist] = useState(false);
     useEffect(() => {
         getTranHist();
     }, []);
     function getTranHist() {
-        fetch('http://localhost:3001/tranHist')
+        fetch(backend_url + 'tranHist')
           .then(response => {
             return response.text();
           })

@@ -6,6 +6,20 @@ import React, { useState, useRef } from "react"
      ["jon", "321"]
   ]
 
+  function getCurrentURL () {
+    return window.location.href
+  }
+
+const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
+
   var obj;
 
   const Login = () => { 
@@ -32,7 +46,7 @@ import React, { useState, useRef } from "react"
     var msg = inputRef1.current.value;
     var pwd = inputRef2.current.value;
 
-    fetch('http://localhost:3001/get_employees')
+    fetch(backend_url + 'get_employees')
       .then(response => {
           return response.text(); 
           })

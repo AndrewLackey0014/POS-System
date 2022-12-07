@@ -12,8 +12,21 @@ var sales; var excess; var restock; var combo;
 var start; var end;
 var inventory_data;
 
+function getCurrentURL () {
+    return window.location.href
+  }
 
-var data = ["hello", "howdy"]
+const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
+
+var data = ["Empty Data"]
 export default function Reports(props) {
 
     const [reports_data, setReports] = useState(false); //  Report Selection
@@ -67,7 +80,7 @@ export default function Reports(props) {
     const handleType = (type) => {  //  Determines which Report is being requested & calls for that data
         if (type === "sales"){  //  If Requesting Sales Report...
             console.log("Fetching Sales Report Data...")
-            fetch('http://localhost:3001/tranHist')
+            fetch(backend_url + 'tranHist')
                 .then(response => {
                     return response.text(); 
                     })
@@ -76,42 +89,52 @@ export default function Reports(props) {
                     });
             obj = JSON.parse(reports_data);
 
-            data = obj.map((val, key) => {
-            var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
-            if((itemTime > startDate) && (itemTime < endDate)){
-                console.log(end)
-                // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+            
+            
+            var values = obj.map((val, key) => {
+                var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
+                if((itemTime > startDate) && (itemTime < endDate)){
+                    console.log(end)
+                    // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
 
-            return (
+                    return (
+                        
+                            <tr key={key}>
+                                <td>{val.order_number}</td>
+                                <td>{val.order_id}</td>
+                                <td>{itemTime}</td>
+                                <td>{val.order_cost}</td>
+                                <td>{val.order_contents}</td>
+                            </tr>
+                           
+                )}else{
+                    console.log("NO VALID DATA ")
+                    return false;
+                }})
+                data = <>
                 <div>
-                    <table>
-                        <tr>
-                            <th>Order Number</th>
-                            <th>Order ID</th>
-                            <th>Order Time</th>
-                            <th>Order Cost</th>
-                            <th>Order Contents</th>
-                        </tr>
-                    </table>
-                    <tr key={key}>
-                        <td>{val.order_number}</td>
-                        <td>{val.order_id}</td>
-                        <td>{val.order_time}</td>
-                        <td>{val.order_cost}</td>
-                        <td>{val.order_contents}</td>
-                    </tr>
-                </div>
-            )}else{
-                console.log("NO VALID DATA ")
-                return false;
-            }})
+                            <table>
+                                <tr>
+                                    <th>Order Number</th>
+                                    <th>Order ID</th>
+                                    <th>Order Time</th>
+                                    <th>Order Cost</th>
+                                    <th>Order Contents</th>
+                                </tr>
+                                {values}
+                            </table>
+                    </div>
+        
+            </>
+
+                
         }else if (type === "excess"){   //  If Requesting Excess Report
             console.log("Fetching Excess Report Data...")
 
             // var temp_hist_data = ["Secondary"]  //  Used to get All Transaction History
             var hist_data = []    //  Used to get filtered Transaction History
 
-            fetch('http://localhost:3001/inventory')    //  Fetch Inventory Data for Current Inventory
+            fetch(backend_url + 'inventory')    //  Fetch Inventory Data for Current Inventory
                 .then(response => {
                     return response.text(); 
                     })
@@ -120,7 +143,7 @@ export default function Reports(props) {
                     });
             obj_inv = JSON.parse(reports_data_secondary);
 
-            fetch("http://localhost:3001/tranHist") //  Fetch Transaction Data for Items Sold
+            fetch(backend_url + "tranHist") //  Fetch Transaction Data for Items Sold
                     .then(response => {
                         return response.text();
                     })
@@ -231,17 +254,22 @@ export default function Reports(props) {
             }
             console.log(sold_dict)
             
-            // return (
-            //     <div>EXCESS DATA BB</div>
-            // )
-            // console.log(obj_inv[0])
-            data = obj_inv.map((val, key) => {
-                // console.log("FIRST: " + (parseInt(val.curr_inv) + parseInt(sold_dict[val.item.trim()]) * 0.1) + "\tSECOND: " + parseInt(sold_dict[val.item.trim()]))
-            // console.log("CURR: " + parseInt(val.curr_inv) + "\tSOLD: " + parseInt(sold_dict[val.item.trim()]))
-            // console.log("VAL: " + val.curr_inv + "\tNAME: " + val.item.trim() + "\tSOLD: " + sold_dict[val.item.trim()])
-            if(((parseInt(val.curr_inv) + parseInt(sold_dict[val.item.trim()]) * 0.1 ) >= parseInt(sold_dict[val.item.trim()]))){
-            return (
-                // <div>SOLD LESS THAN 10%</div>
+            var values = obj_inv.map((val, key) => {
+                if(((parseInt(val.curr_inv) + parseInt(sold_dict[val.item.trim()]) * 0.1 ) >= parseInt(sold_dict[val.item.trim()]))){
+                return (
+                    // <div>SOLD LESS THAN 10%</div>
+                            <tr key={key}>
+                                <td>{val.item_id}</td>
+                                <td>{val.item.trim()}</td>
+                                <td>{val.max_inv}</td>
+                                <td>{sold_dict[val.item.trim()]}</td>
+                            </tr>
+            )}else{
+                console.log("NO VALID DATA ")
+                // alert("Correct Date Format: YYYYMMDD")
+                return false;
+            }})
+            data = <>
                 <div>
                     <table>
                         <tr>
@@ -250,23 +278,13 @@ export default function Reports(props) {
                             <th>Max Inv</th>
                             <th>Amt Sold</th>
                         </tr>
-                        <tr key={key}>
-                            <td>{val.item_id}</td>
-                            <td>{val.item.trim()}</td>
-                            <td>{val.max_inv}</td>
-                            <td>{sold_dict[val.item.trim()]}</td>
-                        </tr>
+                        {values}
                     </table>
                 </div>
-            )}else{
-                
-                console.log("NO VALID DATA ")
-                // alert("Correct Date Format: YYYYMMDD")
-                return false;
-            }})
+            </>
         }else if (type === "restock"){  //  If Requesting Restock Report
             console.log("ENTERING RESTOCK...")
-            fetch('http://localhost:3001/inventory')
+            fetch(backend_url + 'inventory')
                 .then(response => {
                     return response.text(); 
                     })
@@ -275,34 +293,38 @@ export default function Reports(props) {
                     });
             obj = JSON.parse(reports_data);
 
-            data = obj.map((val,key) => {
+            var values = obj.map((val,key) => {
                 // console.log("Current: " + val.curr_inv + "\tMin: " + val.min_inv)
                 if ((val.curr_inv) < (val.min_inv)){
                     return (
-                        <div>
-                            <table>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Current Inv</th>
-                                    <th>Max Inv</th>
-                                    <th>Min Inv</th>
-                                </tr>
-                            
                             <tr key={key}>
                                 <td>{val.item}</td>
                                 <td>{val.curr_inv}</td>
                                 <td>{val.max_inv}</td>
                                 <td>{val.min_inv}</td>
-                            </tr></table>
-                        </div>
+                            </tr>
                 )}else{
                     console.log("NO VALID DATA ")
                     return false;
                 }
             })
+            data = <>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Current Inv</th>
+                            <th>Max Inv</th>
+                            <th>Min Inv</th>
+                        </tr>
+                        {values}
+                    </table>
+            </div>
+        
+            </>
         }else if (type === "combo"){    //  If Requesting Combo Report
             console.log("ENTERING COMBO...")
-            fetch('http://localhost:3001/tranHist')
+            fetch(backend_url + 'tranHist')
                 .then(response => {
                     return response.text(); 
                     })
@@ -340,8 +362,7 @@ export default function Reports(props) {
                     console.log("NO VALID DATA ")
                     return false;
                 }})
-        }
-        
+        } 
     }
 
     const changeRep = (index, type) => {    //  Handles Displaying selected information, changing based on which report

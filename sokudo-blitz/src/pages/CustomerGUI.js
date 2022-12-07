@@ -17,7 +17,19 @@ import Login from "./LoginCustomer";
 //import "./navMstyle.css"
 import Toppings_Page from "./Toppings_Page"
 
+function getCurrentURL () {
+  return window.location.href
+}
 
+const url = getCurrentURL()
+var backend_url = "";
+// console.log(url);
+if (url.substring(0,21) == 'http://localhost:3000') {
+  backend_url = 'http://localhost:3001/';
+}
+else {
+  backend_url = 'https://sokudoblitzbackend.onrender.com/';
+}
 
 var order_summary = [];
 var temp_array = [];
@@ -31,7 +43,7 @@ var Display_Order = [];
         getItems();
     }, []);
     function getItems() {
-        fetch('http://localhost:3001/items')
+        fetch(backend_url + 'items')
           .then(response => {
             return response.text();
           })
@@ -41,7 +53,7 @@ var Display_Order = [];
     }
 
     function updateInventory(curr_inv, item_id) {
-      fetch('http://localhost:3001/inventory_update', {
+      fetch(backend_url + 'inventory_update', {
         method: 'POST',
         headers: {  
           'Content-Type': 'application/json',
@@ -59,7 +71,7 @@ var Display_Order = [];
 
     function getCurrInv(item_id) {
       console.log(item_id);
-      fetch('http://localhost:3001/curr_inv',{
+      fetch(backend_url + 'curr_inv',{
         method: 'GET',
         headers: {  
           'Content-Type': 'application/json',

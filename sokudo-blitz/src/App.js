@@ -22,6 +22,9 @@ import NavBarServer from './pages/NavBarServer';
 import NavBarCustomer from './pages/NavBarCustomer';
 import Toppings_Page from './pages/Toppings_Page';
 
+import Gmap from "./gmap.js";
+
+
 var url = "";
 const urlweb = getCurrentURL()
   var backend_urlweb = "";
@@ -223,9 +226,11 @@ function App() {
    case "/About":
       component = <>
        <NavBarAbout/>
-      <About/>
+      {/* <About/> */}
+      <Gmap/>
       </>
       break
+
     default: 
       component = <>
       <Home/>
@@ -233,6 +238,7 @@ function App() {
       </>
       break
   }
+
   return (
     <>
       {/* {getEnvironmentVarsFromExpress()} */}

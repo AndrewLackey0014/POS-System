@@ -5,7 +5,19 @@ import React, { Component, useState, useEffect} from 'react';
 const temp_data = [];
 var obj;
 
+function getCurrentURL () {
+    return window.location.href
+  }
 
+const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
 
 
 export default function Items() {
@@ -15,7 +27,7 @@ export default function Items() {
         getItems();
     }, []);
     function getItems() {
-        fetch('http://localhost:3001/items')
+        fetch(backend_url + 'items')
           .then(response => {
             return response.text();
           })
