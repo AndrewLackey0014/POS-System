@@ -1,14 +1,15 @@
 .search{
     font-family: 'Courier New', monospace;
-    outline: 0;
-    background: grey;
+    /* outline:auto; */
+    /* background: grey; */
     width: 100%;
-    border: 0;
+    /* border: solid; */
     margin: 0 0 15px;
     padding: 10px;
     box-sizing: border-box;
     font-size: 20px;
 }
+
 
 .search button{
     font-family: 'Courier New', monospace;

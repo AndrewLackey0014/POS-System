@@ -19,16 +19,22 @@ import Toppings_Page from "./Toppings_Page"
 
 
 
+
 var order_summary = [];
 var temp_array = [];
 var obj;
+var obj2;
 var Display_Order = [];
 
  function CustomerGUI() {
     let component
     const [items_data, setItems] = useState(false);
+    const [inv_data, setInv] = useState(false);
+    const [price_data, setPrice] = useState(false);
     useEffect(() => {
         getItems();
+        getInventory();
+        getPrice();
     }, []);
     function getItems() {
         fetch('http://localhost:3001/items')
@@ -40,13 +46,50 @@ var Display_Order = [];
           });
     }
 
-    function updateInventory(curr_inv, item_id) {
+    function getInventory() {
+      fetch('http://localhost:3001/inventory')
+        .then(response => {
+          return response.text();
+        })
+        .then(data => {
+          setInv(data);
+        });
+    }
+
+    obj = JSON.parse(inv_data);
+    var temp_obj = {};
+    for (const [key, value] of Object.entries(obj)) {
+      temp_obj[value['item_id']] = value;
+    };
+    obj = temp_obj;
+    console.log(obj);
+
+    function getPrice() {
+      fetch('http://localhost:3001/items')
+        .then(response => {
+          return response.text();
+        })
+        .then(data => {
+          setPrice(data);
+        });
+    }
+
+    obj2 = JSON.parse(price_data);
+    var temp_obj2 = {};
+    for (const [key, value] of Object.entries(obj2)) {
+      temp_obj2[value['item_id']] = value;
+    };
+    obj2 = temp_obj2;
+    console.log(obj2);
+
+
+    function updateInventory(order_amount, item_id) {
       fetch('http://localhost:3001/inventory_update', {
         method: 'POST',
         headers: {  
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({curr_inv, item_id}),
+        body: JSON.stringify({order_amount, item_id}),
       })
         .then(response => {
           return response.text();
@@ -57,28 +100,43 @@ var Display_Order = [];
     }
 
 
-    function getCurrInv(item_id) {
-      console.log(item_id);
-      fetch('http://localhost:3001/curr_inv',{
-        method: 'GET',
-        headers: {  
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({item_id}),
-      })
-        .then(response => {
-          return response.text();
-        })
-        .then(data => {
-          alert(data);
-        });
-    }
+    // function getCurrInv(item_id) {
+    //   console.log(item_id);
+    //   fetch('http://localhost:3001/curr_inv',{
+    //     method: 'GET',
+    //     headers: {  
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({item_id}),
+    //   })
+    //     .then(response => {
+    //       return response.text();
+    //     })
+    //     .then(data => {
+    //       alert(data);
+    //     });
+    // }
+
+    // function getItemPrice(?) {
+    //   console.log(?);
+    //   fetch('http://localhost:3001/item_price',{
+    //     method: 'GET',
+    //     headers: {  
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({item_id}),
+    //   })
+    //     .then(response => {
+    //       return response.text();
+    //     })
+    //     .then(data => {
+    //       alert(data);
+    //     });
+    // }
     
     const [toggle, setToggle] = useState(true)
 
-    console.log(obj);
-
-    obj = JSON.parse(items_data);
+    // obj = JSON.parse(items_data);
 
     switch (window.location.pathname) {
 
@@ -235,60 +293,72 @@ var Display_Order = [];
 
       for(var i = 0; i < order_summary.length; i++){
         if(order_summary[i] == ", Chips&Guac" || order_summary[i] == "Chips&Guac"){
-          let inventory = getCurrInv(17);
-          console.log(inventory);
-          updateInventory(inventory-.5, 17);
+          updateInventory(obj[17]['curr_inv']-.5, 17);
+          updateInventory(obj[14]['curr_inv']-.25,14);
         }
         if(order_summary[i] == ", Chips&Queso" || order_summary[i] == "Chips&Queso"){
-          
+          updateInventory(obj[17]['curr_inv']-.5,17);
+          updateInventory(obj[18]['curr_inv']-.25,18);
         }
         if(order_summary[i] == ", Chips&Salsa" || order_summary[i] == "Chips&Salsa"){
-          
+          updateInventory(obj[17]['curr_inv']-.5,17);
+          updateInventory(obj[16]['curr_inv']-.25,16);
         }
         if(order_summary[i] == ", Burrito" || order_summary[i] == "Burrito"){
-          
+          updateInventory(obj[7]['curr_inv']-1,7);
+          updateInventory(obj[9]['curr_inv']-1,9);
+          updateInventory(obj[6]['curr_inv']-.15,6);
         }
         if(order_summary[i] == ", Bowl" || order_summary[i] == "Bowl"){
-          
+          updateInventory(obj[8]['curr_inv']-1,8);
+          updateInventory(obj[20]['curr_inv']-1,20);
         }
         if(order_summary[i] == ", Salad" || order_summary[i] == "Salad"){
-          
+          updateInventory(obj[8]['curr_inv']-1,8);
+          updateInventory(obj[11]['curr_inv']-1,11);
         }
         if(order_summary[i] == ", Taco" || order_summary[i] == "Taco"){
-          
+          updateInventory(obj[10]['curr_inv']-2,10);
+          updateInventory(obj[6]['curr_inv']-.15,6);
         }
         if(order_summary[i] == "Beef"){
-          
+          updateInventory(obj[24]['curr_inv']-.25,24);
         }
         if(order_summary[i] == "Steak"){
-          
+          updateInventory(obj[3]['curr_inv']-.25,3);
         }
         if(order_summary[i] == "Medley"){
-          
+          updateInventory(obj[5]['curr_inv']-.25,5);
         }
         if(order_summary[i] == "Chicken"){
-          
+          updateInventory(obj[4]['curr_inv']-.25,4);
         }
         if(order_summary[i] == "Cheese"){
-          
+          updateInventory(obj[12]['curr_inv']-.25,12);
         }
         if(order_summary[i] == "Beans"){
-          
+          updateInventory(obj[15]['curr_inv']-.25,15);
         }
         if(order_summary[i] == "Rice"){
-          
+          updateInventory(obj[2]['curr_inv']-.25,2);
         }
         if(order_summary[i] == "Salsa"){
-          
+          updateInventory(obj[16]['curr_inv']-.25,16);
         }
         if(order_summary[i] == "SourCream"){
-          
+          updateInventory(obj[13]['curr_inv']-.25,13);
         }
         if(order_summary[i] == "Guac"){
-          
+          updateInventory(obj[14]['curr_inv']-.25,14);
         }
         if(order_summary[i] == "Queso"){
-          
+          updateInventory(obj[18]['curr_inv']-.25,18);
+        }
+        if(order_summary[i] == ", Drink" || order_summary[i] == "Drink"){
+          updateInventory(obj[22]['curr_inv']-1,22);
+          updateInventory(obj[23]['curr_inv']-1,23);
+          updateInventory(obj[21]['curr_inv']-1,21);
+          updateInventory(obj[1]['curr_inv']-.15,1);
         }
         
 
@@ -381,20 +451,20 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefTaco").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push("Taco Seasoned Beef");
+            Display_Order.push(11);
 
         }else if (  document.getElementById("MedleyTaco").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push("Taco Grilled Vegetable Medley");
+          Display_Order.push(12);
       }else if (  document.getElementById("SteakTaco").style.color== "red"){
         order_summary.push("Steak");
-        Display_Order.push("Taco Marinated Steak");
+        Display_Order.push(10);
     }else if (  document.getElementById("ChickenTaco").style.color== "red"){
       order_summary.push("Chicken");
-      Display_Order.push("Taco Chili Rubbed Chicken");
+      Display_Order.push(9);
 
   }else{
-    Display_Order.push("Taco");
+    Display_Order.push("Taco ");
   }
   order_summary.push("Taco");
   if (document.getElementById("CheeseTaco").style.color== "red")order_summary.push("Cheese");
@@ -412,17 +482,17 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefBurrito").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push("Burrito Seasoned Beef");
+            Display_Order.push(3);
 
         }else if (  document.getElementById("MedleyBurrito").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push("Burrito Grilled Vegetable Medley");
+          Display_Order.push(4);
       }else if (  document.getElementById("SteakBurrito").style.color== "red"){
         order_summary.push("Steak");
-        Display_Order.push("Burrito Marinated Steak");
+        Display_Order.push(2);
     }else if (  document.getElementById("ChickenBurrito").style.color== "red"){
       order_summary.push("Chicken");
-      Display_Order.push("Burrito Chili Rubbed Chicken");
+      Display_Order.push(1);
   }else{
     Display_Order.push("Burrito");
   }
@@ -443,11 +513,11 @@ var Display_Order = [];
 
         if(  document.getElementById("BeefBowl").style.color== "red"){
             order_summary.push("Beef");
-            Display_Order.push("Bowl Seasoned Beef");
+            Display_Order.push(7);
 
         }else if (  document.getElementById("MedleyBowl").style.color== "red"){
           order_summary.push("Medley");
-          Display_Order.push("Bowl Grilled Vegetable Medley");
+          Display_Order.push(8);
       }else if (  document.getElementById("SteakBowl").style.color== "red"){
         order_summary.push("Steak");
         Display_Order.push("Bowl Marinated Steak");
@@ -535,9 +605,11 @@ var Display_Order = [];
 
         
         stringprice=0;
+        console.log(Display_Order)
       for(var i = 0; i < Display_Order.length; i++){
   //calculate for string price?
-        stringprice += 5.01; //actually an integer
+        console.log(obj2[Display_Order[i]]);
+        stringprice += parseFloat(obj2[Display_Order[i]]['price']); //actually an integer
         
         //TODO query from database with Display_Order[i], these are from the items table in database/
         // also, Display_Order[i] has the exact name given from database, making querying easier
@@ -1313,41 +1385,38 @@ var Display_Order = [];
               </button>
             </div>
           </div>
+
           <table class="content">
-
-          <p id="Contents">Contents</p>
-
-          
-
-          <p id="DisplayOrder">DisplayOrder</p>
-
-           <p 
-          
-          id="Price">Price </p>
+            <li id="Contents">Contents</li>
+            <li id="DisplayOrder">Display Order</li>
+            <li id="Price">Price </li>
           </table>
 
-            <div className = "orderButton" onClick = {handleOrder}>
+          <div class ="orderButton">
+            <button onClick = {handleOrder}>
                 <p>ADD TO ORDER</p>
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */
                 //displayOrder()
                 }
-            </div>
+            </button>
             
-            <div className = "orderButton" onClick = {FinishOrder}>
+            <button onClick = {FinishOrder}>
                 <p>Finish Order</p>
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */}
-            </div>
-            <div className = "orderButton" onClick = {DeleteOrder}>
+            </button>
+
+            <button onClick = {DeleteOrder}>
                 <p>Delete Contents</p>
 
                 {/* <button onClick = {handleOrder}>
                     
                 </button> */}
-            </div>
+            </button>
+          </div>
 
             {/* Contents changes to whatever is in the order_summary string when add to order is pressed */}
         </body>

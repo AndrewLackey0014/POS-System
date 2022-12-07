@@ -1,0 +1,22 @@
+.buttons{
+    padding: 10px;
+    position: relative;
+    background-color: teal;
+    margin: 10px;
+    align-content: center;
+    display:flex;
+    gap: 0.900%
+}
+
+.ebuttons{
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    background: black;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    width: 500px;
+}

@@ -1,3 +1,4 @@
+import "./App.css"
 
 import React, { Component, useState, useEffect} from 'react';
 
@@ -166,14 +167,14 @@ function App() {
       component =  <> 
       <NavBarManager/>
       <Employees/>
-      <div>
+      <div class = "buttons">
         {/* {employees ? employees : 'There is no employee data available'} */}
         <br />
-        <button onClick={createEmployee}>Add employee</button>
+        <button class = "ebuttons" onClick={createEmployee}>Add employee</button>
         <br />
-        <button onClick={deleteEmployee}>Delete employee</button>
+        <button class = "ebuttons" onClick={deleteEmployee}>Delete employee</button>
         <br />
-        <button onClick={updateSalary}>update employee</button>
+        <button class = "ebuttons" onClick={updateSalary}>update employee</button>
       </div>
       </>
       break
