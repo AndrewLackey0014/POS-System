@@ -1391,7 +1391,7 @@ var Display_Order = [];
 
           
 
-          <p id="DisplayOrder">DisplayOrder</p>
+          <p id="DisplayOrder"></p>
 
            <p 
           
