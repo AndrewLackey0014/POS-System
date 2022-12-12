@@ -358,35 +358,109 @@ export default function Reports(props) {
                     });
             obj = JSON.parse(reports_data);
 
+
+            var item_dict = {};
+            var test = "";
+            var bruh = "";
+
+            // for(var e in obj){
+                
+            // }
+            // console.log(obj);
+
             data = obj.map((val, key) => {
                 var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
                 if((itemTime > startDateCombo) && (itemTime < endDateCombo)){
-                    console.log(end)
+                    // console.log(val)
+                    // test.push(val.order_contents);
+                    test += val.order_contents;
+                    
                     // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
-    
-                return (
-                    <div>
-                        <table>
-                            <tr>
-                                <th>Order Number</th>
-                                <th>Order ID</th>
-                                <th>Order Time</th>
-                                <th>Order Cost</th>
-                                <th>Order Contents</th>
-                            </tr>
+                                        // console.log(test);
+
+                // return (
+                //     test
+                //     // <div>
+                //     //     <table>
+                //     //         <tr>
+                //     //             <th>Combo</th>
+                //     //             <th>Times Ordered</th>
+                //     //         </tr>
                         
-                        <tr key={key}>
-                            <td>{val.order_number}</td>
-                            <td>{val.order_id}</td>
-                            <td>{val.order_time}</td>
-                            <td>{val.order_cost}</td>
-                            <td>{val.order_contents}</td>
-                        </tr></table>
-                    </div>
-                )}else{
+                //     //     <tr key={key}>
+                //     //         <td>{val.order_contents}</td>
+                //     //         <td>{val.order_number}</td>
+                //     //     </tr></table>
+                //     // </div>
+                // )
+            }else{
                     console.log("NO VALID DATA ")
                     return false;
                 }})
+                bruh = test.split(/[ ]+/);
+                console.log(bruh);
+
+                for(var i = 0; i < bruh.length; i++){
+                    if (bruh[i] == "and" || bruh[i] == "&"){
+                        continue;
+                    }
+
+                    var combo = bruh[0] + " " + bruh[i];
+                    // console.log("COMBO: " + combo)
+                    if (combo in item_dict){
+                        item_dict[combo] = item_dict[combo] + 1;
+                    }else{
+                        item_dict[combo] = 1;
+                    }
+                }
+                console.log(item_dict);
+
+            var values;
+            var arr1 = [];
+            var arr2 = [];
+                for ( var x in item_dict){
+                    // values += <>
+                    //     <tr key={item_dict}>
+                    //         <td>{x}</td>
+                    //         <td>{item_dict[x]}</td>
+                    //     </tr>
+                    // </>
+                    // console.log("x: " + x + "\titem_dict[x]: " + item_dict[x])
+                    // values = 
+                    // <tr>
+                    //     <td>{x}</td>
+                    //     <td>{item_dict[x]}</td>
+                    // </tr>
+                    arr1.push(x);
+                    arr2.push(item_dict[x]);
+                }
+
+                console.log("arr1: " + arr1)
+                console.log("arr2: " + arr2)
+
+                var arr3 = [];
+                for(var e = 0; e < arr1.length; e++){
+                    arr3.push(arr1[e] + "\t"+arr2[e] + "\n")
+                }
+
+            data = <>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Combo</th>
+                            <th>Times Ordered</th>
+                        </tr>
+                        <tr>
+                            <td>{arr3}</td>
+                            {/* <td>{arr1}</td>
+                            <td>{arr2}</td> */}
+                        </tr>
+                    </table>
+                </div>
+            </>  
+            
+
+            
         } 
     }
 

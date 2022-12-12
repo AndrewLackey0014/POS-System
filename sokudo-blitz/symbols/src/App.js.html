@@ -1,0 +1,288 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="NAME">import</span><span class="WHIT"> </span><span class="STRN">"./App.css"</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">React</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">Component</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">useState</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">useEffect</span><span class="PUNC">}</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">'react'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  4</span> 
+<span class='line'>  5</span> </span><span class="COMM">//import NavBar from "./NavBar";</span><span class="WHIT">
+<span class='line'>  6</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Pricing</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/Pricing"</span><span class="WHIT">
+<span class='line'>  7</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">About</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/About"</span><span class="WHIT">
+<span class='line'>  8</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Home</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/Home"</span><span class="WHIT">
+<span class='line'>  9</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Transaction</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/tranHistory"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 10</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Employees</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/Employees"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 11</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Items</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/Items"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 12</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Serverorder</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/Serverorder"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 13</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Reports</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/Reports"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 14</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Inventory</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/Inventory"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">ManagerGUI</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./pages/ManagerGUI"</span><span class="WHIT">
+<span class='line'> 16</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">CustomerGUI</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">'./pages/CustomerGUI'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">ServerGUI</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">'./pages/ServerGUI'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">NavBarManager</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">'./pages/NavBarManager'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 19</span> 
+<span class='line'> 20</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">NavBarAbout</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">'./pages/NavBarAbout'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">NavBarServer</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">'./pages/NavBarServer'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 22</span> 
+<span class='line'> 23</span> 
+<span class='line'> 24</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">NavBarCustomer</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">'./pages/NavBarCustomer'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Toppings_Page</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">'./pages/Toppings_Page'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 26</span> 
+<span class='line'> 27</span> </span><span class="NAME">import</span><span class="WHIT"> </span><span class="NAME">Gmap</span><span class="WHIT"> </span><span class="NAME">from</span><span class="WHIT"> </span><span class="STRN">"./gmap.js"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 28</span> 
+<span class='line'> 29</span> 
+<span class='line'> 30</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">url</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">""</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 31</span> 
+<span class='line'> 32</span> 
+<span class='line'> 33</span> </span><span class="KEYW">const</span><span class="WHIT"> </span><span class="NAME">urlweb</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">getCurrentURL</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="WHIT">  </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">backend_urlweb</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">""</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="WHIT">  </span><span class="COMM">// console.log(url);</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">  </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">urlweb.substring</span><span class="PUNC">(</span><span class="NUMB">0</span><span class="PUNC">,</span><span class="NUMB">21</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="STRN">'http://localhost:3000'</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">    </span><span class="NAME">backend_urlweb</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'http://localhost:3001/'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">  </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">    </span><span class="NAME">backend_urlweb</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'https://sokudoblitzbackend.onrender.com/'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 42</span> 
+<span class='line'> 43</span> </span><span class="COMM">/**
+<span class='line'> 44</span>  * Grabs environmental variables from backend
+<span class='line'> 45</span>  */</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="NAME">export</span><span class="WHIT"> </span><span class="NAME">async</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">getEnvironmentVarsFromExpress</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="WHIT">  </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">await</span><span class="WHIT"> </span><span class="NAME">fetch</span><span class="PUNC">(</span><span class="NAME">backend_urlweb</span><span class="PUNC">+</span><span class="STRN">'webgetEnvironmentVars'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="PUNC">(</span><span class="NAME">res</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="WHIT">    </span><span class="NAME">url</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">res.json</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">    </span><span class="COMM">// console.log(url);</span><span class="WHIT">
+<span class='line'> 50</span> 
+<span class='line'> 51</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 53</span> 
+<span class='line'> 54</span> </span><span class="COMM">/**
+<span class='line'> 55</span>  * Decides whether on local host or deploy
+<span class='line'> 56</span>  */</span><span class="WHIT">
+<span class='line'> 57</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">getCurrentURL</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="WHIT">  </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">window.location.href</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 60</span> 
+<span class='line'> 61</span> </span><span class="COMM">// Example</span><span class="WHIT">
+<span class='line'> 62</span> 
+<span class='line'> 63</span> </span><span class="COMM">/**
+<span class='line'> 64</span>  * Displays Webpage
+<span class='line'> 65</span>  */</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">App</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 67</span> 
+<span class='line'> 68</span> </span><span class="WHIT">  </span><span class="KEYW">const</span><span class="WHIT"> </span><span class="NAME">url</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">getCurrentURL</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 69</span> </span><span class="WHIT">  </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">backend_url</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">""</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 70</span> </span><span class="WHIT">  </span><span class="COMM">// console.log(url);</span><span class="WHIT">
+<span class='line'> 71</span> </span><span class="WHIT">  </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">url.substring</span><span class="PUNC">(</span><span class="NUMB">0</span><span class="PUNC">,</span><span class="NUMB">21</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="STRN">'http://localhost:3000'</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 72</span> </span><span class="WHIT">    </span><span class="NAME">backend_url</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'http://localhost:3001/'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 73</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 74</span> </span><span class="WHIT">  </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">    </span><span class="NAME">backend_url</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'https://sokudoblitzbackend.onrender.com/'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 77</span> 
+<span class='line'> 78</span> </span><span class="WHIT">  </span><span class="KEYW">const</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">employees</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">setEmployees</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">useState</span><span class="PUNC">(</span><span class="KEYW">false</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 79</span> </span><span class="WHIT">  </span><span class="NAME">useEffect</span><span class="PUNC">(</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 80</span> </span><span class="WHIT">    </span><span class="NAME">getEmployees</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 81</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 82</span> 
+<span class='line'> 83</span> 
+<span class='line'> 84</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 85</span>  * Gets Employee data from Employee database
+<span class='line'> 86</span>  */</span><span class="WHIT">
+<span class='line'> 87</span> </span><span class="WHIT">  </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">getEmployees</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 88</span> </span><span class="WHIT">    </span><span class="NAME">fetch</span><span class="PUNC">(</span><span class="NAME">backend_url</span><span class="PUNC">+</span><span class="STRN">'get_employees'</span><span class="PUNC">,</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 89</span> </span><span class="WHIT">      </span><span class="NAME">method</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'GET'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 90</span> </span><span class="WHIT">      </span><span class="NAME">headers</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 91</span> </span><span class="WHIT">        </span><span class="STRN">'Content-Type'</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'application/json'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 92</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 93</span> </span><span class="WHIT">      
+<span class='line'> 94</span>     </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 95</span> </span><span class="WHIT">      </span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="NAME">response</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 96</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">response.text</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 97</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 98</span> </span><span class="WHIT">      </span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="NAME">data</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 99</span> </span><span class="WHIT">        </span><span class="NAME">setEmployees</span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>100</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>101</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>102</span> 
+<span class='line'>103</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>104</span>  * Create Employee to add to database
+<span class='line'>105</span>  */</span><span class="WHIT">
+<span class='line'>106</span> </span><span class="WHIT">  </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">createEmployee</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>107</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">employeeid</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">'Enter employee id'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>108</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">salary</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">'Enter salary'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>109</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">name</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">'enter name'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>110</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">managerid</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">'enter managerid'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>111</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">role</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">'enter role'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>112</span> </span><span class="WHIT">    </span><span class="NAME">fetch</span><span class="PUNC">(</span><span class="NAME">backend_url</span><span class="PUNC">+</span><span class="STRN">'employees'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>113</span> </span><span class="WHIT">      </span><span class="NAME">method</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'POST'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>114</span> </span><span class="WHIT">      </span><span class="NAME">headers</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>115</span> </span><span class="WHIT">        </span><span class="STRN">'Content-Type'</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'application/json'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>116</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>117</span> </span><span class="WHIT">      </span><span class="NAME">body</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">JSON.stringify</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="NAME">employeeid</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">salary</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">name</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">managerid</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">role</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>118</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>119</span> </span><span class="WHIT">      </span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="NAME">response</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>120</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">response.text</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>121</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>122</span> </span><span class="WHIT">      </span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="NAME">data</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>123</span> </span><span class="WHIT">        </span><span class="NAME">alert</span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>124</span> </span><span class="WHIT">        </span><span class="NAME">getEmployees</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>125</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>126</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>127</span> 
+<span class='line'>128</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>129</span>  * Updates Employee salary in Database
+<span class='line'>130</span>  */</span><span class="WHIT">
+<span class='line'>131</span> </span><span class="WHIT">  </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">updateSalary</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>132</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">employeeid</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">'Enter employee id'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>133</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">salary</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">'Enter salary'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>134</span> </span><span class="WHIT">    </span><span class="NAME">fetch</span><span class="PUNC">(</span><span class="NAME">backend_url</span><span class="PUNC">+</span><span class="STRN">'employee_update'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>135</span> </span><span class="WHIT">      </span><span class="NAME">method</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'POST'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>136</span> </span><span class="WHIT">      </span><span class="NAME">headers</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">  
+<span class='line'>137</span>         </span><span class="STRN">'Content-Type'</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'application/json'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>138</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>139</span> </span><span class="WHIT">      </span><span class="NAME">body</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">JSON.stringify</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="NAME">employeeid</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">salary</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>140</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>141</span> </span><span class="WHIT">      </span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="NAME">response</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>142</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">response.text</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>143</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>144</span> </span><span class="WHIT">      </span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="NAME">data</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>145</span> </span><span class="WHIT">        </span><span class="NAME">alert</span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>146</span> </span><span class="WHIT">        </span><span class="NAME">getEmployees</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>147</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>148</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>149</span> 
+<span class='line'>150</span> 
+<span class='line'>151</span> </span><span class="COMM">/**
+<span class='line'>152</span>  * Delete Employee Data from Database
+<span class='line'>153</span>  */</span><span class="WHIT">
+<span class='line'>154</span> </span><span class="WHIT">  </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">deleteEmployee</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>155</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">'Enter employeeid'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>156</span> </span><span class="WHIT">    </span><span class="COMM">// console.log(id);</span><span class="WHIT">
+<span class='line'>157</span> </span><span class="WHIT">    </span><span class="NAME">fetch</span><span class="PUNC">(</span><span class="NAME">backend_url</span><span class="PUNC">+</span><span class="STRN">'delete_employee'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>158</span> </span><span class="WHIT">      </span><span class="NAME">method</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'DELETE'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="WHIT">      </span><span class="NAME">headers</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>160</span> </span><span class="WHIT">        </span><span class="STRN">'Content-Type'</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'application/json'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>161</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>162</span> </span><span class="WHIT">      </span><span class="NAME">body</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">JSON.stringify</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="NAME">id</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>163</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>164</span> </span><span class="WHIT">      </span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="NAME">response</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>165</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">response.text</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>166</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>167</span> </span><span class="WHIT">      </span><span class="PUNC">.</span><span class="NAME">then</span><span class="PUNC">(</span><span class="NAME">data</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>168</span> </span><span class="WHIT">        </span><span class="NAME">alert</span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="WHIT">        </span><span class="NAME">getEmployees</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>170</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>171</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>172</span> </span><span class="WHIT">  </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">component</span><span class="WHIT">
+<span class='line'>173</span> </span><span class="WHIT">  </span><span class="KEYW">switch</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">window.location.pathname</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>174</span> </span><span class="WHIT">    </span><span class="KEYW">case</span><span class="WHIT"> </span><span class="STRN">"/pricing"</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'>175</span> </span><span class="WHIT">      </span><span class="NAME">component</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="NAME">Pricing</span><span class="PUNC">/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>176</span> </span><span class="WHIT">      </span><span class="KEYW">break</span><span class="WHIT">
+<span class='line'>177</span> 
+<span class='line'>178</span> </span><span class="WHIT">    </span><span class="KEYW">case</span><span class="WHIT"> </span><span class="STRN">"/ManagerGUI"</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'>179</span> </span><span class="WHIT">      </span><span class="NAME">component</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="NAME">ManagerGUI</span><span class="PUNC">/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>180</span> </span><span class="WHIT">      </span><span class="KEYW">break</span><span class="WHIT">
+<span class='line'>181</span> </span><span class="WHIT">    </span><span class="KEYW">case</span><span class="WHIT"> </span><span class="STRN">"/ManagerGUI/tranHistory"</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'>182</span> </span><span class="WHIT">      </span><span class="NAME">component</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT">  </span><span class="PUNC">&lt;</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>183</span> </span><span class="WHIT">      </span><span class="PUNC">&lt;</span><span class="NAME">NavBarManager</span><span class="PUNC">/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>184</span> </span><span class="WHIT">      </span><span class="PUNC">&lt;</span><span class="NAME">Transaction</span><span class="PUNC">/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>185</span> </span><span class="WHIT">      </span><span class="PUNC">&lt;</span><span class="REGX">/>
+<span class='line'>186</span>       break
+<span class='line'>187</span>     case "/</span><span class="NAME">ManagerGUI</span><span class="PUNC">/</span><span class="NAME">Employees</span><span class="STRN">":
+<span class='line'>188</span>       component =  &lt;> 
+<span class='line'>189</span>       &lt;NavBarManager/>
+<span class='line'>190</span>       &lt;Employees/>
+<span class='line'>191</span>       &lt;div class = "</span><span class="NAME">buttons</span><span class="STRN">">
+<span class='line'>192</span>         {/* {employees ? employees : 'There is no employee data available'} */}
+<span class='line'>193</span>         &lt;br />
+<span class='line'>194</span>         &lt;button class = "</span><span class="NAME">ebuttons</span><span class="STRN">" onClick={createEmployee}>Add employee&lt;/button>
+<span class='line'>195</span>         &lt;br />
+<span class='line'>196</span>         &lt;button class = "</span><span class="NAME">ebuttons</span><span class="STRN">" onClick={deleteEmployee}>Delete employee&lt;/button>
+<span class='line'>197</span>         &lt;br />
+<span class='line'>198</span>         &lt;button class = "</span><span class="NAME">ebuttons</span><span class="STRN">" onClick={updateSalary}>update employee&lt;/button>
+<span class='line'>199</span>       &lt;/div>
+<span class='line'>200</span>       &lt;/>
+<span class='line'>201</span>       break
+<span class='line'>202</span>     case "</span><span class="REGX">/ManagerGUI/</span><span class="NAME">Inventory</span><span class="STRN">":
+<span class='line'>203</span>       component =  &lt;>
+<span class='line'>204</span>       &lt;NavBarManager/>
+<span class='line'>205</span>       &lt;Inventory/>
+<span class='line'>206</span>       &lt;/> 
+<span class='line'>207</span>       break
+<span class='line'>208</span>     case "</span><span class="REGX">/ManagerGUI/</span><span class="NAME">Items</span><span class="STRN">":
+<span class='line'>209</span>       component =  &lt;>
+<span class='line'>210</span>       &lt;NavBarManager/>
+<span class='line'>211</span>       &lt;Items/>
+<span class='line'>212</span>       &lt;/> 
+<span class='line'>213</span>       break
+<span class='line'>214</span>     case "</span><span class="REGX">/ManagerGUI/</span><span class="NAME">Reports</span><span class="STRN">":
+<span class='line'>215</span>       component =  &lt;>
+<span class='line'>216</span>       &lt;NavBarManager/>
+<span class='line'>217</span>       &lt;Reports/>
+<span class='line'>218</span>       &lt;/> 
+<span class='line'>219</span>       break
+<span class='line'>220</span>     case "</span><span class="REGX">/CustomerGUI":
+<span class='line'>221</span>       component= &lt;>
+<span class='line'>222</span>       &lt;NavBarCustomer/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>223</span> </span><span class="WHIT">     </span><span class="PUNC">&lt;</span><span class="NAME">CustomerGUI</span><span class="PUNC">/</span><span class="PUNC">></span><span class="WHIT"> 
+<span class='line'>224</span>       </span><span class="PUNC">&lt;</span><span class="REGX">/>
+<span class='line'>225</span>       break
+<span class='line'>226</span>     case "/</span><span class="NAME">CustomerGUI</span><span class="PUNC">/</span><span class="NAME">Toppings_Page</span><span class="STRN">":
+<span class='line'>227</span>       component= &lt;>
+<span class='line'>228</span>       &lt;Toppings_Page/>
+<span class='line'>229</span>       &lt;/>
+<span class='line'>230</span>       break
+<span class='line'>231</span>     case "</span><span class="REGX">/CustomerGUI/</span><span class="NAME">Item</span><span class="STRN">":
+<span class='line'>232</span>       component= &lt;CustomerGUI/>
+<span class='line'>233</span>       break
+<span class='line'>234</span>     case "</span><span class="REGX">/ServerGUI":
+<span class='line'>235</span>       component= &lt;ServerGUI/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>236</span> </span><span class="WHIT">      </span><span class="KEYW">break</span><span class="WHIT">
+<span class='line'>237</span> </span><span class="WHIT">    </span><span class="KEYW">case</span><span class="WHIT"> </span><span class="STRN">"/ServerGUI/Items"</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'>238</span> </span><span class="WHIT">      </span><span class="NAME">component</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>239</span> </span><span class="WHIT">      </span><span class="PUNC">&lt;</span><span class="NAME">NavBarServer</span><span class="PUNC">/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>240</span> </span><span class="WHIT">      </span><span class="PUNC">&lt;</span><span class="NAME">Items</span><span class="PUNC">/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>241</span> </span><span class="WHIT">      </span><span class="PUNC">&lt;</span><span class="REGX">/>
+<span class='line'>242</span>       break
+<span class='line'>243</span> 
+<span class='line'>244</span>       case "/</span><span class="NAME">ServerGUI</span><span class="PUNC">/</span><span class="NAME">Serverorder</span><span class="STRN">":
+<span class='line'>245</span>         component = &lt;>
+<span class='line'>246</span>         &lt;NavBarServer/>
+<span class='line'>247</span>         &lt;Serverorder/>
+<span class='line'>248</span>         &lt;/>
+<span class='line'>249</span>         break
+<span class='line'>250</span>       case "</span><span class="REGX">/ServerGUI/</span><span class="NAME">Reports</span><span class="STRN">":
+<span class='line'>251</span>         component = &lt;>
+<span class='line'>252</span>         &lt;NavBarServer/>
+<span class='line'>253</span>         &lt;Reports/>
+<span class='line'>254</span>         &lt;/>
+<span class='line'>255</span>         break
+<span class='line'>256</span> 
+<span class='line'>257</span> 
+<span class='line'>258</span>    case "</span><span class="REGX">/About":
+<span class='line'>259</span>       component = &lt;>
+<span class='line'>260</span>        &lt;NavBarAbout/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>261</span> </span><span class="WHIT">      </span><span class="PUNC">{</span><span class="COMM">/* &lt;About/> */</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>262</span> </span><span class="WHIT">      </span><span class="PUNC">&lt;</span><span class="NAME">Gmap</span><span class="PUNC">/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>263</span> </span><span class="WHIT">      </span><span class="PUNC">&lt;</span><span class="REGX">/>
+<span class='line'>264</span>       break
+<span class='line'>265</span> 
+<span class='line'>266</span>     default: 
+<span class='line'>267</span>       component = &lt;>
+<span class='line'>268</span>       &lt;Home/</span><span class="PUNC">></span><span class="WHIT">
+<span class='line'>269</span> </span><span class="WHIT">      
+<span class='line'>270</span>       </span><span class="PUNC">&lt;</span><span class="REGX">/>
+<span class='line'>271</span>       break
+<span class='line'>272</span>   }
+<span class='line'>273</span> 
+<span class='line'>274</span>   return (
+<span class='line'>275</span>     &lt;>
+<span class='line'>276</span>       {/</span><span class="PUNC">*</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="NAME">getEnvironmentVarsFromExpress</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">}</span><span class="WHIT"> </span><span class="PUNC">*</span><span class="REGX">/}
+<span class='line'>277</span>       {/</span><span class="PUNC">*</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="NAME">div</span><span class="WHIT"> </span><span class="NAME">id</span><span class="PUNC">=</span><span class="STRN">"google_translate_element"</span><span class="PUNC">></span><span class="PUNC">&lt;</span><span class="REGX">/div> */</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>278</span> </span><span class="WHIT">      </span><span class="PUNC">{</span><span class="NAME">component</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>279</span> </span><span class="WHIT">    
+<span class='line'>280</span>       
+<span class='line'>281</span>     </span><span class="PUNC">&lt;</span><span class="TOKN"></span></pre></body></html>

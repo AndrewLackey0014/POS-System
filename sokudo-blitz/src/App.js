@@ -26,6 +26,12 @@ import Toppings_Page from './pages/Toppings_Page';
 
 import Gmap from "./gmap.js";
 
+import { gapi } from 'gapi-script';
+import LoginButton from "./pages/oauthLogin";
+import LogoutButton from "./pages/oauthLogout"
+import Login from "./pages/LoginManager";
+
+
 
 var url = "";
 
@@ -64,6 +70,7 @@ function getCurrentURL () {
  * Displays Webpage
  */
 function App() {
+  const clientId = "231326845154-144brcs88gukjjin9alrmbkt8pdno2ti.apps.googleusercontent.com";
 
   const url = getCurrentURL()
   var backend_url = "";
@@ -78,6 +85,15 @@ function App() {
   const [employees, setEmployees] = useState(false);
   useEffect(() => {
     getEmployees();
+    
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ""
+      })
+    };
+
+    gapi.load('client:auth2', start);
   }, []);
 
 
@@ -266,6 +282,8 @@ function App() {
     default: 
       component = <>
       <Home/>
+      {/* <LoginButton/>
+      <LogoutButton/> */}
       
       </>
       break
