@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: src/pages/LoginManager.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: src/pages/LoginManager.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import "./loginCstyle.css"
+import React, { useState, useRef } from "react"
+
+  let data = [
+    ["david", "123"]
+  ]
+
+  var obj;
+
+  /**
+ * Gets Current window's URL
+ */
+  function getCurrentURL () {
+    return window.location.href
+  }
+
+const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
+
+  /**
+ * Displays Login Page
+ */
+  const Login = () => { 
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+    var id, pswrd;  
+    const [reports_data, setReports] = useState({})
+
+
+    /**
+ * Handles User input Name/ID
+ */
+    const handleNameChange = event => {
+      setName(event.target.value);
+      id = event.target.value;
+    };
+
+/**
+ * Handles User input Password
+ */
+    const handlePwdChange = event => {
+      setPassword(event.target.value);
+      pswrd = event.target.value;
+    };
+
+    const inputRef1 = useRef(null);
+    const inputRef2 = useRef(null);
+
+    /**
+ * Checks input Credentials when Login Button Clicked
+ */
+    function handleClick() {
+
+    var msg = inputRef1.current.value;
+    var pwd = inputRef2.current.value;
+
+    fetch(backend_url + 'get_employees')
+      .then(response => {
+          return response.text(); 
+          })
+      .then(data => {
+          setReports(data);
+          });
+    obj = JSON.parse(reports_data);
+
+    data = obj.map((val, key) => {
+      // console.log("Val Name: " + val.name + "\tMSG: " + msg + "\tEVAl: " + ((test + "                                            " === val.name)))
+      if ((val.name === (msg+"                                            ")) &amp;&amp; (((String(val.employeeid)) + (String(val.managerid))) === pwd) ){
+        console.log("Successfully Logged In: " + msg + "\tPWD: " + pwd)
+        window.location.pathname="/ManagerGUI/tranHistory";
+        return true;
+      }else{
+        console.log("Failed to Login")
+        return false;
+      }
+    })
+    }
+    
+    return (
+        //   &lt;div class="nav1">
+        //     &lt;img alt = "Cabo Grill logo" title = "logo" className = "logologin" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
+        //     &lt;h1 class="center">WELCOME TO CABO GRILL&lt;/h1>
+        //     INPUT MANAGER ID:
+        //     &lt;br/>
+        //     &lt;div class="textbox">
+        //       &lt;input ref={inputRef1} type="text" id="name" name="name" onChange={handleNameChange} value={name} /> 
+        //       &lt;input ref={inputRef2} type="text" id="password" name="password" onChange={handlePwdChange} value={password} />
+        //     &lt;/div>
+        //     &lt;br/>
+        //     &lt;button class="list" onClick={handleClick}>Login&lt;/button>
+        //     &lt;br/>
+        // &lt;button class="list" onClick={() => window.location.pathname = "/"}>Return&lt;/button>
+        // &lt;/div>
+
+        &lt;div class="nav1">
+          &lt;img alt = "Cabo Grill logo" title = "logo" className = "logologin" src="https://api.dineoncampus.com/files/images/fb0f93d4-8920-4567-b1e6-70b3ee72690c.png" />
+          &lt;br/>
+          &lt;div class="form">
+              &lt;input ref={inputRef1} type="text" placeholder = "Manager ID" id="name" name="name" onChange={handleNameChange} value={name} /> 
+              &lt;input ref={inputRef2} type="text" placeholder = "Password" id="password" name="password" onChange={handlePwdChange} value={password} />
+              &lt;button onClick={handleClick}>Login&lt;/button>
+              &lt;br/>
+              &lt;button onClick={() => window.location.pathname = "/"}>Return&lt;/button>
+        &lt;/div>
+      &lt;/div>
+    );
+  };
+  export default Login;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CustomerGUI">CustomerGUI</a></li><li><a href="global.html#InsertHistory">InsertHistory</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#ManagerGUI">ManagerGUI</a></li><li><a href="global.html#Map">Map</a></li><li><a href="global.html#ServerGUI">ServerGUI</a></li><li><a href="global.html#createEmployee">createEmployee</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#deleteEmployee">deleteEmployee</a></li><li><a href="global.html#getCurrInv">getCurrInv</a></li><li><a href="global.html#getCurrentURL">getCurrentURL</a></li><li><a href="global.html#getEmployees">getEmployees</a></li><li><a href="global.html#getEnvironmentVarsFromExpress">getEnvironmentVarsFromExpress</a></li><li><a href="global.html#getInventory">getInventory</a></li><li><a href="global.html#getItemPrice">getItemPrice</a></li><li><a href="global.html#getItems">getItems</a></li><li><a href="global.html#getTranHist">getTranHist</a></li><li><a href="global.html#updateInventory">updateInventory</a></li><li><a href="global.html#updateItem">updateItem</a></li><li><a href="global.html#updateSalary">updateSalary</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 23:46:22 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

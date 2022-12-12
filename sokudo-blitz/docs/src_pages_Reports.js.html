@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: src/pages/Reports.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: src/pages/Reports.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import "./Reports.css"
+import React, { Component, useState, useEffect, useRef, isValidElement} from 'react';
+
+
+const temp_data = [];
+var obj; var obj_hist; var obj_inv;
+var rep_type;
+var component;
+var dataTable;
+var numBtns = [1,2,3,4];
+var num = 0;
+var sales; var excess; var restock; var combo;
+var start; var end;
+var inventory_data;
+
+/**
+ * Gets Current window's URL
+ */
+function getCurrentURL () {
+    return window.location.href
+  }
+
+const url = getCurrentURL()
+  var backend_url = "";
+  // console.log(url);
+  if (url.substring(0,21) == 'http://localhost:3000') {
+    backend_url = 'http://localhost:3001/';
+  }
+  else {
+    backend_url = 'https://sokudoblitzbackend.onrender.com/';
+  }
+
+var data = ["Empty Data"]
+
+/**
+ * Displays Reports Page of Manager GUI
+ */
+export default function Reports(props) {
+
+    const [reports_data, setReports] = useState(false); //  Report Selection
+    const [reports_data_secondary, setReportsSecondary] = useState(false);
+    const [rep_type, setRepType] = useState({});    //  Report Selection 
+
+    const [startDate, setStartDate] = useState(''); //  Sales Report
+    const [endDate, setEndDate] = useState(''); //  Sales Report
+    
+    const [excessDate, setExcessDate] = useState('');   //  Excess Report
+
+    const [startDateCombo, setStartDateCombo] = useState('');    //  Combo Report
+    const [endDateCombo, setEndDateCombo] = useState('')    //  Combo Report
+
+    
+/**
+ * Handles Sales Report Start Date Input
+ */
+    const handleStartChange = event => {    //  On click, Gets Sales Report Start Time
+        setStartDate(event.target.value);    start = inputRef1.current.value;
+        console.log(start)
+    }
+
+    /**
+ * Handles Sales Report End Date Input
+ */
+    const handleEndChange = event => {  //  On click, gets Sales Report End time
+        setEndDate(event.target.value);        end = inputRef2.current.value;
+        console.log(end)
+    }
+
+    /**
+ * Handles Excess Report Date Input
+ */
+    const handleExcessDate = event => { //  On click, gets Excess Report Date (for transaction history table)
+        setExcessDate(event.target.value);      excessDate = inputRef3.current.value;
+        console.log(excess)
+    }
+
+/**
+ * Handle Combo Report Start Time Input
+ */
+    const handleStartChangeCombo = event => {    //  On click, Gets Combo Report Start Time
+        setStartDateCombo(event.target.value);    start = inputRef4.current.value;
+        console.log(start)
+    }
+
+/**
+ * Handle Combo Report End Time Input
+ */
+    const handleEndChangeCombo = event => {  //  On click, gets Combo Report End time
+        setEndDateCombo(event.target.value);        end = inputRef5.current.value;
+        console.log(end)
+    }
+
+    const inputRef1 = useRef(null); //  Sales Report
+    const inputRef2 = useRef(null); //  Sales Report
+
+    const inputRef3 = useRef(null); //  Excess Report
+
+    const inputRef4 = useRef(null); //  Combo Report
+    const inputRef5 = useRef(null); //  Combo Report
+
+/**
+ * Displays the type of Report based on button clicked
+ * @param {String} type - Name/Type of Report requested via button click
+ */
+    const handleType = (type) => {  //  Determines which Report is being requested &amp; calls for that data
+        if (type === "sales"){  //  If Requesting Sales Report...
+            console.log("Fetching Sales Report Data...")
+            fetch(backend_url + 'tranHist')
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReports(data);
+                    });
+            obj = JSON.parse(reports_data);
+
+            
+            
+            var values = obj.map((val, key) => {
+                var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
+                if((itemTime > startDate) &amp;&amp; (itemTime &lt; endDate)){
+                    console.log(end)
+                    // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+
+                    return (
+                        
+                            &lt;tr key={key}>
+                                &lt;td>{val.order_number}&lt;/td>
+                                &lt;td>{val.order_id}&lt;/td>
+                                &lt;td>{itemTime}&lt;/td>
+                                &lt;td>{val.order_cost}&lt;/td>
+                                &lt;td>{val.order_contents}&lt;/td>
+                            &lt;/tr>
+                           
+                )}else{
+                    console.log("NO VALID DATA ")
+                    return false;
+                }})
+                data = &lt;>
+                &lt;div>
+                            &lt;table>
+                                &lt;tr>
+                                    &lt;th>Order Number&lt;/th>
+                                    &lt;th>Order ID&lt;/th>
+                                    &lt;th>Order Time&lt;/th>
+                                    &lt;th>Order Cost&lt;/th>
+                                    &lt;th>Order Contents&lt;/th>
+                                &lt;/tr>
+                                {values}
+                            &lt;/table>
+                    &lt;/div>
+        
+            &lt;/>
+
+                
+        }else if (type === "excess"){   //  If Requesting Excess Report
+            console.log("Fetching Excess Report Data...")
+
+            // var temp_hist_data = ["Secondary"]  //  Used to get All Transaction History
+            var hist_data = []    //  Used to get filtered Transaction History
+
+            fetch(backend_url + 'inventory')    //  Fetch Inventory Data for Current Inventory
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReportsSecondary(data);
+                    });
+            obj_inv = JSON.parse(reports_data_secondary);
+
+            fetch(backend_url + "tranHist") //  Fetch Transaction Data for Items Sold
+                    .then(response => {
+                        return response.text();
+                    })
+                    .then(data => {
+                        setReports(data);
+                    })
+            obj_hist = JSON.parse(reports_data);
+
+            //  Filter Data based on input date
+            var temp_hist_data = obj_hist.map((val, key) => {
+                var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
+                if (itemTime >= excessDate){
+                    hist_data.push(val.order_contents)
+                }
+                
+            })
+
+            var order_dict = {};
+            for(var i = 0; i &lt; hist_data.length; i++){
+                //  order_dictionary to go through each order's contents and tally the values of each item type
+                //  Collect # of each item sold, Do the math with data from the item's current value (from obj_inv-> val.curr_inv) to determine if its excess
+                var splitString = hist_data[i].split(/[ ]+/);
+                for(var j = 0; j &lt; splitString.length; j++){
+                    if (!order_dict[splitString[j]]){
+                        order_dict[splitString[j]] = 1;
+                    }else{
+                        order_dict[splitString[j]] += 1;
+                    }
+                }
+                
+            }
+            delete order_dict["&amp;"];   delete order_dict[""];    delete order_dict["and"];     //  Remove Non-Inventory Words
+            console.log(order_dict)
+
+            var sold_dict = {
+                "Big Tortilla": 0,
+                "Plates": 0,
+                "Foil": 0,
+                "Bowls w/ Lids": 0,
+                "Plastic ware": 0,
+                "Small Tortilla": 0,
+                "Beef": 0,
+                "Steak": 0,
+                "Spice Chicken": 0,
+                "Vegetables": 0,
+                "Chips": 0,
+                "Salsa": 0,
+                "Guacamole": 0,
+                "Queso": 0,
+                "Soda Syrup": 0,
+                "Cups": 0,
+                "Straws": 0,
+                "Lids": 0,
+                "Rice": 0,
+                "Cheese": 0,
+                "Sour Cream": 0,
+                "Beans": 0
+            };
+            for(var key in order_dict){
+                if (key === "BurritoSteak" || key === "BurritoBeef" || key === "BurritoChicken" || key === "BurritoMedley" || key === "Burrito"){
+                    sold_dict["Big Tortilla"] += order_dict[key] * 1.0;
+                    sold_dict["Plates"] += order_dict[key] * 1.0;
+                    sold_dict["Foil"] += order_dict[key] * 0.1;
+                }else if (key === ("BowlSteak")||(key === ("BowlBeef"))||(key === ("BowlChicken"))||(key === ("BowlMedley"))||(key === ("Bowl"))){
+                    sold_dict["Bowls w/ Lids"] += order_dict[key] * 1.0;
+                    sold_dict["Plastic ware"] += order_dict[key] * 1.0;
+                }else if (key === ("TacoSteak")||(key === ("TacoBeef"))||(key === ("TacoChicken"))||(key === ("TacoMedley"))||(key === ("Taco"))){
+                    sold_dict["Small Tortilla"] += order_dict[key] * 2.0;
+                    sold_dict["Plates"] += order_dict[key] * 2.0;
+                    sold_dict["Foil"] += order_dict[key] * 0.09;
+                }else if (key === ("SaladSteak")||(key === ("SaladBeef"))||(key === ("SaladChicken"))||(key === ("SaladMedley"))||(key === ("Salad"))){
+                    sold_dict["Bowls w/ Lids"] += order_dict[key] * 1.0;
+                    sold_dict["Plastic ware"] += order_dict[key] * 1.0;
+                }
+
+                if (key === ("BurritoBeef")||(key === ("TacoBeef"))||(key === ("SaladBeef"))||(key === ("BowlBeef"))){
+                    sold_dict["Beef"] += order_dict[key] * 0.25;
+                }else if (key === ("BurritoSteak")||(key === ("TacoSteak"))||key === ("SaladSteak")||key === ("BowlSteak")){
+                    sold_dict["Steak"] += order_dict[key] * 0.25;
+                }else if (key === ("BurritoChicken")||(key === ("TacoChicken"))||key === ("SaladChicken")||key === ("BowlChicken")){
+                    sold_dict["Spice Chicken"] += order_dict[key] * 0.25;
+                }else if (key === ("BurritoMedley")||(key === ("TacoMedley"))||key === ("SaladMedley")||key === ("BowlMedley")){
+                    sold_dict["Vegetables"] += order_dict[key] * 0.25;
+                }else if (key === ("Chips")){
+                    sold_dict["Chips"] += order_dict[key] * 0.15;
+                }else if (key === ("and")){
+                    //  NOTHING
+                }else if (key === ("Salsa")){
+                    sold_dict["Salsa"] += order_dict[key] * 0.15;
+                }else if (key === ("Guac")){
+                    sold_dict["Guacamole"] += order_dict[key] * 0.15;
+                }else if (key === ("Queso")){
+                    sold_dict["Queso"] += order_dict[key] * 0.15;
+                }else if (key === ("Drink")){
+                    sold_dict["Soda Syrup"] += order_dict[key] * 0.015;
+                    sold_dict["Cups"] += order_dict[key] * 1.0;
+                    sold_dict["Straws"] += order_dict[key] * 1.0;
+                    sold_dict["Lids"] += order_dict[key] * 1.0;
+                }else if (key === ("Rice")){
+                    sold_dict["Rice"] += order_dict[key] * 0.15;
+                }else if (key === ("Cheese")){
+                    sold_dict["Cheese"] += order_dict[key] * 0.15;
+                }else if (key === ("SourCream")){
+                    sold_dict["Sour Cream"] += order_dict[key] * 0.15;
+                }else if (key === ("Beans")){
+                    sold_dict["Beans"] += order_dict[key] * 0.15;
+                }
+            }
+            console.log(sold_dict)
+            
+            var values = obj_inv.map((val, key) => {
+                if(((parseInt(val.curr_inv) + parseInt(sold_dict[val.item.trim()]) * 0.1 ) >= parseInt(sold_dict[val.item.trim()]))){
+                return (
+                    // &lt;div>SOLD LESS THAN 10%&lt;/div>
+                            &lt;tr key={key}>
+                                &lt;td>{val.item_id}&lt;/td>
+                                &lt;td>{val.item.trim()}&lt;/td>
+                                &lt;td>{val.max_inv}&lt;/td>
+                                &lt;td>{sold_dict[val.item.trim()]}&lt;/td>
+                            &lt;/tr>
+            )}else{
+                console.log("NO VALID DATA ")
+                // alert("Correct Date Format: YYYYMMDD")
+                return false;
+            }})
+            data = &lt;>
+                &lt;div>
+                    &lt;table>
+                        &lt;tr>
+                            &lt;th>Item ID&lt;/th>
+                            &lt;th>Item Name&lt;/th>
+                            &lt;th>Max Inv&lt;/th>
+                            &lt;th>Amt Sold&lt;/th>
+                        &lt;/tr>
+                        {values}
+                    &lt;/table>
+                &lt;/div>
+            &lt;/>
+        }else if (type === "restock"){  //  If Requesting Restock Report
+            console.log("ENTERING RESTOCK...")
+            fetch(backend_url + 'inventory')
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReports(data);
+                    });
+            obj = JSON.parse(reports_data);
+
+            var values = obj.map((val,key) => {
+                // console.log("Current: " + val.curr_inv + "\tMin: " + val.min_inv)
+                if ((val.curr_inv) &lt; (val.min_inv)){
+                    return (
+                            &lt;tr key={key}>
+                                &lt;td>{val.item}&lt;/td>
+                                &lt;td>{val.curr_inv}&lt;/td>
+                                &lt;td>{val.max_inv}&lt;/td>
+                                &lt;td>{val.min_inv}&lt;/td>
+                            &lt;/tr>
+                )}else{
+                    console.log("NO VALID DATA ")
+                    return false;
+                }
+            })
+            data = &lt;>
+                &lt;div>
+                    &lt;table>
+                        &lt;tr>
+                            &lt;th>Item&lt;/th>
+                            &lt;th>Current Inv&lt;/th>
+                            &lt;th>Max Inv&lt;/th>
+                            &lt;th>Min Inv&lt;/th>
+                        &lt;/tr>
+                        {values}
+                    &lt;/table>
+            &lt;/div>
+        
+            &lt;/>
+        }else if (type === "combo"){    //  If Requesting Combo Report
+            console.log("ENTERING COMBO...")
+            fetch(backend_url + 'tranHist')
+                .then(response => {
+                    return response.text(); 
+                    })
+                .then(data => {
+                    setReports(data);
+                    });
+            obj = JSON.parse(reports_data);
+
+            data = obj.map((val, key) => {
+                var itemTime = parseInt(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])  //  Get Order Date
+                if((itemTime > startDateCombo) &amp;&amp; (itemTime &lt; endDateCombo)){
+                    console.log(end)
+                    // console.log("num: " + val.order_number + "1: " + val.order_time[8] + "\t2: " + val.order_time[9] + "\t3: " + (parseInt( val.order_time[8] + val.order_time[9])+5) )                // console.log(val.order_time[0] + val.order_time[1] + val.order_time[2] + val.order_time[3] + val.order_time[5] + val.order_time[6] + val.order_time[8] + val.order_time[9])
+    
+                return (
+                    &lt;div>
+                        &lt;table>
+                            &lt;tr>
+                                &lt;th>Order Number&lt;/th>
+                                &lt;th>Order ID&lt;/th>
+                                &lt;th>Order Time&lt;/th>
+                                &lt;th>Order Cost&lt;/th>
+                                &lt;th>Order Contents&lt;/th>
+                            &lt;/tr>
+                        
+                        &lt;tr key={key}>
+                            &lt;td>{val.order_number}&lt;/td>
+                            &lt;td>{val.order_id}&lt;/td>
+                            &lt;td>{val.order_time}&lt;/td>
+                            &lt;td>{val.order_cost}&lt;/td>
+                            &lt;td>{val.order_contents}&lt;/td>
+                        &lt;/tr>&lt;/table>
+                    &lt;/div>
+                )}else{
+                    console.log("NO VALID DATA ")
+                    return false;
+                }})
+        } 
+    }
+
+    /**
+ * Displays currently requested report, hiding the others
+ * @param {int} index - Number of which report is being requested via button click
+ * @param {String} type - Name of which report is being requested via button click
+ */
+    const changeRep = (index, type) => {    //  Handles Displaying selected information, changing based on which report
+        
+    // this will be run for the amount of button you have
+        if (!rep_type[index]) {
+          setRepType((rep_type) => ({
+            ...rep_type,
+            [index]: " ",
+          }));
+        }
+    
+        // for every onclick, this function will be run
+        return () => {
+          handleType(type);
+          setRepType((rep_type) => ({
+            ...(
+              Object.keys(rep_type)
+                .reduce((a, b) => ({
+                  ...a,
+                  [b]: " "
+                }), {})
+            ),
+            [index]: rep_type[index] === " " ? data : " ",
+          }));
+        };
+      };
+
+    //  Left side of Display; Contains all Input Fields and Buttons
+    component = &lt;> 
+        &lt;div class="column left">
+            &lt;div class="row">
+            {/* Sales Report */}
+                &lt;input ref={inputRef1} id="startDate" type="text" value={startDate} onChange={handleStartChange} placeholder="YYYY/MM/DD">&lt;/input>
+                &lt;input ref={inputRef2} id="endDate" type="text" value={endDate} onChange={handleEndChange} placeholder="YYYY/MM/DD">&lt;/input>
+                &lt;button id={numBtns[0]} onClick={changeRep(1, "sales")} value={false}>Sales Report&lt;/button>&lt;br/>
+            &lt;/div>
+
+            &lt;div class="row">
+            {/* Excess Report */}
+                &lt;input ref={inputRef3} id="excessDate" type="text" value={excessDate} onChange={handleExcessDate} placeholder="YYYY/MM/DD">&lt;/input>
+                &lt;button id={numBtns[1]} onClick={changeRep(2, "excess")} value={false}>Excess Report&lt;/button>&lt;br/>
+            &lt;/div>
+
+            &lt;div class="row"> 
+            {/* Restock Report */}
+                &lt;button id={numBtns[2]} onClick={changeRep(3, "restock")} value={false}>Restock Report&lt;/button>&lt;br/>
+            &lt;/div>
+
+            &lt;div class="row">
+            {/* Combo Report */}
+                &lt;input ref={inputRef4} id="startDateCombo" type="text" value={startDateCombo} onChange={handleStartChangeCombo} placeholder="YYYY/MM/DD">&lt;/input>
+                &lt;input ref={inputRef5} id="endDateCombo" type="text" value={endDateCombo} onChange={handleEndChangeCombo} placeholder="YYYY/MM/DD">&lt;/input>
+                &lt;button id={numBtns[3]} onClick={changeRep(4, "combo")} value={false}>Combo Report&lt;/button>
+            &lt;/div>
+        &lt;/div>
+    &lt;/>
+
+    //  Right side of Display; Contains Tables of Data
+    dataTable = &lt;>
+        &lt;div class="column right">
+            &lt;div>{rep_type[1]}&lt;/div>
+            &lt;div>{rep_type[2]}&lt;/div>
+            &lt;div>{rep_type[3]}&lt;/div>
+            &lt;div>{rep_type[4]}&lt;/div>
+            
+        &lt;/div>
+    &lt;/>
+    
+    return(
+        &lt;>
+            {component}
+            {dataTable}
+        &lt;/>
+        );
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CustomerGUI">CustomerGUI</a></li><li><a href="global.html#InsertHistory">InsertHistory</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#ManagerGUI">ManagerGUI</a></li><li><a href="global.html#Map">Map</a></li><li><a href="global.html#ServerGUI">ServerGUI</a></li><li><a href="global.html#createEmployee">createEmployee</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#deleteEmployee">deleteEmployee</a></li><li><a href="global.html#getCurrInv">getCurrInv</a></li><li><a href="global.html#getCurrentURL">getCurrentURL</a></li><li><a href="global.html#getEmployees">getEmployees</a></li><li><a href="global.html#getEnvironmentVarsFromExpress">getEnvironmentVarsFromExpress</a></li><li><a href="global.html#getInventory">getInventory</a></li><li><a href="global.html#getItemPrice">getItemPrice</a></li><li><a href="global.html#getItems">getItems</a></li><li><a href="global.html#getTranHist">getTranHist</a></li><li><a href="global.html#updateInventory">updateInventory</a></li><li><a href="global.html#updateItem">updateItem</a></li><li><a href="global.html#updateSalary">updateSalary</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 23:46:22 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

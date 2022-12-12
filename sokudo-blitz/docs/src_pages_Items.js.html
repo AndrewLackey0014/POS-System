@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: src/pages/Items.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: src/pages/Items.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import "./Items.css"
+import React, { Component, useState, useEffect, useRef} from 'react';
+
+
+const temp_data = [];
+var obj;
+
+/**
+ * Gets Current window's URL
+ */
+function getCurrentURL () {
+    return window.location.href
+  }
+
+/**
+ * Displays Item database information
+ */
+export default function Items() {
+    const [price, setPrice] = useState('');
+    const [name, setName] = useState('');
+    const [id, setId] = useState('');
+
+
+
+    const url = getCurrentURL()
+    var backend_url = "";
+    // console.log(url);
+    if (url.substring(0,21) == 'http://localhost:3000') {
+      backend_url = 'http://localhost:3001/';
+    }
+    else {
+      backend_url = 'https://sokudoblitzbackend.onrender.com/';
+    }
+
+
+    const [items_data, setItems] = useState(false);
+    useEffect(() => {
+        getItems();
+    }, []);
+
+    /**
+ * Gets Item information from Items Database
+ */
+    function getItems() {
+        fetch(backend_url + 'items')
+          .then(response => {
+            return response.text();
+          })
+          .then(data => {
+            setItems(data);
+          });
+    }
+
+    /**
+ * Handles the creation of new items for database
+ */
+    function handleItemCreate() {
+        let price_amount = inputRef1.current.value;
+        let name= inputRef2.current.value;
+        let id = inputRef3.current.value;
+
+
+        fetch(backend_url+'create_item', {
+          method: 'POST',
+          headers: {  
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({price_amount, name, id}),
+        })
+          .then(response => {
+            return response.text();
+          })
+          .then(data => {
+            alert(data);
+            getItems();
+          });
+    }
+
+    /**
+ * Handles Updating Item data in Database
+ */
+    function handleUpdateItem() {
+        let price_amount = inputRef1.current.value;
+        var select = document.getElementById('items');
+        var item_id = select.options[select.selectedIndex].value;
+        // console.log(value); // en
+
+
+        fetch(backend_url+'item_update', {
+        method: 'POST',
+        headers: {  
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({price_amount, item_id}),
+        })
+        .then(response => {
+            return response.text();
+        })
+        .then(data => {
+            alert(data);
+            getItems();
+        });
+    }
+
+
+
+
+
+    obj = JSON.parse(items_data);
+    // console.log(obj);
+
+/**
+ * Sets Item Price when being updated
+ */
+    const handlePrice = event => {
+        setPrice(event.target.value);
+      };
+
+/**
+ * Sets Item Name when being updated
+ */
+    const handleName = event => {
+        setName(event.target.value);
+    };
+
+/**
+ * Sets Item ID when being updated
+ */
+    const handleID = event => {
+        setId(event.target.value);
+      };
+    const inputRef1 = useRef(null);
+    const inputRef2 = useRef(null);
+    const inputRef3 = useRef(null);
+
+
+    const handleClick = (e)=>{
+        e.preventDefault();
+        document.getElementById("myDropdown").classList.toggle("show");
+
+    }
+
+    // // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i &lt; dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+        }
+    }
+    } 
+    
+
+    let component;
+    switch (obj) {
+        case false:
+          component = &lt;>
+            &lt;div class="column left">
+                &lt;div class="dropdown row" onClick={handleClick}>
+                &lt;button class="dropbtn">Select Item&lt;/button>
+                    &lt;div id ="myDropdown"  class="dropdown-content">
+                        &lt;a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 1&lt;/a>
+                        &lt;a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 2&lt;/a>
+                        &lt;a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 3&lt;/a>
+                        &lt;a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 4&lt;/a>
+                    &lt;/div>
+                &lt;/div>
+
+                &lt;form class="row">
+                    Test: &lt;input type="text">&lt;/input>
+                    Create Item: &lt;input type="text">&lt;/input>
+                &lt;/form>
+
+                &lt;form>Price: &lt;input type="text">&lt;/input>&lt;/form>
+
+                &lt;button class="order_inv">Order Inventory&lt;/button>
+
+            &lt;/div>
+            
+            &lt;div class="column right">
+                &lt;table>
+                    &lt;tr>
+                        &lt;th>Item ID&lt;/th>
+                        &lt;th>Name&lt;/th>
+                        &lt;th>Price&lt;/th>
+                    &lt;/tr>
+                    {temp_data.map((val, key) => {
+                    return (
+                        &lt;tr key={key}>
+                        &lt;td>{val.item_id}&lt;/td>
+                        &lt;td>{val.name}&lt;/td>
+                        &lt;td>{val.price}&lt;/td>
+                        &lt;/tr>
+                    )
+                    })}
+                &lt;/table>
+            &lt;/div>
+          
+          &lt;/>
+          break
+        
+        default: 
+          component = &lt;>
+          &lt;div class="column left">
+                &lt;div class="dropdown row">
+                    {/* &lt;button class="dropbtn">Select Item&lt;/button> */}
+
+                 
+                    {/* &lt;div id ="myDropdown" class="dropdown-content"> */}
+                    &lt;select  name="items" id="items">
+                    
+                        {obj.map((val, key) => {
+                        return (
+                            &lt;option>{val.item_id}&lt;/option>            
+                            
+                        )
+                        })}
+
+                    &lt;/select>
+
+                    
+                    {/* &lt;/div> */}
+                &lt;/div>
+
+                {/* &lt;form class="row"> */}
+                &lt;div class = "text">
+                    &lt;input placeholder="TEST" type="text">&lt;/input>
+                    &lt;input placeholder="CREATE ITEM" type="text">&lt;/input>
+                {/* &lt;/form> */}
+
+                {/* &lt;form> */}
+                    &lt;input placeholder="ORDER AMOUNT"type="text">&lt;/input>
+                    {/* &lt;/form> */}
+                &lt;/div>
+                &lt;button class="order_inv">Order Inventory&lt;/button>
+                {/* &lt;form class="row">
+                    Update Name: &lt;input type="text">&lt;/input>
+                &lt;/form> */}
+                &lt;form class="row">
+                    New Item Name: &lt;input type="text" ref={inputRef2} onChange={handleName} value={name}>&lt;/input>
+                    New Item ID: &lt;input type="text" ref={inputRef3} onChange={handleID} value={id}>&lt;/input>
+
+                &lt;/form>
+                
+                &lt;form>Price: &lt;input type="text" ref={inputRef1} onChange={handlePrice} value={price}>&lt;/input>&lt;/form>
+
+
+                &lt;div>
+                    &lt;button class="order_inv"  onClick={handleUpdateItem}>Update Item&lt;/button>
+                    &lt;button class="order_inv"  onClick={handleItemCreate}>Create New Item&lt;/button>
+                &lt;/div>
+
+
+            &lt;/div>
+            
+            &lt;div class="column right">
+                &lt;table>
+                &lt;tr>
+                        &lt;th>Item ID&lt;/th>
+                        &lt;th>Name&lt;/th>
+                        &lt;th>Price&lt;/th>
+                    &lt;/tr>
+                    {obj.map((val, key) => {
+                    return (
+                        &lt;tr key={key}>
+                        &lt;td>{val.item_id}&lt;/td>
+                        &lt;td>{val.name}&lt;/td>
+                        &lt;td>{val.price}&lt;/td>
+                        &lt;/tr>
+                    )
+                    })}
+                &lt;/table>
+            &lt;/div>
+          
+            
+          &lt;/>
+          break
+      }
+
+    return(
+        &lt;>
+    
+    {/* &lt;div class="column left">
+        &lt;div class="dropdown row" onClick={handleClick}>
+        &lt;button class="dropbtn">Select Item&lt;/button>
+            &lt;div id ="myDropdown"  class="dropdown-content">
+                &lt;a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 1&lt;/a>
+                &lt;a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 2&lt;/a>
+                &lt;a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 3&lt;/a>
+                &lt;a href="https://www.w3schools.com/howto/howto_js_dropdown.asp">Link 4&lt;/a>
+            &lt;/div>
+        &lt;/div>
+
+        &lt;form class="row">
+            Test: &lt;input type="text">&lt;/input>
+            Create Item: &lt;input type="text">&lt;/input>
+        &lt;/form>
+
+        &lt;form>Order Amount: &lt;input type="text">&lt;/input>&lt;/form>
+
+        &lt;button class="order_inv">Order Inventory&lt;/button>
+
+    &lt;/div>
+    
+    &lt;div class="column right">
+        &lt;table>
+            &lt;tr>
+                &lt;th>Name&lt;/th>
+                &lt;th>Age&lt;/th>
+                &lt;th>Gender&lt;/th>
+            &lt;/tr>
+            {data.map((val, key) => {
+            return (
+                &lt;tr key={key}>
+                &lt;td>{val.name}&lt;/td>
+                &lt;td>{val.age}&lt;/td>
+                &lt;td>{val.gender}&lt;/td>
+                &lt;/tr>
+            )
+            })}
+        &lt;/table>
+    &lt;/div> */}
+    {component}
+    &lt;/>
+        );
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CustomerGUI">CustomerGUI</a></li><li><a href="global.html#InsertHistory">InsertHistory</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#ManagerGUI">ManagerGUI</a></li><li><a href="global.html#Map">Map</a></li><li><a href="global.html#ServerGUI">ServerGUI</a></li><li><a href="global.html#createEmployee">createEmployee</a></li><li><a href="global.html#createItem">createItem</a></li><li><a href="global.html#deleteEmployee">deleteEmployee</a></li><li><a href="global.html#getCurrInv">getCurrInv</a></li><li><a href="global.html#getCurrentURL">getCurrentURL</a></li><li><a href="global.html#getEmployees">getEmployees</a></li><li><a href="global.html#getEnvironmentVarsFromExpress">getEnvironmentVarsFromExpress</a></li><li><a href="global.html#getInventory">getInventory</a></li><li><a href="global.html#getItemPrice">getItemPrice</a></li><li><a href="global.html#getItems">getItems</a></li><li><a href="global.html#getTranHist">getTranHist</a></li><li><a href="global.html#updateInventory">updateInventory</a></li><li><a href="global.html#updateItem">updateItem</a></li><li><a href="global.html#updateSalary">updateSalary</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 23:46:22 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
