@@ -167,12 +167,9 @@ export default function Inventory() {
         default: 
           component = <>
           <div class="column left">
-                <div class="dropdown row">
-                    {/* <button class="dropbtn">SELECT ITEM</button> */}
-
-                 
-                    {/* <div id ="myDropdown" class="dropdown-content"> */}
-                    <select  name="items" id="items">
+                <div class="custom-select">
+                  
+                    SELECT ITEM ID:<select  name="items" id="items">
                     
                         {obj.map((val, key) => {
                         return (

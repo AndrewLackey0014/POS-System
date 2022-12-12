@@ -206,12 +206,9 @@ export default function Items() {
         default: 
           component = <>
           <div class="column left">
-                <div class="dropdown row">
-                    {/* <button class="dropbtn">Select Item</button> */}
-
+                <div class="custom-select">
                  
-                    {/* <div id ="myDropdown" class="dropdown-content"> */}
-                    <select  name="items" id="items">
+                    SELECT ITEM ID: <select name="items" id="items">
                     
                         {obj.map((val, key) => {
                         return (
@@ -226,28 +223,17 @@ export default function Items() {
                     {/* </div> */}
                 </div>
 
-                {/* <form class="row"> */}
-                <div class = "text">
-                    <input placeholder="TEST" type="text"></input>
-                    <input placeholder="CREATE ITEM" type="text"></input>
-                {/* </form> */}
-
-                {/* <form> */}
-                    <input placeholder="ORDER AMOUNT"type="text"></input>
-                    {/* </form> */}
-                </div>
-                <button class="order_inv">Order Inventory</button>
-                {/* <form class="row">
-                    Update Name: <input type="text"></input>
-                </form> */}
+                
+                
+                <div class = "text2">
                 <form class="row">
-                    New Item Name: <input type="text" ref={inputRef2} onChange={handleName} value={name}></input>
-                    New Item ID: <input type="text" ref={inputRef3} onChange={handleID} value={id}></input>
+                    <input type="text" placeholder = "NEW ITEM NAME" ref={inputRef2} onChange={handleName} value={name}></input>
+                    <input type="text" placeholder = "NEW ITEM ID" ref={inputRef3} onChange={handleID} value={id}></input>
 
                 </form>
                 
-                <form>Price: <input type="text" ref={inputRef1} onChange={handlePrice} value={price}></input></form>
-
+                <form><input type="text" placeholder = "PRICE"ref={inputRef1} onChange={handlePrice} value={price}></input></form>
+                </div>
 
                 <div>
                     <button class="order_inv"  onClick={handleUpdateItem}>Update Item</button>

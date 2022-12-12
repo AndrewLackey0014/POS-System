@@ -1,4 +1,4 @@
-.text input{
+/* .text input{
     font-family: 'Courier New', monospace;
     outline: 0;
     background: #f2f2f2;
@@ -8,4 +8,39 @@
     box-sizing: border-box;
     font-size: 14px;
     border:10px;
+} */
+
+.text2 input{
+    font-family: 'Courier New', monospace;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 1;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border:10px;
+    margin:5px;
 }
+
+.custom-select {
+    display: grid;
+    grid-template-areas: "select";
+    align-items: center;
+    position: relative;
+
+    min-width: 15ch;
+    max-width: 55ch;
+  
+    border: 1px solid var(--select-border);
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+  
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+  
+    background-color: black;
+    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  }
+

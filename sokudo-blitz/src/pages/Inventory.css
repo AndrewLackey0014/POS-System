@@ -14,34 +14,34 @@
 }
 
 .brick input{
-    /* font-family: 'Courier New', monospace;
-    outline: 0;
-    width: 400px;
-    border: 0;
-    padding-top: 15px;
-    font-size: 15px; */
     font-family: 'Courier New', monospace;
     outline: 0;
     background: #f2f2f2;
     width: 100%;
     border: 0;
-    /* margin: 0 0 15px; */
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
     border:10px;
 }
-/* 
-.top_row{
-    display:flex;
-    gap: 50px;
-} */
 
-/* .idata{
-    font-family: 'Courier New', monospace;
-    background: grey;
-    width: 100%;
-    /* padding: 15px; */
-    /* box-sizing: border-box;
-    font-size: 20px;
-} */
+.custom-select {
+    display: grid;
+    grid-template-areas: "select";
+    align-items: center;
+    position: relative;
+
+    min-width: 15ch;
+    max-width: 55ch;
+  
+    border: 1px solid var(--select-border);
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+  
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+  
+    background-color: black;
+    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}
