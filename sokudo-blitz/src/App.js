@@ -26,7 +26,7 @@ import Toppings_Page from './pages/Toppings_Page';
 
 import Gmap from "./gmap.js";
 
-import { gapi } from 'gapi-script';
+// import { gapi } from 'gapi-script';
 import LoginButton from "./pages/oauthLogin";
 import LogoutButton from "./pages/oauthLogout"
 import Login from "./pages/LoginManager";
@@ -86,14 +86,14 @@ function App() {
   useEffect(() => {
     getEmployees();
     
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: ""
-      })
-    };
+  //   function start() {
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope: ""
+  //     })
+  //   };
 
-    gapi.load('client:auth2', start);
+  //   gapi.load('client:auth2', start);
   }, []);
 
 
